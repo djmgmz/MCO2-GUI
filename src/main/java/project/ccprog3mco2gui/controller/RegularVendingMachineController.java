@@ -6,11 +6,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.*;
-
 import javafx.scene.control.Label;
 import project.ccprog3mco2gui.model.*;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class RegularVendingMachineController implements Initializable {
 
@@ -48,9 +53,8 @@ public class RegularVendingMachineController implements Initializable {
     private Label screenError;
 
     @FXML Button enterButton;
-    public RegularVendingMachineController(RegularVendingMachine vendingMachine) {
-        this.vendingMachine = vendingMachine;
-    }
+
+    @FXML Button backButton;
 
     private int selectedItemIndex = -1;
 
@@ -75,6 +79,9 @@ public class RegularVendingMachineController implements Initializable {
         denominationsMap.put(denom300, 300);
         denominationsMap.put(denom500, 500);
         denominationsMap.put(denom1000, 1000);
+
+
+        resetVendingMachine();
 
         for (int i = 0; i <= 9; i++) {
             int buttonNumber = i; // Button numbers 1 to 9
@@ -221,6 +228,8 @@ public class RegularVendingMachineController implements Initializable {
                 redButtons[buttonNumber].setImage(redButtonImage);
             });
         }
+
+        backButton.setOnAction(this::goBackToMenu1);
     }
 
     private void updateVendingMachine()
@@ -264,4 +273,24 @@ public class RegularVendingMachineController implements Initializable {
             redButtons[i].setDisable(false);
         }
     }
+
+    private void goBackToMenu1(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/menu1.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Menu 1");
+            stage.show();
+
+            ((Stage) backButton.getScene().getWindow()).close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setVendingMachine(RegularVendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+
 }

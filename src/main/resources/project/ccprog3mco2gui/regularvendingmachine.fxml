@@ -647,5 +647,6 @@
       <Button fx:id="denom300" disable="true" layoutX="585.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="300" />
       <Button fx:id="denom500" disable="true" layoutX="637.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="500" />
       <Button fx:id="denom1000" disable="true" layoutX="691.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1000" />
+      <Button fx:id="backButton" layoutX="713.0" layoutY="688.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Back" />
    </children>
 </AnchorPane>

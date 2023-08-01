@@ -45,16 +45,25 @@ public class MenuController {
 
     @FXML
     private Label errorText;
-
-    private VendingMachineService vendingMachineService;
+    private VendingMachineService vendingMachineService = new VendingMachineService();
     private int selectedRegularVendingMachineIndex;
+    public int getRegularVendingMachineIndex()
+    {
+        return selectedRegularVendingMachineIndex;
+    }
+
+    public MenuController() {
+    }
+
+    public void setVendingMachineService(VendingMachineService vendingMachineService) {
+        this.vendingMachineService = vendingMachineService;
+    }
     public void setDriverStage(Stage driverStage) {
         this.driverStage = driverStage;
     }
 
     @FXML
     public void initialize() {
-        vendingMachineService = new VendingMachineService();
         regularVendingMachineListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
                 selectedRegularVendingMachineIndex = newValue.intValue();
@@ -171,7 +180,9 @@ public class MenuController {
         RegularVendingMachine vendingMachine = vendingMachineService.getRegularVendingMachines().get(selectedRegularVendingMachineIndex);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
-            fxmlLoader.setController(new RegularVendingMachineController(vendingMachine));
+            RegularVendingMachineController controller = new RegularVendingMachineController();
+            controller.setVendingMachine(vendingMachine); // Pass the vendingMachine object
+            fxmlLoader.setController(controller);
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
             vendingMachineStage.setTitle("Vending Machine");
