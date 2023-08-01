@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="728.0" fitWidth="807.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/backgroundofvendingmachine.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="titleText" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="96.0" prefHeight="43.0" prefWidth="592.0" text="Maintenance Features" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Rockwell" size="36.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="295.0" layoutY="168.0" prefHeight="363.0" prefWidth="205.0">
+         <children>
+            <Button fx:id="replenishMoneyBtn" layoutY="179.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="193.0" text="Replenish Money" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="restockItemBtn" mnemonicParsing="false" prefHeight="53.0" prefWidth="193.0" text="Restock Items" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="setItemPriceBtn" layoutY="60.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="193.0" text="Set Item Price" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="collectMoneyBtn" layoutY="119.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="193.0" text="Collect Money" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="printTransSummaryBtn" layoutY="239.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="193.0" text="Print Transaction Summary" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="backBtn" layoutY="298.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="193.0" text="Back" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="58.0" layoutY="453.0" prefHeight="78.0" prefWidth="171.0" />
+      <AnchorPane fx:id="anchorPaneItems" layoutX="262.0" layoutY="146.0" prefHeight="320.0" prefWidth="205.0">
+         <children>
+            <ImageView fitHeight="321.0" fitWidth="278.0" layoutX="-7.0" layoutY="-1.0">
+               <image>
+                  <Image url="@../../assets/backgroundforbuttons.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="57.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="143.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="212.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="num1" fill="WHITE" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price1" fill="WHITE" layoutX="138.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty1" fill="WHITE" layoutX="209.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="51.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num2" fill="WHITE" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price2" fill="WHITE" layoutX="138.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty2" fill="WHITE" layoutX="209.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="76.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name2" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num3" fill="WHITE" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty3" fill="WHITE" layoutX="209.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="101.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name3" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num4" fill="WHITE" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price4" fill="WHITE" layoutX="138.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty4" fill="WHITE" layoutX="209.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="126.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name4" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name4">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num5" fill="WHITE" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num5">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price5" fill="WHITE" layoutX="138.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price5">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty5" fill="WHITE" layoutX="209.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty5">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="151.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name5" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num6" fill="WHITE" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num6">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="176.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name6" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name6">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num7" fill="WHITE" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num7">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price7" fill="WHITE" layoutX="138.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price7">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty7" fill="WHITE" layoutX="209.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty7">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="201.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name7" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name7">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num8" fill="WHITE" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num8">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price8" fill="WHITE" layoutX="138.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price8">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty8" fill="WHITE" layoutX="209.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty8">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="226.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name8" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name8">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="num9" fill="WHITE" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="num9">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextFlow layoutX="43.0" layoutY="251.0" prefHeight="25.0" prefWidth="86.0">
+               <children>
+                  <Text fx:id="name9" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <Text fx:id="price6" fill="WHITE" layoutX="138.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price6">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty6" fill="WHITE" layoutX="209.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty6">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price9" fill="WHITE" layoutX="138.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price9">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="qty9" fill="WHITE" layoutX="209.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty9">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="price3" fill="WHITE" layoutX="138.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
