@@ -86,6 +86,15 @@ public class ItemSlots {
             System.out.println("Not enough quantity available.");
         }
     }
+
+    /**
+     * Increase the quantity of the item in the slot.
+     *
+     * @param amount the amount to increase the quantity by
+     */
+    public void increaseQuantity(int amount) {
+        quantity += amount;
+    }
     /**
      * Restocks the item slot with a new item and quantity.
      *

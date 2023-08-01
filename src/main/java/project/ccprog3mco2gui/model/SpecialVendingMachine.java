@@ -1,16 +1,22 @@
 package project.ccprog3mco2gui.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpecialVendingMachine extends RegularVendingMachine {
 
     //additional items
-    private ItemSlots[] standAloneItems;
+
+    private ItemSlots[] milkItems;
+    private ItemSlots[] sweetenerItems;
+    private ItemSlots[] addOnsItems;
+    private ItemSlots[] startMilkItems;
+    private ItemSlots[] startSweetenerItems;
+    private ItemSlots[] startAddOnsItems;
 
     public SpecialVendingMachine(String name) {
         super(name);
         initializeStandaloneItems();
-        predefinedSlots();
     }
 
     // Initialization method to create standalone items
@@ -30,34 +36,105 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         extras[1] = new Item("Chia Seeds", 10, 10);
         extras[2] = new Item("Protein Powder", 50, 50);
 
-        // Create separate slots for each type of ingredient
-        standAloneItems = new ItemSlots[9];
+
+        milkItems = new ItemSlots[3];
+        sweetenerItems = new ItemSlots[3];
+        addOnsItems = new ItemSlots[3];
+        startMilkItems = new ItemSlots[3];
+        startSweetenerItems = new ItemSlots[3];
+        startAddOnsItems = new ItemSlots[3];
         for (int i = 0; i < 3; i++) {
-            standAloneItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
+            milkItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
+            startMilkItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
+
         }
         for (int i = 0; i < 3; i++) {
-            standAloneItems[i + 3] = new ItemSlots(sweetener[i], 10);
+            sweetenerItems[i] = new ItemSlots(sweetener[i], 10);
+            startSweetenerItems[i] = new ItemSlots(sweetener[i], 10);
+
         }
         for (int i = 0; i < 3; i++) {
-            standAloneItems[i + 6] = new ItemSlots(extras[i], 10);
+            addOnsItems[i] = new ItemSlots(extras[i], 10);
+            startAddOnsItems[i] = new ItemSlots(extras[i], 10);
+
         }
+
+    }
+    public void setStandAloneItemsInv(ItemSlots[] milk, ItemSlots[] sweetener, ItemSlots[] addons)
+    {
+        milkItems = milk;
+        sweetenerItems = sweetener;
+        addOnsItems = addons;
+        startMilkItems =  milk;
+        startSweetenerItems = sweetener;
+        startAddOnsItems = addons;
+
+    }
+    public void setStartingMilkInv(ItemSlots[] newInventory){
+        this.milkItems = newInventory;
     }
 
-    public ItemSlots[] getStandAloneItems() {
-        return standAloneItems;
+    public void setStartingSweetenerInv(ItemSlots[] newInventory){
+        this.sweetenerItems = newInventory;
     }
 
-    public Item getMilk(int index)
-    {
-        return standAloneItems[index-1].getItem();
+    public void setStartingAddonsInv(ItemSlots[] newInventory){
+        this.addOnsItems = newInventory;
+
     }
-    public Item getSweetener(int index)
+
+    public boolean dispenseFinalItem(double payment, Item item)
     {
-        return standAloneItems[index*2-1].getItem();
+
+        double itemPrice = item.getItemPrice();
+        String itemName = item.getItemName();
+        if (payment < itemPrice) {
+            System.out.println("Insufficient payment. Please insert the exact amount to purchase.");
+            return false;
+        }
+        double change = payment - itemPrice;
+        if (change < 0) {
+            System.out.println("Insufficient payment. Please insert the exact amount to purchase.");
+            return false;
+        }
+
+        if (!hasSufficientChange(change)) {
+            System.out.println("Not enough change in the vending machine. Transaction canceled.");
+            return false;
+        }
+
+        // Perform the actual dispensing of the item and change
+        System.out.println("Dispensing Item: " + itemName + " (Quantity: " + 1 + ")");
+        System.out.println("Dispensing change with the following denominations:");
+
+        // Calculate and dispense the change denominations
+        List<Denomination> dispensedChange = calculateChange(change);
+        for (Denomination denomination : dispensedChange) {
+            int count = denomination.getCount();
+            int value = denomination.getValue();
+            System.out.println(value + " count: " + count);
+        }
+
+        updateDenominationsCount(dispensedChange);
+
+        // Update total sales and transaction history
+        setTotalSales(getTotalSales() + itemPrice);
+        Transaction transaction = new Transaction(itemName, 1, itemPrice);
+        getTransactions().add(transaction);
+
+        return true;
     }
-    public Item getAddOns(int index)
-    {
-        return standAloneItems[index*3-1].getItem();
+
+    public ItemSlots[] getMilk() {
+        return milkItems;
+    }
+
+    public ItemSlots[] getSweetener() {
+        return sweetenerItems;
+    }
+
+    public ItemSlots[] getAddOns() {
+        return addOnsItems;
     }
     public void prepareBasicFruitSmoothieWithProcess(List<Item> selectedIngredients) {
         System.out.println("\nPreparing Basic Fruit Smoothie...");
@@ -73,24 +150,16 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         System.out.println("-------------------");
     }
 
-    // New method: Predefined slots with items.
-    @Override
-    public void predefinedSlots() {
-        super.predefinedSlots();
 
-        String[] itemNames = {"Almond Milk", "Soy Milk", "Cow's Milk", "Honey", "Stevia", "Agave Syrup", "Yogurt", "Chia Seeds", "Protein Powder"};
-        double[] itemPrices = {120, 90, 100, 20, 15, 25, 30, 10, 50};
-        double[] itemCalories = {86, 65, 100, 10, 10, 13, 25, 10, 50};
-
-        for (int i = 0; i < itemNames.length; i++) {
-            String itemName = itemNames[i];
-            double price = itemPrices[i];
-            double calories = itemCalories[i];
-            int quantity = 10; // Assuming the quantity is the same for all predefined slots
-            Item item = new Item(itemName, price, calories);
-            ItemSlots newSlot = new ItemSlots(item, quantity);
-            standAloneItems[i] = newSlot;
-        }
+    public ItemSlots[] getStartingMilkInventory() {
+        return this.startMilkItems;
     }
 
+    public ItemSlots[] getStartingSweetenerInventory() {
+        return this.startSweetenerItems;
+    }
+
+    public ItemSlots[] getStartingAddOnsInventory() {
+        return this.startAddOnsItems;
+    }
 }

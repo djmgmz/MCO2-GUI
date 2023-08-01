@@ -50,8 +50,6 @@ public class MenuController {
     private Label errorText;
 
     private int selectedRegularVendingMachineIndex;
-
-
     public int getRegularVendingMachineIndex()
     {
         return selectedRegularVendingMachineIndex;
@@ -176,9 +174,10 @@ public class MenuController {
 
     public void openRegular()
     {
+        RegularVendingMachine vendingMachine = regularVendingMachines.get(selectedRegularVendingMachineIndex);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
-            fxmlLoader.setController(new RegularVendingMachineController(selectedRegularVendingMachineIndex));
+            fxmlLoader.setController(new RegularVendingMachineController(vendingMachine));
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
             vendingMachineStage.setTitle("Vending Machine");

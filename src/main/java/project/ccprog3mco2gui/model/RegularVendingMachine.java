@@ -27,6 +27,7 @@ public class RegularVendingMachine {
         this.totalSales = 0;
         this.transactions = new ArrayList<>();
         initializeDenominations();
+        predefinedSlots();
     }
 
     // Initialization methods
@@ -98,7 +99,7 @@ public class RegularVendingMachine {
      * Sets up predefined slots with items.
      */
     public void predefinedSlots() {
-        String[] itemNames = {"Banana", "Strawberry", "Blueberry", "Mango", "Pineapple", "Kiwi", "Raspberry", "Peach", "Avocado"};
+        String[] itemNames = {"Banana", "Strawberry", "Blueberry", "Mango", "Pineapple", "Kiwi", "Raspberry", "Peach", "Gomu-Gomu"};
         double[] itemPrices = {23, 45, 150, 60, 94, 49, 178, 167, 130};
         double[] itemCalories = {89, 6, 20, 68, 47, 61, 53, 56, 80};
 
@@ -123,7 +124,7 @@ public class RegularVendingMachine {
     public List<Transaction> getTransactions() { return this.transactions; }
 
     // Setter methods
-    protected void setTotalSales(double totalSales) { this.totalSales = totalSales; }
+    public void setTotalSales(double totalSales) { this.totalSales = totalSales; }
     public void setSlots(ItemSlots[] slots) { this.slots = slots; }
     public void setStartingInventory(ItemSlots[] newInventory) { this.startingInventory = newInventory; }
 
@@ -326,7 +327,7 @@ public class RegularVendingMachine {
      *
      * @param dispensedChange the list of denominations dispensed as change
      */
-    protected void updateDenominationsCount(List<Denomination> dispensedChange) {
+    public void updateDenominationsCount(List<Denomination> dispensedChange) {
         for (Denomination dispensedDenomination : dispensedChange) {
             int denominationValue = dispensedDenomination.getValue();
             int dispensedCount = dispensedDenomination.getCount();
