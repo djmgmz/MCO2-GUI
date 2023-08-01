@@ -12,7 +12,7 @@ public class Driver extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        VendingMachineService vendingMachineService = new VendingMachineService();
+        VendingMachineService vendingMachineService = VendingMachineService.getInstance();;
 
         // Add a default regular vending machine (you can customize this as needed)
         RegularVendingMachine defaultRegularVendingMachine = new RegularVendingMachine("Default Vending Machine");

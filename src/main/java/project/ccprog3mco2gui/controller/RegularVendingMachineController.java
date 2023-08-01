@@ -278,7 +278,8 @@ public class RegularVendingMachineController implements Initializable {
 
     private void goBackToMenu1(ActionEvent event) {
         try {
-            VendingMachineService vendingMachineService = new VendingMachineService();
+            // Get the singleton instance of VendingMachineService
+            VendingMachineService vendingMachineService = VendingMachineService.getInstance();
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/menu1.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);

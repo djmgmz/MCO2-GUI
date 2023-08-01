@@ -65,7 +65,7 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-        vendingMachineService = new VendingMachineService();
+        vendingMachineService = VendingMachineService.getInstance();;
         regularVendingMachineListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
                 selectedRegularVendingMachineIndex = newValue.intValue();
