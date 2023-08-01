@@ -7,9 +7,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Driver extends javafx.application.Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("menu1.fxml"));
+        MenuController controller = new MenuController();
         Scene scene = new Scene(fxmlLoader.load(), 600, 500);
         stage.setTitle("Main Menu");
         stage.setScene(scene);

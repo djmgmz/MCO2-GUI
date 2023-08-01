@@ -121,20 +121,35 @@ public class RegularVendingMachineController implements Initializable {
             {
                 if (selectedItemIndex > 0)
                 {
+                    double totalPayment = 0;
                     String text = numberButtonText.getText();
                     String[] numbersArray = text.split(" ");
                     Double[] denominations = new Double[numbersArray.length];
                     for (int i = 0; i < numbersArray.length; i++) {
                         denominations[i] = Double.parseDouble(numbersArray[i]);
+                        totalPayment += Double.parseDouble(numbersArray[i]);
                     }
-                    String output = "";
-                    output = vendingMachine.payDenominations(denominations, selectedItemIndex);
-                    numberButtonText.setText(output);
-                    for (Button denomButton : denomButtonsArray) {
-                        denomButton.setDisable(true);
+                    // Get the selected slot from the vending machine
+                    ItemSlots selectedSlot = vendingMachine.getSlots()[selectedItemIndex-1];
+                    Item item = selectedSlot.getItem();
+                    double itemPrice = item.getItemPrice();
+                    if (totalPayment < itemPrice)
+                    {
+                        numberButtonText.setText("");
+                        screenError.setVisible(true);
+                    }
+                    else {
+                        String output = "";
+                        output = vendingMachine.payDenominations(denominations, selectedItemIndex);
+                        numberButtonText.setText(output);
+                        screenError.setVisible(false);
+                        for (Button denomButton : denomButtonsArray) {
+                            denomButton.setDisable(true);
+                        }
                     }
                 }
                 else {
+                    // for 0
                     String text = numberButtonText.getText();
                     String[] numbersArray = text.split(" ");
                     Double[] denominations = new Double[numbersArray.length];
