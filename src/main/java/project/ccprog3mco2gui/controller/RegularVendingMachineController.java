@@ -2,11 +2,13 @@ package project.ccprog3mco2gui.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.*;
 import javafx.scene.control.Label;
+import project.ccprog3mco2gui.Driver;
 import project.ccprog3mco2gui.model.*;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
@@ -276,14 +278,21 @@ public class RegularVendingMachineController implements Initializable {
 
     private void goBackToMenu1(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/menu1.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Menu 1");
-            stage.show();
+            VendingMachineService vendingMachineService = new VendingMachineService();
 
-            ((Stage) backButton.getScene().getWindow()).close();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/menu1.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            MenuController menuController = fxmlLoader.getController();
+            menuController.setVendingMachineService(vendingMachineService);
+
+            // Get the stage from the event source
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            menuController.setDriverStage(stage);
+
+            stage.setTitle("Main Menu");
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -45,25 +45,27 @@ public class MenuController {
 
     @FXML
     private Label errorText;
-    private VendingMachineService vendingMachineService = new VendingMachineService();
-    private int selectedRegularVendingMachineIndex;
-    public int getRegularVendingMachineIndex()
-    {
-        return selectedRegularVendingMachineIndex;
-    }
 
-    public MenuController() {
-    }
+    private VendingMachineService vendingMachineService;
+    private int selectedRegularVendingMachineIndex;
 
     public void setVendingMachineService(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
     }
+    public MenuController() {
+    }
+
+    public MenuController(VendingMachineService vendingMachineService) {
+        this.vendingMachineService = vendingMachineService;
+    }
+
     public void setDriverStage(Stage driverStage) {
         this.driverStage = driverStage;
     }
 
     @FXML
     public void initialize() {
+        vendingMachineService = new VendingMachineService();
         regularVendingMachineListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
                 selectedRegularVendingMachineIndex = newValue.intValue();
@@ -177,11 +179,15 @@ public class MenuController {
 
     public void openRegular()
     {
+        if (this.driverStage == null) {
+            throw new IllegalStateException("driverStage has not been initialized.");
+        }
+
         RegularVendingMachine vendingMachine = vendingMachineService.getRegularVendingMachines().get(selectedRegularVendingMachineIndex);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
             RegularVendingMachineController controller = new RegularVendingMachineController();
-            controller.setVendingMachine(vendingMachine); // Pass the vendingMachine object
+            controller.setVendingMachine(vendingMachine);
             fxmlLoader.setController(controller);
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
