@@ -111,7 +111,7 @@
                         <Image url="@../../assets/bananafinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="27.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="BANANA" textFill="WHITE">
+                  <Label fx:id="item1" alignment="CENTER" layoutX="27.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="BANANA" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -143,6 +143,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price1" alignment="CENTER" layoutX="6.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories1" alignment="CENTER" layoutX="49.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity1" alignment="CENTER" layoutX="90.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -154,7 +169,7 @@
                         <Image url="@../../assets/strawberryfinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="28.0" layoutY="120.0" prefHeight="19.0" prefWidth="86.0" text="STRAWBERRY" textFill="WHITE">
+                  <Label fx:id="item2" alignment="CENTER" layoutX="28.0" layoutY="120.0" prefHeight="19.0" prefWidth="86.0" text="STRAWBERRY" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -186,6 +201,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price2" alignment="CENTER" layoutX="7.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories2" alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity2" alignment="CENTER" layoutX="91.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -197,7 +227,7 @@
                         <Image url="@../../assets/blueberryfinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="BLUEBERRY" textFill="WHITE">
+                  <Label fx:id="item3" alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="BLUEBERRY" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -229,6 +259,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price3" alignment="CENTER" layoutX="5.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories3" alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity3" alignment="CENTER" layoutX="89.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -240,7 +285,7 @@
                         <Image url="@../../assets/mangofinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="29.0" layoutY="123.0" prefHeight="19.0" prefWidth="86.0" text="MANGO" textFill="WHITE">
+                  <Label fx:id="item4" alignment="CENTER" layoutX="29.0" layoutY="123.0" prefHeight="19.0" prefWidth="86.0" text="MANGO" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -272,6 +317,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price4" alignment="CENTER" layoutX="8.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories4" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity4" alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -283,7 +343,7 @@
                         <Image url="@../../assets/pineapplefinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="PINEAPPLE" textFill="WHITE">
+                  <Label fx:id="item5" alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="PINEAPPLE" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -315,6 +375,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price5" alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories5" alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity5" alignment="CENTER" layoutX="94.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -326,7 +401,7 @@
                         <Image url="@../../assets/kiwifinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="KIWI" textFill="WHITE">
+                  <Label fx:id="item6" alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="KIWI" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -358,6 +433,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price6" alignment="CENTER" layoutX="9.0" layoutY="16.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories6" alignment="CENTER" layoutX="52.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity6" alignment="CENTER" layoutX="93.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -369,7 +459,7 @@
                         <Image url="@../../assets/raspberryfinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="RASPBERRY" textFill="WHITE">
+                  <Label fx:id="item7" alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="RASPBERRY" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -401,6 +491,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price7" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories7" alignment="CENTER" layoutX="48.0" layoutY="13.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity7" alignment="CENTER" layoutX="89.0" layoutY="13.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -412,7 +517,7 @@
                         <Image url="@../../assets/peachfinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="29.0" layoutY="118.0" prefHeight="22.0" prefWidth="81.0" text="PEACH" textFill="WHITE">
+                  <Label fx:id="item8" alignment="CENTER" layoutX="29.0" layoutY="118.0" prefHeight="22.0" prefWidth="81.0" text="PEACH" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -444,6 +549,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price8" alignment="CENTER" layoutX="8.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories8" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity8" alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -460,7 +580,7 @@
                         <Font name="Rockwell" size="12.0" />
                      </font>
                   </Text>
-                  <Label alignment="CENTER" layoutX="32.0" layoutY="119.0" prefHeight="22.0" prefWidth="81.0" text="GOMU-GOMU" textFill="WHITE">
+                  <Label fx:id="item9" alignment="CENTER" layoutX="32.0" layoutY="119.0" prefHeight="22.0" prefWidth="81.0" text="GOMU-GOMU" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -487,6 +607,21 @@
                               <Font name="Rockwell" size="9.0" />
                            </font>
                         </Text>
+                        <Label fx:id="price9" alignment="CENTER" layoutX="9.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories9" alignment="CENTER" layoutX="52.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity9" alignment="CENTER" layoutX="93.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
