@@ -52,13 +52,25 @@ public class RegularVendingMachineController implements Initializable {
                 if (slot != null && slot.isAvailable()) {
                     Item item = slot.getItem();
                     itemLabels[i].setText(item.getItemName());
+                    String itemprice = Double.toString(item.getItemPrice());
+                    String itemcalories = Double.toString(item.getItemCalories());
+                    String quantity = Integer.toString(slot.getQuantity());
+                    priceLabels[i].setText(itemprice);
+                    caloriesLabels[i].setText(itemcalories);
+                    quantityLabels[i].setText(quantity);
                 } else {
                     // If the slot is not available or is null, set an empty label
-                    itemLabels[i].setText("NULL");
+                    itemLabels[i].setText("N/A");
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
                 }
             } else {
                 // If the vending machine has fewer slots, set empty labels for the remaining slots
                 itemLabels[i].setText("MISSING");
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
             }
         }
 

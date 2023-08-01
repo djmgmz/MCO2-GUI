@@ -107,6 +107,7 @@ public class MenuController {
     {
         btn1.setOnAction(e -> createVendingMachine());
         btn2.setOnAction(e -> testVendingMachine());
+        btn3.setOnAction(e -> exitProgram());
         titleText.setText("Vending Machine Simulator");
         btn1.setText("Create a Vending Machine");
         btn2.setText("Test a Vending Machine");
@@ -124,6 +125,7 @@ public class MenuController {
         btn2.setText("Special Vending Machine");
         btn1.setOnAction(e -> regularVendingMachine());
         btn2.setOnAction(e -> specialVendingMachine());
+        btn3.setOnAction(e -> goBackToMainMenu());
     }
 
     @FXML
@@ -143,6 +145,7 @@ public class MenuController {
         btn2.setText("Special Vending Machine");
         btn1.setOnAction(e -> chooseRegularVendingMachine());
         btn2.setOnAction(e -> chooseSpecialVendingMachine());
+        btn3.setOnAction(e -> goBackToMainMenu());
     }
 
     public void chooseRegularVendingMachine()
