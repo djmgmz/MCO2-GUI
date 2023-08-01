@@ -1,6 +1,7 @@
 package project.ccprog3mco2gui.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -188,28 +189,6 @@ public class RegularVendingMachine {
 
         return change;
     }
-    /**
-     * Adds payment denominations to the vending machine.
-     *
-     * @param denominationValues the values of the denominations to add
-     */
-    public void addPaymentDenominations(String[] denominationValues) {
-        List<Denomination> vendingMachineDenominations = this.denominations;
-
-        for (int i = 0; i < denominationValues.length; i++) {
-            int value = Integer.parseInt(denominationValues[i]);
-
-            for (int j = 0; j < vendingMachineDenominations.size(); j++) {
-                Denomination denomination = vendingMachineDenominations.get(j);
-                if (denomination.getValue() == value) {
-                    int count = denomination.getCount();
-                    denomination.setCount(count + 1);
-                    break;
-                }
-            }
-        }
-    }
-
 
     /**
      * Collects all the money from the vending machine.
@@ -260,67 +239,6 @@ public class RegularVendingMachine {
         slot.setQuantity(slot.getQuantity());
     }
 
-    /**
-     * Dispenses the selected item and processes the transaction.
-     *
-     * @param slotNumber         The slot number of the item to purchase.
-     * @param payment            The payment amount made by the user.
-     * @param quantityToDispense The quantity of the item to dispense.
-     */
-    public void dispenseItem(int slotNumber, double payment, int quantityToDispense) {
-        ItemSlots selectedSlot = getSlots()[slotNumber];
-        Item item = selectedSlot.getItem();
-        double itemPrice = item.getItemPrice();
-        String itemName = item.getItemName();
-
-        if (payment < itemPrice) {
-            System.out.println("Insufficient payment. Please insert the exact amount to purchase.");
-            return;
-        }
-
-        if (selectedSlot.getQuantity() <= 0) {
-            System.out.println("Not enough quantity of the item in the selected slot.");
-            return;
-        }
-
-        double change = payment - itemPrice;
-        if (change < 0) {
-            System.out.println("Insufficient payment. Please insert the exact amount to purchase.");
-            return;
-        }
-
-        if (!hasSufficientChange(change)) {
-            System.out.println("Not enough change in the vending machine. Transaction canceled.");
-            return;
-        }
-
-        // Perform the actual dispensing of the item and change
-        System.out.println("Dispensing Item: " + itemName + " (Quantity: " + quantityToDispense + ")");
-        System.out.println("Dispensing change with the following denominations:");
-
-        // Calculate and dispense the change denominations
-        List<Denomination> dispensedChange = calculateChange(change);
-        for (Denomination denomination : dispensedChange) {
-            int count = denomination.getCount();
-            int value = denomination.getValue();
-            System.out.println(value + " count: " + count);
-        }
-
-        // Update the item quantity and denominations count
-        selectedSlot.decreaseQuantity(quantityToDispense);
-        if (selectedSlot.getQuantity() == 0) {
-            // Set availability to false if the slot is empty
-            selectedSlot.setAvailability(false);
-        }
-
-        updateDenominationsCount(dispensedChange);
-
-        // Update total sales and transaction history
-        setTotalSales(getTotalSales() + itemPrice);
-        Transaction transaction = new Transaction(itemName, quantityToDispense, itemPrice);
-        getTransactions().add(transaction);
-    }
-
     // Internal helper methods
     /**
      * Updates the count of denominations in the vending machine after a transaction.
@@ -339,6 +257,94 @@ public class RegularVendingMachine {
                 }
             }
         }
+    }
+
+    /**
+     * Dispenses the selected item and processes the transaction.
+     *
+     * @param slotNumber         The slot number of the item to purchase.
+     * @param payment            The payment amount made by the user.
+     * @param quantityToDispense The quantity of the item to dispense.
+     */
+    public String dispenseItem(int slotNumber, double payment, int quantityToDispense) {
+        ItemSlots selectedSlot = getSlots()[slotNumber];
+        Item item = selectedSlot.getItem();
+        double itemPrice = item.getItemPrice();
+        String itemName = item.getItemName();
+
+        if (payment < itemPrice) {
+            return "Insufficient payment. Please insert the exact amount to purchase.";
+        }
+
+        if (selectedSlot.getQuantity() <= 0) {
+            return "Not enough quantity of the item in the selected slot.";
+        }
+
+        double change = payment - itemPrice;
+        if (change < 0) {
+            return "Insufficient payment. Please insert the exact amount to purchase.";
+        }
+
+        if (!hasSufficientChange(change)) {
+            return "Not enough change in the vending machine. Transaction canceled.";
+        }
+
+        String Output = "";
+        Output += "Dispensing Item: " + itemName + " (Quantity: " + quantityToDispense + ")\n";
+        Output += "Dispensing change with the following denominations:\n";
+
+        List<Denomination> dispensedChange = calculateChange(change);
+        for (Denomination denomination : dispensedChange) {
+            int count = denomination.getCount();
+            int value = denomination.getValue();
+            Output += value + " count: " + count + "\n";
+            System.out.println(value + "$ count: " + count +"\n");
+        }
+
+        selectedSlot.decreaseQuantity(quantityToDispense);
+        if (selectedSlot.getQuantity() == 0) {
+            selectedSlot.setAvailability(false);
+        }
+
+        updateDenominationsCount(dispensedChange);
+
+        setTotalSales(getTotalSales() + itemPrice);
+        Transaction transaction = new Transaction(itemName, quantityToDispense, itemPrice);
+        getTransactions().add(transaction);
+        return Output;
+    }
+
+    /**
+     * Adds payment denominations to the vending machine.
+     *
+     * @param denominationValues the values of the denominations to add
+     */
+    public void addPaymentDenominations(Double[] denominationValues) {
+        List<Denomination> vendingMachineDenominations = this.denominations;
+
+        for (Double denominationValue : denominationValues) {
+            for (Denomination denomination : vendingMachineDenominations) {
+                if (denomination.getValue() == denominationValue) {
+                    int count = denomination.getCount();
+                    denomination.setCount(count + 1);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Input of the user's denomination
+     */
+    public String payDenominations(Double[] denominations, int choice) {
+        String result = "";
+        double totalPayment = Arrays.stream(denominations).mapToDouble(Double::doubleValue).sum();
+
+        if (totalPayment >= slots[choice - 1].getItem().getItemPrice()) {
+            addPaymentDenominations(denominations);
+            result = dispenseItem(choice - 1, totalPayment, 1);
+        }
+        return result;
     }
 
 }
