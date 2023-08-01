@@ -129,7 +129,6 @@ public class RegularVendingMachineController implements Initializable {
                         denominations[i] = Double.parseDouble(numbersArray[i]);
                         totalPayment += Double.parseDouble(numbersArray[i]);
                     }
-                    // Get the selected slot from the vending machine
                     ItemSlots selectedSlot = vendingMachine.getSlots()[selectedItemIndex-1];
                     Item item = selectedSlot.getItem();
                     double itemPrice = item.getItemPrice();
@@ -146,6 +145,8 @@ public class RegularVendingMachineController implements Initializable {
                         for (Button denomButton : denomButtonsArray) {
                             denomButton.setDisable(true);
                         }
+                        screenText.setText("Please press Enter if you want to buy again");
+                        updateVendingMachine();
                     }
                 }
                 else {
@@ -174,7 +175,15 @@ public class RegularVendingMachineController implements Initializable {
 
                     // Set the text of the numberButtonText label to display the result
                     numberButtonText.setText(changeOutput);
+                    screenText.setText("Please press Enter if you want to buy again");
+                    for (Button denomButton : denomButtonsArray) {
+                        denomButton.setDisable(true);
+                    }
                 }
+            }
+            else if(textFromScreen.equals("Please press Enter if you want to buy again"))
+            {
+                resetVendingMachine();
             }
         });
 
@@ -196,6 +205,26 @@ public class RegularVendingMachineController implements Initializable {
         }
 
         screenText.setText("Choose an item (or enter 0 for change): ");
+        updateVendingMachine();
+        for (int i = 0; i < redButtons.length; i++) {
+            final int buttonNumber = i; // Button numbers start from 0
+
+            // Set event handler for mouse pressed
+            redButtons[buttonNumber].setOnMousePressed(event -> {
+                Image greenButtonImage = new Image(getClass().getResource("/assets/greenbutton" + buttonNumber + ".png").toExternalForm());
+                redButtons[buttonNumber].setImage(greenButtonImage);
+            });
+
+            // Set event handler for mouse released
+            redButtons[buttonNumber].setOnMouseReleased(event -> {
+                Image redButtonImage = new Image(getClass().getResource("/assets/redbutton" + buttonNumber + ".png").toExternalForm());
+                redButtons[buttonNumber].setImage(redButtonImage);
+            });
+        }
+    }
+
+    private void updateVendingMachine()
+    {
         ItemSlots[] slots = vendingMachine.getSlots();
         for (int i = 0; i < itemLabels.length; i++) {
             if (i < slots.length) {
@@ -224,21 +253,15 @@ public class RegularVendingMachineController implements Initializable {
                 quantityLabels[i].setText("MISSING");
             }
         }
+    }
 
-        for (int i = 0; i < redButtons.length; i++) {
-            final int buttonNumber = i; // Button numbers start from 0
-
-            // Set event handler for mouse pressed
-            redButtons[buttonNumber].setOnMousePressed(event -> {
-                Image greenButtonImage = new Image(getClass().getResource("/assets/greenbutton" + buttonNumber + ".png").toExternalForm());
-                redButtons[buttonNumber].setImage(greenButtonImage);
-            });
-
-            // Set event handler for mouse released
-            redButtons[buttonNumber].setOnMouseReleased(event -> {
-                Image redButtonImage = new Image(getClass().getResource("/assets/redbutton" + buttonNumber + ".png").toExternalForm());
-                redButtons[buttonNumber].setImage(redButtonImage);
-            });
+    private void resetVendingMachine()
+    {
+        screenError.setVisible(false);
+        numberButtonText.setText("");
+        screenText.setText("Choose an item (or enter 0 for change): ");
+        for (int i = 0; i < 10; i++) {
+            redButtons[i].setDisable(false);
         }
     }
 }
