@@ -28,7 +28,9 @@
                   <Image url="@../../assets/VendingMachineScreen.png" />
                </image>
             </ImageView>
-            <TextFlow fx:id="textFlow" layoutX="14.0" layoutY="13.0" prefHeight="110.0" prefWidth="201.0">
+            <Label fx:id="numberButtonText" alignment="CENTER" layoutX="7.0" layoutY="39.0" prefHeight="96.0" prefWidth="215.0" textFill="WHITE" visible="false" />
+            <Label fx:id="screenError" alignment="CENTER" layoutX="2.0" layoutY="109.0" prefHeight="18.0" prefWidth="224.0" text="ERROR" textFill="WHITE" visible="false" />
+            <TextFlow fx:id="textFlow" layoutX="14.0" layoutY="13.0" prefHeight="71.0" prefWidth="202.0">
                <children>
                   <Text fx:id="screenText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
@@ -96,6 +98,11 @@
                   <Image url="@../../assets/redbutton0.png" />
                </image>
             </ImageView>
+            <Button fx:id="enterButton" layoutX="75.0" layoutY="323.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Enter">
+               <font>
+                  <Font name="Rockwell" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="606.0" prefWidth="491.0">
@@ -629,16 +636,16 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <Button layoutX="554.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1" />
-      <Button layoutX="606.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="5" />
-      <Button layoutX="660.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="10" />
-      <Button layoutX="718.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="15" />
-      <Button layoutX="554.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="20" />
-      <Button layoutX="606.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="50" />
-      <Button layoutX="660.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="100" />
-      <Button layoutX="718.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="200" />
-      <Button layoutX="585.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="300" />
-      <Button layoutX="637.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="500" />
-      <Button layoutX="691.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1000" />
+      <Button fx:id="denom1" disable="true" layoutX="554.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1" />
+      <Button fx:id="denom5" disable="true" layoutX="606.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="5" />
+      <Button fx:id="denom10" disable="true" layoutX="660.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="10" />
+      <Button fx:id="denom15" disable="true" layoutX="718.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="15" />
+      <Button fx:id="denom20" disable="true" layoutX="554.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="20" />
+      <Button fx:id="denom50" disable="true" layoutX="606.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="50" />
+      <Button fx:id="denom100" disable="true" layoutX="660.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="100" />
+      <Button fx:id="denom200" disable="true" layoutX="718.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="200" />
+      <Button fx:id="denom300" disable="true" layoutX="585.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="300" />
+      <Button fx:id="denom500" disable="true" layoutX="637.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="500" />
+      <Button fx:id="denom1000" disable="true" layoutX="691.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1000" />
    </children>
 </AnchorPane>

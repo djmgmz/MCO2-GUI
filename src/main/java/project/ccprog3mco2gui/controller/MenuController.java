@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
 import project.ccprog3mco2gui.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +19,6 @@ import javafx.scene.control.ListView;
 
 
 public class MenuController {
-    private ArrayList<RegularVendingMachine> regularVendingMachines;
-    private ArrayList<SpecialVendingMachine> specialVendingMachines;
     private ObservableList<String> regularVendingMachineNames;
 
     private Stage driverStage;
@@ -49,27 +46,21 @@ public class MenuController {
     @FXML
     private Label errorText;
 
+    private VendingMachineService vendingMachineService;
     private int selectedRegularVendingMachineIndex;
-    public int getRegularVendingMachineIndex()
-    {
-        return selectedRegularVendingMachineIndex;
-    }
     public void setDriverStage(Stage driverStage) {
         this.driverStage = driverStage;
     }
 
-
-
     @FXML
     public void initialize() {
+        vendingMachineService = new VendingMachineService();
         regularVendingMachineListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
                 selectedRegularVendingMachineIndex = newValue.intValue();
                 openRegular();
             }
         });
-        regularVendingMachines = new ArrayList<>();
-        specialVendingMachines = new ArrayList<>();
         regularVendingMachineNames = FXCollections.observableArrayList();
         regularVendingMachineListView.setItems(regularVendingMachineNames);
         btn1.setOnAction(e -> createVendingMachine());
@@ -150,7 +141,7 @@ public class MenuController {
 
     public void chooseRegularVendingMachine()
     {
-        if (regularVendingMachines.isEmpty()) {
+        if (vendingMachineService.getRegularVendingMachines().isEmpty()) {
             errorText.setVisible(true);
         }
         else
@@ -161,8 +152,8 @@ public class MenuController {
             regularVendingMachineListView.setVisible(true);
             regularVendingMachineNames.clear();
 
-            for (int i = 0; i < regularVendingMachines.size(); i++) {
-                RegularVendingMachine vendingMachine = regularVendingMachines.get(i);
+            for (int i = 0; i < vendingMachineService.getRegularVendingMachines().size(); i++) {
+                RegularVendingMachine vendingMachine = vendingMachineService.getRegularVendingMachines().get(i);
                 regularVendingMachineNames.add(vendingMachine.getName());
             }
         }
@@ -177,7 +168,7 @@ public class MenuController {
 
     public void openRegular()
     {
-        RegularVendingMachine vendingMachine = regularVendingMachines.get(selectedRegularVendingMachineIndex);
+        RegularVendingMachine vendingMachine = vendingMachineService.getRegularVendingMachines().get(selectedRegularVendingMachineIndex);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
             fxmlLoader.setController(new RegularVendingMachineController(vendingMachine));
@@ -226,10 +217,10 @@ public class MenuController {
                 goBackToMainMenu();
                 if ("Regular Vending Machine".equals(vendingtype)) {
                     RegularVendingMachine regularVendingMachine = new RegularVendingMachine(vendingMachineName);
-                    regularVendingMachines.add(regularVendingMachine);
+                    vendingMachineService.addRegularMachine(regularVendingMachine);
                 } else if ("Special Vending Machine".equals(vendingtype)) {
                     SpecialVendingMachine specialVendingMachine = new SpecialVendingMachine(vendingMachineName);
-                    specialVendingMachines.add(specialVendingMachine);
+                    vendingMachineService.addSpecialMachine(specialVendingMachine);
                 }
             }
         }
