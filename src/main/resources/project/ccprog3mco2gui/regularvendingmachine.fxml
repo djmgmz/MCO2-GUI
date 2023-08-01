@@ -283,7 +283,7 @@
                         <Image url="@../../assets/pineapplefinal.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="36.0" layoutY="115.0" prefHeight="19.0" prefWidth="86.0" text="MANGO" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="PINEAPPLE" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -326,11 +326,11 @@
                         <Image url="@../../assets/kiwifinal.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" layoutX="57.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KIWI" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="KIWI" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
-                  </Text>
+                  </Label>
                   <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="RIGHT" wrappingWidth="8.39453125">
                      <font>
                         <Font name="Rockwell" size="12.0" />
@@ -369,11 +369,11 @@
                         <Image url="@../../assets/raspberryfinal.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" layoutX="38.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RASPBERRY" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="RASPBERRY" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
-                  </Text>
+                  </Label>
                   <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="RIGHT" wrappingWidth="8.39453125">
                      <font>
                         <Font name="Rockwell" size="12.0" />
@@ -412,11 +412,11 @@
                         <Image url="@../../assets/peachfinal.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" layoutX="50.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PEACH" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="29.0" layoutY="118.0" prefHeight="22.0" prefWidth="81.0" text="PEACH" textFill="WHITE">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
-                  </Text>
+                  </Label>
                   <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8" textAlignment="RIGHT" wrappingWidth="8.39453125">
                      <font>
                         <Font name="Rockwell" size="12.0" />
@@ -460,6 +460,11 @@
                         <Font name="Rockwell" size="12.0" />
                      </font>
                   </Text>
+                  <Label alignment="CENTER" layoutX="32.0" layoutY="119.0" prefHeight="22.0" prefWidth="81.0" text="GOMU-GOMU" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
                   <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
                      <children>
                         <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
@@ -484,11 +489,6 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <Text fill="WHITE" layoutX="32.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GOMU-GOMU" textAlignment="CENTER">
-                     <font>
-                        <Font name="Rockwell" size="12.0" />
-                     </font>
-                  </Text>
                </children>
             </AnchorPane>
          </children>
