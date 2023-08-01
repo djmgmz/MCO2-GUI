@@ -2,6 +2,7 @@ package project.ccprog3mco2gui.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class SpecialVendingMachine extends RegularVendingMachine {
 
@@ -150,6 +151,157 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         System.out.println("-------------------");
     }
 
+    public void restockStandaloneItems() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = -1;
+        System.out.println("Which standalone items do you want to restock?");
+
+        System.out.println("[1] Milk");
+        System.out.println("[2] Sweetener");
+        System.out.println("[3] Add-ons");
+
+        choice = scanner.nextInt();
+
+        ItemSlots[] milk = getMilk();
+        ItemSlots[] sweetener = getSweetener();
+        ItemSlots[] addons = getAddOns();
+
+        switch(choice) {
+            case 1 -> restockItems(scanner, milk);
+            case 2 -> restockItems(scanner, sweetener);
+            case 3 -> restockItems(scanner, addons);
+            default -> System.out.println("Incorrect input");
+        }
+
+        resetTransactions();
+        setStandAloneItemsInv(milk, sweetener, addons);
+    }
+
+    public void restockItems(Scanner scanner, ItemSlots[] items) {
+        for (int i = 0; i < 3; i++) {
+            System.out.println("[" + (i+1) + "] " + items[i].getItem().getItemName());
+        }
+        System.out.println("Select an item to restock: ");
+        int itemChoice = scanner.nextInt();
+        if(itemChoice >= 1 && itemChoice <= 3) {
+            System.out.println("Enter the restock quantity: ");
+            int quantity = scanner.nextInt();
+            int currentQuantity = items[itemChoice-1].getQuantity();
+            int maxCapacity = 10; // This could be a constant or a field in your class
+            if(currentQuantity + quantity > maxCapacity) {
+                System.out.println("Error: The restock quantity would exceed the slot's maximum capacity.");
+            } else {
+                items[itemChoice-1].increaseQuantity(quantity);
+            }
+        } else {
+            System.out.println("Invalid choice. Please try again.");
+        }
+    }
+
+    /**
+     * Prompts the user to select an item slot from an array.
+     *
+     * @param slots the array of item slots to choose from
+     * @return the index of the selected item slot in the slots array
+     */
+    public int selectItemSlot(ItemSlots[] slots) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which item slot do you want to select?");
+        for (int i = 0; i < slots.length; i++) {
+            ItemSlots slot = slots[i];
+            Item item = slot.getItem();
+            String itemName = item != null ? item.getItemName() : "Empty";
+            int quantity = slot.getQuantity();
+            System.out.println("[" + (i + 1) + "] " + itemName + " (Quantity: " + quantity + ")");
+        }
+        System.out.print("Enter choice: ");
+        int itemSlotNumber = scanner.nextInt();
+        return itemSlotNumber - 1;
+    }
+
+    public void restockFruits() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Restock item for " + getName());
+        int restockSuccess = -1;
+        ItemSlots[] slots = getSlots();
+        int itemSlotIndex = selectItemSlot(slots);
+
+        if (itemSlotIndex < 0 || itemSlotIndex >= slots.length) {
+            System.out.println("Invalid item slot number. Please enter a correct input.");
+            return;
+        }
+
+        ItemSlots selectedSlot = slots[itemSlotIndex];
+        System.out.println("Item Slot: " + selectedSlot.getItem().getItemName());
+
+        if (!selectedSlot.isAvailable()) {
+            System.out.println("There are no items left in the slot");
+            System.out.println("[1] Stock with another item");
+            System.out.println("[2] Restock Item");
+
+            System.out.print("Enter choice: ");
+            int n = scanner.nextInt();
+            ItemSlots[] newInventory = getStartingInventory();
+            switch (n) {
+                case 1 -> {
+                    System.out.print("Enter the name of the new item: ");
+                    String itemName = scanner.next();
+                    System.out.print("Enter the price of the new item: ");
+                    double itemPrice = scanner.nextDouble();
+                    System.out.print("Enter calories of the new item: ");
+                    double itemCalories = scanner.nextDouble();
+                    System.out.print("Enter quantity of the new item: ");
+                    int newQuantity = scanner.nextInt();
+                    if (newQuantity <= 10) {
+                        Item newItem = new Item(itemName, itemPrice, itemCalories);
+                        restockWithNewItem(itemSlotIndex, newItem, newQuantity);
+                        newInventory[itemSlotIndex].setQuantity(newQuantity);
+                        slots[itemSlotIndex] = newInventory[itemSlotIndex]; // Update slots array
+                        restockSuccess = 1;
+                    } else {
+                        System.out.println("Each slot only has a capacity of 10 items.");
+                    }
+                }
+                case 2 -> {
+                    System.out.print("Enter quantity to add: ");
+                    int newQuantity2 = scanner.nextInt() + selectedSlot.getQuantity();
+                    if (newQuantity2 <= 10) {
+                        newInventory[itemSlotIndex].setQuantity(newQuantity2);
+                        setStartingInventory(newInventory);
+                        restockWithQuantity(itemSlotIndex, newQuantity2);
+                        slots[itemSlotIndex] = newInventory[itemSlotIndex]; // Update slots array
+                        restockSuccess = 1;
+                    } else {
+                        System.out.println("Each slot only has a capacity of 10 items.");
+                    }
+                }
+                default -> System.out.println("Please enter a correct input");
+            }
+            if (restockSuccess == 1) {
+                setSlots(newInventory);
+                resetTransactions();
+                System.out.println("Quantity for the selected item slot and transactions have been reset.");
+            }
+        } else {
+            System.out.print("Enter quantity to add: ");
+            int newQuantity = scanner.nextInt();
+
+            if (newQuantity + selectedSlot.getQuantity() <= 10) {
+                restockWithQuantity(itemSlotIndex, newQuantity);
+                ItemSlots[] newInventory = getStartingInventory();
+                newInventory[itemSlotIndex].setQuantity(newQuantity + selectedSlot.getQuantity());
+                setStartingInventory(newInventory);
+                slots[itemSlotIndex] = newInventory[itemSlotIndex]; // Update slots array
+
+                resetTransactions();
+                System.out.println("Stocking successful. Quantity for the selected item slot and transactions have been reset.");
+                restockSuccess = 1;
+            } else {
+                System.out.println("Each slot only has a capacity of 10 items. Restocking not possible.");
+            }
+        }
+
+    }
 
     public ItemSlots[] getStartingMilkInventory() {
         return this.startMilkItems;
