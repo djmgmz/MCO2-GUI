@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import project.ccprog3mco2gui.model.RegularVendingMachine;
+import project.ccprog3mco2gui.model.SpecialVendingMachine;
 import project.ccprog3mco2gui.model.VendingMachineService;
 import java.io.IOException;
 
@@ -17,6 +18,8 @@ public class Driver extends javafx.application.Application {
         // Add a default regular vending machine (you can customize this as needed)
         RegularVendingMachine defaultRegularVendingMachine = new RegularVendingMachine("Default Vending Machine");
         vendingMachineService.addRegularMachine(defaultRegularVendingMachine);
+        SpecialVendingMachine defaultSpecialVendingMachine = new SpecialVendingMachine("Default Vending Machine");
+        vendingMachineService.addSpecialMachine(defaultSpecialVendingMachine);
 
         FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("menu1.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 500);

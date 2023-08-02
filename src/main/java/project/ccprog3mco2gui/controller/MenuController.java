@@ -20,10 +20,14 @@ import javafx.scene.control.ListView;
 
 public class MenuController {
     private ObservableList<String> regularVendingMachineNames;
+    private ObservableList<String> specialVendingMachineNames;
 
     private Stage driverStage;
     @FXML
     private ListView<String> regularVendingMachineListView;
+
+    @FXML
+    private ListView<String> specialVendingMachineListView;
 
     @FXML
     private Label titleText;
@@ -48,6 +52,7 @@ public class MenuController {
 
     private VendingMachineService vendingMachineService;
     private int selectedRegularVendingMachineIndex;
+    private int selectedSpecialVendingMachineIndex;
     private boolean isInMaintenanceMode;
 
     public void setVendingMachineService(VendingMachineService vendingMachineService) {
@@ -75,6 +80,15 @@ public class MenuController {
                 openRegular();
             }
         });
+
+        specialVendingMachineListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() >= 0) {
+                selectedSpecialVendingMachineIndex = newValue.intValue();
+                openSpecial();
+            }
+        });
+        specialVendingMachineNames = FXCollections.observableArrayList();
+        specialVendingMachineListView.setItems(specialVendingMachineNames);
         regularVendingMachineNames = FXCollections.observableArrayList();
         regularVendingMachineListView.setItems(regularVendingMachineNames);
         btn1.setOnAction(e -> createVendingMachine());
@@ -177,9 +191,22 @@ public class MenuController {
 
     public void chooseSpecialVendingMachine()
     {
-        titleText.setText("Choose a special vending machine");
-        hideButtons();
-        disableButtons();
+        if (vendingMachineService.getSpecialVendingMachines().isEmpty()) {
+            errorText.setVisible(true);
+        }
+        else
+        {
+            titleText.setText("Choose a special vending machine");
+            hideButtons();
+            disableButtons();
+            specialVendingMachineListView.setVisible(true);
+            specialVendingMachineNames.clear();
+
+            for (int i = 0; i < vendingMachineService.getSpecialVendingMachines().size(); i++) {
+                SpecialVendingMachine vendingMachine = vendingMachineService.getSpecialVendingMachines().get(i);
+                specialVendingMachineNames.add(vendingMachine.getName());
+            }
+        }
     }
 
     public void openRegular()
@@ -221,24 +248,24 @@ public class MenuController {
         if (this.driverStage == null) {
             throw new IllegalStateException("driverStage has not been initialized.");
         }
-        //to change
-        SpecialVendingMachine vendingMachine = vendingMachineService.getSpecialVendingMachines().get(selectedRegularVendingMachineIndex);
+
+        SpecialVendingMachine vendingMachine = vendingMachineService.getSpecialVendingMachines().get(selectedSpecialVendingMachineIndex);
         try {
             FXMLLoader fxmlLoader;
             if (isInMaintenanceMode) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/maintenance.fxml")); // update the path to the maintenance FXML
 //                fxmlLoader.setController(new MaintenanceController(vendingMachine));
             } else {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
-//                SpecialVendingMachineController controller = new SpecialVendingMachineController();
-//                controller.setVendingMachine(vendingMachine);
-//                fxmlLoader.setController(controller);
+                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/specialvendingmachine.fxml"));
+                SpecialVendingMachineController controller = new SpecialVendingMachineController();
+                controller.setVendingMachine(vendingMachine);
+                fxmlLoader.setController(controller);
             }
 
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
             vendingMachineStage.setTitle(isInMaintenanceMode ? "Maintenance" : "Vending Machine");
-            vendingMachineStage.setScene(new Scene(root, 794, 728));
+            vendingMachineStage.setScene(new Scene(root, 1315, 728));
             vendingMachineStage.show();
 
             driverStage.close();
