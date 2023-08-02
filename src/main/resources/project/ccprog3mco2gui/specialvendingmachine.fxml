@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="728.0" fitWidth="1315.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/specialvendingmachinebackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="452.0" layoutX="118.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/outputvendingmachine.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="543.0" layoutY="14.0" prefHeight="136.0" prefWidth="230.0">
+         <children>
+            <ImageView fitHeight="158.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/VendingMachineScreen.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="numberButtonText" alignment="CENTER" layoutX="7.0" layoutY="39.0" prefHeight="96.0" prefWidth="215.0" textFill="WHITE" visible="false" />
+            <Label fx:id="screenError" alignment="CENTER" layoutX="2.0" layoutY="109.0" prefHeight="18.0" prefWidth="224.0" text="ERROR" textFill="WHITE" visible="false" />
+            <TextFlow fx:id="textFlow" layoutX="14.0" layoutY="13.0" prefHeight="71.0" prefWidth="202.0">
+               <children>
+                  <Text fx:id="screenText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="543.0" layoutY="182.0" prefHeight="374.0" prefWidth="230.0">
+         <children>
+            <ImageView fitHeight="426.0" fitWidth="230.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/backgroundforbuttons.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton1" fitHeight="44.0" fitWidth="56.0" layoutX="21.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton2" fitHeight="44.0" fitWidth="56.0" layoutX="88.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton3" fitHeight="44.0" fitWidth="56.0" layoutX="153.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton4" fitHeight="44.0" fitWidth="56.0" layoutX="22.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton4.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton5" fitHeight="44.0" fitWidth="56.0" layoutX="89.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton5.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton6" fitHeight="44.0" fitWidth="56.0" layoutX="154.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton6.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton7" fitHeight="44.0" fitWidth="56.0" layoutX="22.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton7.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton8" fitHeight="44.0" fitWidth="56.0" layoutX="89.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton8.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton9" fitHeight="44.0" fitWidth="56.0" layoutX="154.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton9.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redButton0" fitHeight="44.0" fitWidth="56.0" layoutX="87.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/redbutton0.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="enterButton" layoutX="75.0" layoutY="323.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Enter">
+               <font>
+                  <Font name="Rockwell" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="606.0" prefWidth="491.0">
+         <children>
+            <ImageView fitHeight="638.0" fitWidth="510.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/insideofthevendingmachine.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="40.0" layoutY="11.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/bananafinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item1" alignment="CENTER" layoutX="27.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="BANANA" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price1" alignment="CENTER" layoutX="6.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories1" alignment="CENTER" layoutX="49.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity1" alignment="CENTER" layoutX="90.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="183.0" layoutY="12.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/strawberryfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item2" alignment="CENTER" layoutX="28.0" layoutY="120.0" prefHeight="19.0" prefWidth="86.0" text="STRAWBERRY" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price2" alignment="CENTER" layoutX="7.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories2" alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity2" alignment="CENTER" layoutX="91.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="325.0" layoutY="11.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/blueberryfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item3" alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="BLUEBERRY" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price3" alignment="CENTER" layoutX="5.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories3" alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity3" alignment="CENTER" layoutX="89.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="40.0" layoutY="197.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/mangofinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item4" alignment="CENTER" layoutX="29.0" layoutY="123.0" prefHeight="19.0" prefWidth="86.0" text="MANGO" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price4" alignment="CENTER" layoutX="8.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories4" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity4" alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="183.0" layoutY="198.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/pineapplefinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item5" alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="PINEAPPLE" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price5" alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories5" alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity5" alignment="CENTER" layoutX="94.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="325.0" layoutY="197.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/kiwifinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item6" alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="KIWI" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price6" alignment="CENTER" layoutX="9.0" layoutY="16.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories6" alignment="CENTER" layoutX="52.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity6" alignment="CENTER" layoutX="93.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="39.0" layoutY="383.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/raspberryfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item7" alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="RASPBERRY" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price7" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories7" alignment="CENTER" layoutX="48.0" layoutY="13.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity7" alignment="CENTER" layoutX="89.0" layoutY="13.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="182.0" layoutY="384.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/peachfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item8" alignment="CENTER" layoutX="29.0" layoutY="118.0" prefHeight="22.0" prefWidth="81.0" text="PEACH" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price8" alignment="CENTER" layoutX="8.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories8" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity8" alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="324.0" layoutY="383.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/gomugomufruitfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="item9" alignment="CENTER" layoutX="32.0" layoutY="119.0" prefHeight="22.0" prefWidth="81.0" text="GOMU-GOMU" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price9" alignment="CENTER" layoutX="9.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories9" alignment="CENTER" layoutX="52.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity9" alignment="CENTER" layoutX="93.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="denom1" disable="true" layoutX="554.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1" />
+      <Button fx:id="denom5" disable="true" layoutX="606.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="5" />
+      <Button fx:id="denom10" disable="true" layoutX="660.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="10" />
+      <Button fx:id="denom15" disable="true" layoutX="718.0" layoutY="585.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="15" />
+      <Button fx:id="denom20" disable="true" layoutX="554.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="20" />
+      <Button fx:id="denom50" disable="true" layoutX="606.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="50" />
+      <Button fx:id="denom100" disable="true" layoutX="660.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="100" />
+      <Button fx:id="denom200" disable="true" layoutX="718.0" layoutY="623.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="200" />
+      <Button fx:id="denom300" disable="true" layoutX="585.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="300" />
+      <Button fx:id="denom500" disable="true" layoutX="637.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="500" />
+      <Button fx:id="denom1000" disable="true" layoutX="691.0" layoutY="662.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="43.0" text="1000" />
+      <Button fx:id="backButton" layoutX="713.0" layoutY="688.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" text="Back" />
+      <AnchorPane layoutX="794.0" layoutY="14.0" prefHeight="606.0" prefWidth="491.0">
+         <children>
+            <ImageView fitHeight="638.0" fitWidth="510.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/insideofthevendingmachine.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="40.0" layoutY="11.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/almondmilkfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item11" alignment="CENTER" layoutX="27.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="Almond Milk" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price10" alignment="CENTER" layoutX="6.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories10" alignment="CENTER" layoutX="49.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity10" alignment="CENTER" layoutX="90.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="183.0" layoutY="12.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/soymilkfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item21" alignment="CENTER" layoutX="28.0" layoutY="120.0" prefHeight="19.0" prefWidth="86.0" text="Soy Milk" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price11" alignment="CENTER" layoutX="7.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories11" alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity11" alignment="CENTER" layoutX="91.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="325.0" layoutY="11.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/cowsmilkfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item31" alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="Cow's Milk" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price12" alignment="CENTER" layoutX="5.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories12" alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity12" alignment="CENTER" layoutX="89.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="40.0" layoutY="197.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/honeyfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item41" alignment="CENTER" layoutX="29.0" layoutY="123.0" prefHeight="19.0" prefWidth="86.0" text="Honey" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price13" alignment="CENTER" layoutX="8.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories13" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity13" alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="183.0" layoutY="198.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/steviafinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item51" alignment="CENTER" layoutX="28.0" layoutY="121.0" prefHeight="19.0" prefWidth="86.0" text="Stevia" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price14" alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories14" alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity14" alignment="CENTER" layoutX="94.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="325.0" layoutY="197.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/agavesyrupfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item61" alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="Agave Syrup" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price15" alignment="CENTER" layoutX="9.0" layoutY="16.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories15" alignment="CENTER" layoutX="52.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity15" alignment="CENTER" layoutX="93.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="39.0" layoutY="383.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/yogurtfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item71" alignment="CENTER" layoutX="29.0" layoutY="120.0" prefHeight="22.0" prefWidth="81.0" text="Yogurt" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price16" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories16" alignment="CENTER" layoutX="48.0" layoutY="13.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity16" alignment="CENTER" layoutX="89.0" layoutY="13.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="182.0" layoutY="384.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/chiaseedsfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="item81" alignment="CENTER" layoutX="29.0" layoutY="118.0" prefHeight="22.0" prefWidth="81.0" text="Chia Seeds" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price17" alignment="CENTER" layoutX="8.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories17" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity17" alignment="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="324.0" layoutY="383.0" prefHeight="184.0" prefWidth="143.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/proteinpowderfinal.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="RIGHT" wrappingWidth="8.39453125">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="item91" alignment="CENTER" layoutX="32.0" layoutY="119.0" prefHeight="22.0" prefWidth="81.0" text="Protein Powder" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="12.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutY="142.0" prefHeight="44.0" prefWidth="142.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="141.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../assets/nameplate.png" />
+                           </image>
+                        </ImageView>
+                        <Text fill="WHITE" layoutX="16.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="53.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="95.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" textAlignment="CENTER">
+                           <font>
+                              <Font name="Rockwell" size="9.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="price18" alignment="CENTER" layoutX="9.0" layoutY="15.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="calories18" alignment="CENTER" layoutX="52.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantity18" alignment="CENTER" layoutX="93.0" layoutY="14.0" prefHeight="22.0" prefWidth="43.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
