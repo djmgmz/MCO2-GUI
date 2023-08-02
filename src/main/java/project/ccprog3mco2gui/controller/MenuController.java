@@ -242,7 +242,6 @@ public class MenuController {
             e.printStackTrace();
         }
     }
-
     public void openSpecial()
     {
         if (this.driverStage == null) {
@@ -253,8 +252,11 @@ public class MenuController {
         try {
             FXMLLoader fxmlLoader;
             if (isInMaintenanceMode) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/maintenance.fxml")); // update the path to the maintenance FXML
-//                fxmlLoader.setController(new MaintenanceController(vendingMachine));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/maintenance.fxml"));
+                MaintenanceController controller = new MaintenanceController();
+                controller.setVendingMachineSpecial(vendingMachine);
+                fxmlLoader.setController(controller);
+
             } else {
                 fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/specialvendingmachine.fxml"));
                 SpecialVendingMachineController controller = new SpecialVendingMachineController();
@@ -265,7 +267,7 @@ public class MenuController {
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
             vendingMachineStage.setTitle(isInMaintenanceMode ? "Maintenance" : "Vending Machine");
-            vendingMachineStage.setScene(new Scene(root, 1315, 728));
+            vendingMachineStage.setScene(new Scene(root, 794, 728));
             vendingMachineStage.show();
 
             driverStage.close();

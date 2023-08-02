@@ -106,4 +106,5 @@ public class ItemSlots {
         setQuantity(newQuantity);
         setAvailability(true);
     }
+
 }

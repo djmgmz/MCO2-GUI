@@ -56,7 +56,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneItems" layoutX="152.0" layoutY="183.0" prefHeight="320.0" prefWidth="205.0">
+      <AnchorPane fx:id="anchorPaneItems" layoutX="152.0" layoutY="183.0" prefHeight="320.0" prefWidth="205.0" visible="false">
          <children>
             <ImageView fitHeight="321.0" fitWidth="278.0" layoutX="-7.0" layoutY="-1.0">
                <image>
@@ -68,12 +68,12 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="143.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+            <Text fill="WHITE" layoutX="161.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="212.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty">
+            <Text fill="WHITE" layoutX="218.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty">
                <font>
                   <Font size="16.0" />
                </font>
@@ -83,17 +83,17 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price1" fill="WHITE" layoutX="145.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price1">
+            <Text fx:id="price1" fill="WHITE" layoutX="161.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price1">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty1" fill="WHITE" layoutX="214.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty1">
+            <Text fx:id="qty1" fill="WHITE" layoutX="222.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty1">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="51.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="51.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name1">
                      <font>
@@ -107,17 +107,17 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price2" fill="WHITE" layoutX="145.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price2">
+            <Text fx:id="price2" fill="WHITE" layoutX="161.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price2">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty2" fill="WHITE" layoutX="214.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty2">
+            <Text fx:id="qty2" fill="WHITE" layoutX="222.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty2">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="76.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="76.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name2" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name2">
                      <font>
@@ -131,14 +131,14 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty3" fill="WHITE" layoutX="214.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty3">
+            <Text fx:id="qty3" fill="WHITE" layoutX="222.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty3">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="101.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="101.0" prefHeight="25.0" prefWidth="112.0">
                <children>
-                  <Text fx:id="name3" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name3">
+                  <Text fx:id="name3" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name3" wrappingWidth="83.96875">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -150,17 +150,17 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price4" fill="WHITE" layoutX="145.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price4">
+            <Text fx:id="price4" fill="WHITE" layoutX="161.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price4">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty4" fill="WHITE" layoutX="214.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty4">
+            <Text fx:id="qty4" fill="WHITE" layoutX="222.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty4">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="126.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="126.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name4" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name4">
                      <font>
@@ -174,17 +174,17 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price5" fill="WHITE" layoutX="145.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price5">
+            <Text fx:id="price5" fill="WHITE" layoutX="161.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price5">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty5" fill="WHITE" layoutX="214.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty5">
+            <Text fx:id="qty5" fill="WHITE" layoutX="222.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty5">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="151.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="151.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name5" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name5">
                      <font>
@@ -198,7 +198,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="176.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="176.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name6" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name6">
                      <font>
@@ -212,17 +212,17 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price7" fill="WHITE" layoutX="145.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price7">
+            <Text fx:id="price7" fill="WHITE" layoutX="161.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price7">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty7" fill="WHITE" layoutX="214.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty7">
+            <Text fx:id="qty7" fill="WHITE" layoutX="222.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty7">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="201.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="201.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name7" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name7">
                      <font>
@@ -236,17 +236,17 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price8" fill="WHITE" layoutX="145.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price8">
+            <Text fx:id="price8" fill="WHITE" layoutX="161.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price8">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty8" fill="WHITE" layoutX="214.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty8">
+            <Text fx:id="qty8" fill="WHITE" layoutX="222.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty8">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="226.0" prefHeight="25.0" prefWidth="86.0">
+            <TextFlow layoutX="43.0" layoutY="226.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name8" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name8">
                      <font>
@@ -260,7 +260,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextFlow layoutX="43.0" layoutY="251.0" prefHeight="25.0" prefWidth="92.0">
+            <TextFlow layoutX="43.0" layoutY="251.0" prefHeight="25.0" prefWidth="112.0">
                <children>
                   <Text fx:id="name9" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="name9" wrappingWidth="59.96875">
                      <font>
@@ -269,27 +269,27 @@
                   </Text>
                </children>
             </TextFlow>
-            <Text fx:id="price6" fill="WHITE" layoutX="145.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price6">
+            <Text fx:id="price6" fill="WHITE" layoutX="161.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price6">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty6" fill="WHITE" layoutX="214.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty6">
+            <Text fx:id="qty6" fill="WHITE" layoutX="222.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty6">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price9" fill="WHITE" layoutX="145.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price9">
+            <Text fx:id="price9" fill="WHITE" layoutX="161.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price9">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="qty9" fill="WHITE" layoutX="214.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty9">
+            <Text fx:id="qty9" fill="WHITE" layoutX="222.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="qty9">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="price3" fill="WHITE" layoutX="145.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price3">
+            <Text fx:id="price3" fill="WHITE" layoutX="161.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="price3">
                <font>
                   <Font size="16.0" />
                </font>
@@ -301,7 +301,7 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <AnchorPane fx:id="newquantity" layoutX="477.0" layoutY="195.0" prefHeight="295.0" prefWidth="200.0">
+      <AnchorPane fx:id="newquantity" layoutX="477.0" layoutY="195.0" prefHeight="295.0" prefWidth="200.0" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Enter Quantity:">
                <font>
@@ -320,7 +320,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="slotspane" layoutX="479.0" layoutY="285.0" prefHeight="169.0" prefWidth="174.0">
+      <AnchorPane fx:id="slotspane" layoutX="479.0" layoutY="285.0" prefHeight="169.0" prefWidth="174.0" visible="false">
          <children>
             <Button fx:id="slot1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="43.0" text="1">
                <font>
@@ -365,6 +365,79 @@
             <Button fx:id="slot9" layoutX="114.0" layoutY="107.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="43.0" text="9">
                <font>
                   <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="stockItem" layoutX="513.0" layoutY="208.0" prefHeight="337.0" prefWidth="200.0" visible="false">
+         <children>
+            <Label layoutX="10.0" layoutY="54.0" text="Enter New Item Name: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="106.0" text="Enter New Price: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="168.0" text="Enter New Calories: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="229.0" text="Enter Quantity: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfield11" layoutX="7.0" layoutY="75.0" prefHeight="31.0" prefWidth="149.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textfield3" layoutX="7.0" layoutY="189.0" prefHeight="31.0" prefWidth="149.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textfield2" layoutX="7.0" layoutY="127.0" prefHeight="31.0" prefWidth="149.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textfield4" layoutX="7.0" layoutY="250.0" prefHeight="31.0" prefWidth="149.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text fx:id="error1" layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR" visible="false">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <Button fx:id="stockBtn" layoutX="56.0" layoutY="293.0" mnemonicParsing="false" text="Stock">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="setPrice" layoutX="500.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="13.0" layoutY="5.0" text="Enter New Price: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfield21" layoutX="13.0" layoutY="26.0" prefHeight="31.0" prefWidth="149.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="enterBtn2" layoutX="57.0" layoutY="67.0" mnemonicParsing="false" text="Enter">
+               <font>
+                  <Font size="14.0" />
                </font>
             </Button>
          </children>

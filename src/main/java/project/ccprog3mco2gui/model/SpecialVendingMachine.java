@@ -19,6 +19,9 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     public SpecialVendingMachine(String name) {
         super(name);
         initializeStandaloneItems();
+        milkItems[0].setQuantity(0);
+        milkItems[0].setAvailability(false);
+
     }
 
     // Initialization method to create standalone items
@@ -364,6 +367,20 @@ public class SpecialVendingMachine extends RegularVendingMachine {
             }
         }
     }
+//for special only
+    @Override
+    public boolean hasEmptySlot() {
+        List<ItemSlots[]> allSlotArrays = Arrays.asList(getSlots(), milkItems, sweetenerItems, addOnsItems);
+
+        for (ItemSlots[] slotsArray : allSlotArrays) {
+            for (ItemSlots slot : slotsArray) {
+                if (slot == null || !slot.isAvailable()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private ItemSlots findCorrespondingSlot(Item item, ItemSlots[] slots) {
         for (ItemSlots slot : slots) {
@@ -378,8 +395,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     /**
      * Sets the item price for a specific item in a vending machine.
      */
-    public void setItemPrice(ItemSlots[] itemSlots , double price, int itemSlotIndex) {
-
+    public void setItemPrice(ItemSlots[] itemSlots, double price, int itemSlotIndex) {
         ItemSlots selectedSlot = itemSlots[itemSlotIndex];
 //        System.out.print("Enter new price for the item: ");
         if(price > 0 && price <= 1000)

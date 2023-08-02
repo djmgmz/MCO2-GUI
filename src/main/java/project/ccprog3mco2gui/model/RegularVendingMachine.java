@@ -29,6 +29,8 @@ public class RegularVendingMachine {
         this.transactions = new ArrayList<>();
         initializeDenominations();
         predefinedSlots();
+        slots[0].setQuantity(0);
+        slots[0].setAvailability(false);
     }
 
     // Initialization methods
@@ -238,7 +240,7 @@ public class RegularVendingMachine {
         ItemSlots slot = slots[slotIndex];
         if(slot.getQuantity()+newQuantity <= 10)
         {
-
+            slot.setAvailability(true);
             slot.setQuantity(slot.getQuantity()+newQuantity);
             updateStartingInventory();
             resetTransactions();
@@ -321,6 +323,15 @@ public void updateStartingInventory()
         Transaction transaction = new Transaction(itemName, quantityToDispense, itemPrice);
         getTransactions().add(transaction);
         return Output;
+    }
+
+    public boolean hasEmptySlot() {
+        for (ItemSlots slot : getSlots()) {
+            if (slot == null || !slot.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
