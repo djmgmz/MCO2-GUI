@@ -236,9 +236,18 @@ public class RegularVendingMachine {
     public void restockWithQuantity(int slotIndex, int newQuantity) {
         ItemSlots[] slots = getSlots();
         ItemSlots slot = slots[slotIndex];
-        slot.setQuantity(slot.getQuantity());
-    }
+        if(slot.getQuantity()+newQuantity <= 10)
+        {
 
+            slot.setQuantity(slot.getQuantity()+newQuantity);
+            updateStartingInventory();
+            resetTransactions();
+        }
+    }
+public void updateStartingInventory()
+{
+    this.startingInventory = slots;
+}
     // Internal helper methods
     /**
      * Updates the count of denominations in the vending machine after a transaction.
@@ -298,7 +307,7 @@ public class RegularVendingMachine {
             int count = denomination.getCount();
             int value = denomination.getValue();
             Output += value + " count: " + count + "\n";
-            System.out.println(value + "$ count: " + count +"\n");
+            System.out.println(value + " count: " + count +"\n");
         }
 
         selectedSlot.decreaseQuantity(quantityToDispense);
