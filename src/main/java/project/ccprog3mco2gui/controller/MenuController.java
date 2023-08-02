@@ -267,7 +267,7 @@ public class MenuController {
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
             vendingMachineStage.setTitle(isInMaintenanceMode ? "Maintenance" : "Vending Machine");
-            vendingMachineStage.setScene(new Scene(root, 794, 728));
+            vendingMachineStage.setScene(new Scene(root, 1315, 728));
             vendingMachineStage.show();
 
             driverStage.close();
