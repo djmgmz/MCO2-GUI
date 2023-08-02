@@ -107,9 +107,8 @@ public class RegularVendingMachineController implements Initializable {
                 try {
                     selectedItemIndex = Integer.parseInt(inputText);
 
-                    if (selectedItemIndex >= 0 && selectedItemIndex < vendingMachine.getSlots().length) {
+                    if (selectedItemIndex >= 0 && selectedItemIndex <= vendingMachine.getSlots().length) {
                         screenError.setVisible(false);
-                        ItemSlots selectedItemSlot = vendingMachine.getSlots()[selectedItemIndex];
                         for (int i = 0; i < 10; i++) {
                             redButtons[i].setDisable(true);
                         }
