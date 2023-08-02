@@ -92,7 +92,7 @@ public class MaintenanceController implements Initializable {
             backBtn.setOnAction(this::goBackToMenu2);
 
         } else {
-            restockItemBtn.setOnAction(e -> ((SpecialVendingMachine) vendingMachine).restockFruits());
+//            restockItemBtn.setOnAction(e -> );
 //            setItemPriceBtn.setOnAction(e -> setItemPrice()); // replace 'setItemPrice' with the actual method name.
             //... repeat for other buttons
         }

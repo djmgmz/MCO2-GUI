@@ -1,5 +1,7 @@
 package project.ccprog3mco2gui.model;
 
+import java.util.Objects;
+
 /**
  * Represents an item in the vending machine.
  */
@@ -7,7 +9,6 @@ public class Item {
     private String name;
     private double price;
     private double calories;
-
     /**
      * Constructs an Item object with the specified name, price, and calories.
      *
@@ -73,5 +74,12 @@ public class Item {
      */
     public double getItemCalories() {
         return calories;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Item item = (Item) obj;
+        return Objects.equals(name, item.name);
     }
 }

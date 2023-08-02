@@ -1,6 +1,7 @@
 package project.ccprog3mco2gui.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,6 +85,10 @@ public class SpecialVendingMachine extends RegularVendingMachine {
 
     }
 
+    private boolean processPayment(ArrayList<Item> selectedIngredients, double totalCost, double totalPayment) {
+        Item item = createItem(selectedIngredients);
+        return dispenseFinalItem(totalPayment, item);
+    }
     public boolean dispenseFinalItem(double payment, Item item)
     {
 
@@ -198,33 +203,32 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
     }
 
-    /**
-     * Prompts the user to select an item slot from an array.
-     *
-     * @param slots the array of item slots to choose from
-     * @return the index of the selected item slot in the slots array
-     */
-    public int selectItemSlot(ItemSlots[] slots) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Which item slot do you want to select?");
-        for (int i = 0; i < slots.length; i++) {
-            ItemSlots slot = slots[i];
-            Item item = slot.getItem();
-            String itemName = item != null ? item.getItemName() : "Empty";
-            int quantity = slot.getQuantity();
-            System.out.println("[" + (i + 1) + "] " + itemName + " (Quantity: " + quantity + ")");
-        }
-        System.out.print("Enter choice: ");
-        int itemSlotNumber = scanner.nextInt();
-        return itemSlotNumber - 1;
-    }
+//    /**
+//     * Prompts the user to select an item slot from an array.
+//     *
+//     * @param slots the array of item slots to choose from
+//     * @return the index of the selected item slot in the slots array
+//     */
+//    public int selectItemSlot(ItemSlots[] slots) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Which item slot do you want to select?");
+//        for (int i = 0; i < slots.length; i++) {
+//            ItemSlots slot = slots[i];
+//            Item item = slot.getItem();
+//            String itemName = item != null ? item.getItemName() : "Empty";
+//            int quantity = slot.getQuantity();
+//            System.out.println("[" + (i + 1) + "] " + itemName + " (Quantity: " + quantity + ")");
+//        }
+//        System.out.print("Enter choice: ");
+//        int itemSlotNumber = scanner.nextInt();
+//        return itemSlotNumber - 1;
+//    }
 
-    public void restockFruits() {
+    public void restockFruits(int itemSlotIndex) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Restock item for " + getName());
         int restockSuccess = -1;
         ItemSlots[] slots = getSlots();
-        int itemSlotIndex = selectItemSlot(slots);
 
         if (itemSlotIndex < 0 || itemSlotIndex >= slots.length) {
             System.out.println("Invalid item slot number. Please enter a correct input.");
@@ -314,4 +318,109 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     public ItemSlots[] getStartingAddOnsInventory() {
         return this.startAddOnsItems;
     }
+
+    private Item createItem(ArrayList<Item> selectedIngredients) {
+        double totalCost = 0;
+        double totalCalories = 0;
+        for(int i = 0; i < selectedIngredients.toArray().length; i++)
+        {
+            totalCost += selectedIngredients.get(i).getItemPrice();
+            totalCalories += selectedIngredients.get(i).getItemCalories();
+        }
+        return new Item("Fruit Smoothie", totalCost, totalCalories);
+    }
+
+    private void selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
+        if(index < 1 || index > itemSlots.length) {
+            System.out.println("Invalid option. Please try again.");
+            return;
+        }
+
+        ItemSlots slot = itemSlots[index-1];
+        if(!slot.isAvailable()) {
+            System.out.println("Sorry, this item is currently unavailable.");
+            return;
+        }
+        Item chosenItem = slot.getItem();
+        selectedIngredients.add(chosenItem);
+        slot.decreaseQuantity(1);
+    }
+
+
+    private void revertIngredientQuantities(ArrayList<Item> selectedIngredients) {
+        for (Item ingredient : selectedIngredients) {
+            ItemSlots correspondingSlot = findCorrespondingSlot(ingredient, this.slots);
+            if (correspondingSlot == null) {
+                correspondingSlot = findCorrespondingSlot(ingredient, milkItems);
+            }
+            if (correspondingSlot == null) {
+                correspondingSlot = findCorrespondingSlot(ingredient, sweetenerItems);
+            }
+            if (correspondingSlot == null) {
+                correspondingSlot = findCorrespondingSlot(ingredient, addOnsItems);
+            }
+            if (correspondingSlot != null) {
+                correspondingSlot.increaseQuantity(1);
+            }
+        }
+    }
+
+    private ItemSlots findCorrespondingSlot(Item item, ItemSlots[] slots) {
+        for (ItemSlots slot : slots) {
+            if (slot.getItem().equals(item)) {
+                return slot;
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * Sets the item price for a specific item in a vending machine.
+     */
+    public void setItemPrice(ItemSlots[] itemSlots , double price, int itemSlotIndex) {
+
+        ItemSlots selectedSlot = itemSlots[itemSlotIndex];
+//        System.out.print("Enter new price for the item: ");
+        if(price > 0 && price <= 1000)
+        selectedSlot.getItem().setPrice(price);
+//        System.out.println("Item price set successfully. The price for the selected item slot has been updated.");
+    }
+
+
+    /**
+     * Validates the given denomination for use in vending machine payment.
+     *
+     * @param denomination The denomination to validate.
+     * @return True if the denomination is valid, false otherwise.
+     */
+    private boolean validateDenominations(int denomination) {
+        int[] validDenominations = {1, 5, 10, 15, 20, 50, 100, 200, 300, 500, 1000};
+
+        for (int i = 0; i < validDenominations.length; i++) {
+            if (denomination == validDenominations[i]) {
+                return true;
+            }
+        }
+
+        System.out.println("Error: Invalid denomination (" + denomination + "). We do not accept this type of denomination.");
+        return false;
+    }
+
+    /* to do:
+            ArrayList<Item> selectedIngredients in controller
+            private void selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
+            for fruits: selectIngredient(ItemSlots[] fruits, int index, ArrayList<Item> selectedIngredients)
+            selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients)
+            ung pagcreate ng smoothie: createItem(ArrayList<Item> selectedIngredients)
+            tas processPayment, returns boolean. if !successful -> revertIngredients.
+
+            Peter:
+            ung pagrestock -> settheinventories for each items.
+
+        note:
+        setitemprice -> greater than 0 but <= 1000
+
+     */
+
 }

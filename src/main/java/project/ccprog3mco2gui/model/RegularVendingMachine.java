@@ -10,14 +10,14 @@ import java.util.Scanner;
  */
 public class RegularVendingMachine {
 
-    private int MAX_SLOTS = 9;
+    protected  int MAX_SLOTS = 9;
 
-    private String name;
-    private ItemSlots[] slots;
-    private ItemSlots[] startingInventory;
-    private List<Denomination> denominations;
-    private double totalSales;
-    private List<Transaction> transactions;
+    protected  String name;
+    protected  ItemSlots[] slots;
+    protected  ItemSlots[] startingInventory;
+    protected  List<Denomination> denominations;
+    protected  double totalSales;
+    protected  List<Transaction> transactions;
 
     // Constructor
     public RegularVendingMachine(String name) {
