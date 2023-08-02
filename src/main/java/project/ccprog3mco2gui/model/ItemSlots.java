@@ -83,7 +83,7 @@ public class ItemSlots {
         if (amount <= quantity) {
             quantity -= amount;
         } else {
-            System.out.println("Not enough quantity available.");
+
         }
     }
 

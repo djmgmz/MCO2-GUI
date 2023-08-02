@@ -18,6 +18,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class SpecialVendingMachineController implements Initializable {
 
@@ -26,24 +30,25 @@ public class SpecialVendingMachineController implements Initializable {
     @FXML
     private Label item1,item2,item3,item4,item5,item6,item7,item8,item9;
     @FXML
-    private Label price1,price2,price3,price4,price5,price6,price7,price8,price9;
+    private Label price1,price2,price3,price4,price5,price6,price7,price8,price9,price10,price11,price12,price13,price14,price15,price16,price17,price18;
     @FXML
-    private Label calories1,calories2,calories3,calories4,calories5,calories6,calories7,calories8,calories9;
+    private Label calories1,calories2,calories3,calories4,calories5,calories6,calories7,calories8,calories9,calories10,calories11,calories12,calories13,calories14,calories15,calories16,calories17,calories18;
     @FXML
-    private Label quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8,quantity9;
+    private Label quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8,quantity9, quantity10, quantity11, quantity12, quantity13, quantity14, quantity15, quantity16, quantity17, quantity18;
     private ImageView[] redButtons = new ImageView[10];
     @FXML
     private Label[] itemLabels = new Label[9];
     @FXML
-    private Label[] priceLabels = new Label[9];
+    private Label[] priceLabels = new Label[18];
     @FXML
-    private Label[] caloriesLabels = new Label[9];
+    private Label[] caloriesLabels = new Label[18];
     @FXML
-    private Label[] quantityLabels = new Label[9];
+    private Label[] quantityLabels = new Label[18];
     @FXML
     private Text screenText;
 
     private SpecialVendingMachine vendingMachine;
+    private ArrayList<Item> selectedIngredients;
     @FXML
     private Label numberButtonText;
 
@@ -59,15 +64,24 @@ public class SpecialVendingMachineController implements Initializable {
     @FXML Button backButton;
 
     private int selectedItemIndex = -1;
+    private boolean itemCheck;
+    private Timeline timeline;
+
+    private String[] steps = {
+            ""
+    };
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         redButtons = new ImageView[]{redButton0, redButton1, redButton2, redButton3, redButton4, redButton5, redButton6, redButton7, redButton8, redButton9};
         itemLabels = new Label[]{item1, item2, item3, item4, item5, item6, item7, item8, item9};
-        priceLabels = new Label[]{price1, price2, price3, price4, price5, price6, price7, price8, price9};
-        caloriesLabels = new Label[]{calories1, calories2, calories3, calories4, calories5, calories6, calories7, calories8, calories9};
-        quantityLabels = new Label[]{quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8, quantity9};
+        priceLabels = new Label[]{price1, price2, price3, price4, price5, price6, price7, price8, price9, price10, price11, price12, price13, price14, price15, price16, price17, price18};
+        caloriesLabels = new Label[]{calories1, calories2, calories3, calories4, calories5, calories6, calories7, calories8, calories9, calories10,calories11,calories12,calories13,calories14,calories15,calories16,calories17,calories18};
+        quantityLabels = new Label[]{quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8, quantity9, quantity10, quantity11, quantity12, quantity13, quantity14, quantity15, quantity16, quantity17, quantity18};
         denomButtonsArray = new Button[]{denom1, denom5, denom10, denom15, denom20, denom50, denom100, denom200, denom300, denom500,denom1000};
+
+        ArrayList<Item> selectedIngredients = new ArrayList<>();
+        selectedIngredients.clear();
 
         Map<Button, Integer> denominationsMap = new HashMap<>();
         denominationsMap.put(denom1, 1);
@@ -98,32 +112,112 @@ public class SpecialVendingMachineController implements Initializable {
             numberButtonText.setVisible(!newValue.isEmpty());
         });
 
-        screenText.setText("Select a fruit: ");
+        screenText.setText("Select a fruit on the left (or enter 0 for change): ");
 
         enterButton.setOnAction(event -> {
             String textFromScreen = screenText.getText();
-            String inputText = numberButtonText.getText();
+            String inputText = numberButtonText.getText().trim();
 
-            if (textFromScreen.equals("Select a fruit: ")) {
+            if (inputText.isEmpty()) {
+                screenError.setVisible(true);
+                return;
+            }
+
+            if (textFromScreen.equals("Select a fruit on the left (or enter 0 for change): ")) {
                 numberButtonText.setText("");
                 try {
                     selectedItemIndex = Integer.parseInt(inputText);
 
                     if (selectedItemIndex >= 0 && selectedItemIndex <= vendingMachine.getSlots().length) {
                         screenError.setVisible(false);
-                        for (int i = 0; i < 10; i++) {
-                            redButtons[i].setDisable(true);
+                        if(selectedItemIndex == 0)
+                        {
+                            for (int i = 0; i < 10; i++) {
+                                redButtons[i].setDisable(true);
+                            }
+                            screenText.setText("Enter the denominations of your payment");
+                            for (Button denomButton : denomButtonsArray) {
+                                denomButton.setDisable(false);
+                            }
                         }
-                        screenText.setText("Enter the denominations of your payment");
-                        for (Button denomButton : denomButtonsArray) {
-                            denomButton.setDisable(false);
+                        else {
+                            itemCheck = vendingMachine.selectIngredient(vendingMachine.getSlots(), selectedItemIndex, selectedIngredients);
+                            if(itemCheck == true)
+                            {
+                                screenText.setText("Select your preferred milk on the right: ");
+                            }
+                            else {
+                                screenError.setVisible(true);
+                            }
                         }
                     }
                     else
                     {
                         screenError.setVisible(true);
                     }
-                } catch (NumberFormatException e) {
+                }
+                catch (NumberFormatException e)
+                {
+                    screenError.setVisible(true);
+                }
+            }
+            else if(textFromScreen.equals("Select your preferred milk on the right: "))
+            {
+                selectedItemIndex = Integer.parseInt(inputText);
+                numberButtonText.setText("");
+                if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getMilk().length) {
+                    screenError.setVisible(false);
+                    itemCheck = vendingMachine.selectIngredient(vendingMachine.getMilk(), selectedItemIndex, selectedIngredients);
+                    if(itemCheck == true)
+                    {
+                        screenText.setText("Select your preferred sweetener on the right: ");
+                    }
+                    else {
+                        screenError.setVisible(true);
+                    }
+                }
+                else
+                {
+                    screenError.setVisible(true);
+                }
+            }
+            else if(textFromScreen.equals("Select your preferred sweetener on the right: "))
+            {
+                selectedItemIndex = Integer.parseInt(inputText);
+                numberButtonText.setText("");
+                if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getSweetener().length) {
+                    screenError.setVisible(false);
+                    vendingMachine.selectIngredient(vendingMachine.getSweetener(), selectedItemIndex, selectedIngredients);
+                    screenText.setText("Select your preferred add-on on the right: ");
+                }
+                else
+                {
+                    screenError.setVisible(true);
+                }
+            }
+            else if(textFromScreen.equals("Select your preferred add-on on the right: "))
+            {
+                selectedItemIndex = Integer.parseInt(inputText);
+                numberButtonText.setText("");
+                if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getAddOns().length) {
+                    screenError.setVisible(false);
+                    itemCheck = vendingMachine.selectIngredient(vendingMachine.getAddOns(), selectedItemIndex, selectedIngredients);
+                    if(itemCheck == true)
+                    {
+                        screenText.setText("Enter the denominations of your payment");
+                        for (int i = 0; i < 10; i++) {
+                            redButtons[i].setDisable(true);
+                        }
+                        for (Button denomButton : denomButtonsArray) {
+                            denomButton.setDisable(false);
+                        }
+                    }
+                    else {
+                        screenError.setVisible(true);
+                    }
+                }
+                else
+                {
                     screenError.setVisible(true);
                 }
             }
@@ -139,8 +233,7 @@ public class SpecialVendingMachineController implements Initializable {
                         denominations[i] = Double.parseDouble(numbersArray[i]);
                         totalPayment += Double.parseDouble(numbersArray[i]);
                     }
-                    ItemSlots selectedSlot = vendingMachine.getSlots()[selectedItemIndex-1];
-                    Item item = selectedSlot.getItem();
+                    Item item = vendingMachine.createItem(selectedIngredients);
                     double itemPrice = item.getItemPrice();
                     if (totalPayment < itemPrice)
                     {
@@ -149,18 +242,24 @@ public class SpecialVendingMachineController implements Initializable {
                     }
                     else {
                         String output = "";
-                        output = vendingMachine.payDenominations(denominations, selectedItemIndex);
+                        output = vendingMachine.processPayment(selectedIngredients, denominations, item);
                         numberButtonText.setText(output);
                         screenError.setVisible(false);
-                        for (Button denomButton : denomButtonsArray) {
-                            denomButton.setDisable(true);
-                        }
-                        screenText.setText("Please press Enter if you want to buy again");
-                        updateVendingMachine();
+                        enterButton.setDisable(true);
+                        setupAnimation(selectedIngredients, numberButtonText, () -> {
+                                    enterButton.setDisable(false);
+                                    for (Button denomButton : denomButtonsArray) {
+                                        denomButton.setDisable(true);
+                                    }
+                                    screenText.setText("Please press Enter if you want to buy again");
+                                    updateVendingMachine();
+                                    selectedIngredients.clear();
+                                });
                     }
                 }
-                else {
-                    // for 0
+                else
+                {
+                    // for 0 input
                     String text = numberButtonText.getText();
                     String[] numbersArray = text.split(" ");
                     Double[] denominations = new Double[numbersArray.length];
@@ -168,14 +267,12 @@ public class SpecialVendingMachineController implements Initializable {
                         denominations[i] = Double.parseDouble(numbersArray[i]);
                     }
 
-                    // Insert the code to count each unique denomination here
                     Map<Double, Integer> denominationCountMap = new HashMap<>();
                     for (double denomination : denominations) {
                         int count = denominationCountMap.getOrDefault(denomination, 0);
                         denominationCountMap.put(denomination, count + 1);
                     }
 
-                    // Construct the output string with no decimals
                     String changeOutput = "Dispensing change with the following denominations:\n";
                     for (Map.Entry<Double, Integer> entry : denominationCountMap.entrySet()) {
                         double denominationValue = entry.getKey();
@@ -183,7 +280,6 @@ public class SpecialVendingMachineController implements Initializable {
                         changeOutput += String.format("%.0f count: %d\n", denominationValue, count);
                     }
 
-                    // Set the text of the numberButtonText label to display the result
                     numberButtonText.setText(changeOutput);
                     screenText.setText("Please press Enter if you want to buy again");
                     for (Button denomButton : denomButtonsArray) {
@@ -193,6 +289,7 @@ public class SpecialVendingMachineController implements Initializable {
             }
             else if(textFromScreen.equals("Please press Enter if you want to buy again"))
             {
+                System.out.println("this works");
                 resetVendingMachine();
             }
         });
@@ -240,6 +337,10 @@ public class SpecialVendingMachineController implements Initializable {
         for (int i = 0; i < itemLabels.length; i++) {
             if (i < slots.length) {
                 ItemSlots slot = slots[i];
+                if (slot.getQuantity() == 0)
+                {
+                    slot.setAvailability(false);
+                }
                 if (slot != null && slot.isAvailable()) {
                     Item item = slot.getItem();
                     itemLabels[i].setText(item.getItemName());
@@ -264,13 +365,80 @@ public class SpecialVendingMachineController implements Initializable {
                 quantityLabels[i].setText("MISSING");
             }
         }
+
+        ItemSlots milk[] = vendingMachine.getMilk();
+        ItemSlots sweetener[] = vendingMachine.getSweetener();
+        ItemSlots extras[] = vendingMachine.getAddOns();
+
+        for (int i = 9; i <= 11; i++) {
+            int index = i - 9;
+            if (index < milk.length) {
+                ItemSlots slot = milk[index];
+                if (slot != null && slot.isAvailable()) {
+                    Item item = slot.getItem();
+                    priceLabels[i].setText(Double.toString(item.getItemPrice()));
+                    caloriesLabels[i].setText(Double.toString(item.getItemCalories()));
+                    quantityLabels[i].setText(Integer.toString(slot.getQuantity()));
+                } else {
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
+                }
+            } else {
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
+            }
+        }
+
+        for (int i = 12; i <= 14; i++) {
+            int index = i - 12;
+            if (index < sweetener.length) {
+                ItemSlots slot = sweetener[index];
+                if (slot != null && slot.isAvailable()) {
+                    Item item = slot.getItem();
+                    priceLabels[i].setText(Double.toString(item.getItemPrice()));
+                    caloriesLabels[i].setText(Double.toString(item.getItemCalories()));
+                    quantityLabels[i].setText(Integer.toString(slot.getQuantity()));
+                } else {
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
+                }
+            } else {
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
+            }
+        }
+
+        for (int i = 15; i <= 17; i++) {
+            int index = i - 15;
+            if (index < extras.length) {
+                ItemSlots slot = extras[index];
+                if (slot != null && slot.isAvailable()) {
+                    Item item = slot.getItem();
+                    priceLabels[i].setText(Double.toString(item.getItemPrice()));
+                    caloriesLabels[i].setText(Double.toString(item.getItemCalories()));
+                    quantityLabels[i].setText(Integer.toString(slot.getQuantity()));
+                } else {
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
+                }
+            } else {
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
+            }
+        }
     }
 
     private void resetVendingMachine()
     {
         screenError.setVisible(false);
         numberButtonText.setText("");
-        screenText.setText("Choose an item (or enter 0 for change): ");
+        screenText.setText("Select a fruit on the left (or enter 0 for change): ");
         for (int i = 0; i < 10; i++) {
             redButtons[i].setDisable(false);
         }
@@ -301,6 +469,115 @@ public class SpecialVendingMachineController implements Initializable {
 
     public void setVendingMachine(SpecialVendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
+    }
+
+    public ArrayList<String> setAnimationWords(ArrayList<Item> selectedIngredients)
+    {
+        ArrayList<String> steps =new ArrayList<>();
+
+        for (int i = 0; i < selectedIngredients.size(); i++) {
+            Item ingredient = selectedIngredients.get(i);
+            String itemName = ingredient.getItemName();
+            switch(itemName)
+            {
+                case "Banana":
+                    steps.add("Blending Banana...");
+                    break;
+                case "Strawberry":
+                    steps.add("Cutting up strawberries...");
+                    break;
+                case "Blueberry":
+                    steps.add("Adding Blueberries...");
+                    break;
+                case "Mango":
+                    steps.add("Slicing Mango...");
+                    break;
+                case "Pineapple":
+                    steps.add("Dicing Pineapple...");
+                    break;
+                case "Kiwi":
+                    steps.add("Peeling and Slicing Kiwi...");
+                    break;
+                case "Raspberry":
+                    steps.add("Mashing Raspberries...");
+                    break;
+                case "Peach":
+                    steps.add("Slicing Peaches...");
+                    break;
+                case "Gomu-Gomu":
+                    steps.add("Stretching Gomu-Gomu...");
+                    break;
+                case "Almond Milk":
+                    steps.add("Pouring Almond Milk...");
+                    break;
+                case "Soy Milk":
+                    steps.add("Adding Soy Milk...");
+                    break;
+                case "Cow's Milk":
+                    steps.add("Milking Cow...");
+                    break;
+                case "Honey":
+                    steps.add("Drizzling Honey...");
+                    break;
+                case "Stevia":
+                    steps.add("Sprinkling Stevia...");
+                    break;
+                case "Agave Syrup":
+                    steps.add("Mixing in Agave Syrup...");
+                    break;
+                case "Yogurt":
+                    steps.add("Scooping Yogurt...");
+                    break;
+                case "Chia Seeds":
+                    steps.add("Throwing in Chia Seeds...");
+                    break;
+                case "Protein Powder":
+                    steps.add("Mixing in some Protein Powder...");
+                    break;
+                default:
+                    steps.add("Adding unknown ingredient...");
+                    break;
+            }
+        }
+        steps.add("Smoothie Done!");
+
+        return steps;
+    }
+
+    private void setupAnimation(ArrayList<Item> selectedIngredients, Label messageLabel, Runnable onFinishedCallback) {
+        // Get the list of steps for the animation
+        ArrayList<String> steps = setAnimationWords(selectedIngredients);
+
+        // Create a new Timeline
+        timeline = new Timeline();
+
+        // Set an initial delay of 3 seconds before the animation starts
+        KeyFrame initialDelayFrame = new KeyFrame(Duration.seconds(3), event -> {
+            // This code will execute after the initial delay
+            messageLabel.setText(steps.get(0)); // Set the first step message
+        });
+        timeline.getKeyFrames().add(initialDelayFrame);
+
+        // Add keyframes for each step
+        for (int i = 1; i < steps.size() - 1; i++) {
+            Duration delay = Duration.seconds(i + 3); // Add 3 seconds to each subsequent step
+            String stepMessage = steps.get(i);
+            KeyFrame keyFrame = new KeyFrame(delay, event -> {
+                // This code will execute after the specified delay
+                messageLabel.setText(stepMessage);
+            });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        KeyFrame finalStepFrame = new KeyFrame(Duration.seconds(steps.size() + 3), event -> {
+            // This code will execute after the last step
+            messageLabel.setText(steps.get(steps.size() - 1)); // Show the last step message
+            onFinishedCallback.run();
+        });
+        timeline.getKeyFrames().add(finalStepFrame);
+
+        // Start the Timeline
+        timeline.play();
     }
 
 }
