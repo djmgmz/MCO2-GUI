@@ -19,9 +19,6 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     public SpecialVendingMachine(String name) {
         super(name);
         initializeStandaloneItems();
-        milkItems[0].setQuantity(0);
-        milkItems[0].setAvailability(false);
-
     }
 
     // Initialization method to create standalone items
@@ -49,7 +46,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         startSweetenerItems = new ItemSlots[3];
         startAddOnsItems = new ItemSlots[3];
         for (int i = 0; i < 3; i++) {
-            milkItems[i] = new ItemSlots(milk[i], 1); // Set quantity to 10 as an example, you can adjust as needed
+            milkItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
             startMilkItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
 
         }
@@ -90,6 +87,15 @@ public class SpecialVendingMachine extends RegularVendingMachine {
 
     public String processPayment(ArrayList<Item> selectedIngredients, Double[] denominations, Item item) {
         return dispenseFinalItem(item, denominations);
+    }
+    public double calculatePrice(ArrayList<Item> selectedIngredients) {
+        double totalPrice = 0.0;
+
+        for (int i = 0; i < selectedIngredients.size(); i++) {
+            totalPrice += selectedIngredients.get(i).getItemPrice();
+        }
+
+        return totalPrice;
     }
     public String dispenseFinalItem(Item smoothie, Double[] denominations) {
         String output = "";
@@ -423,19 +429,6 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     }
 
     /* to do:
-            ArrayList<Item> selectedIngredients in controller
-            private void selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
-            for fruits: selectIngredient(ItemSlots[] fruits, int index, ArrayList<Item> selectedIngredients)
-            selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients)
-            ung pagcreate ng smoothie: createItem(ArrayList<Item> selectedIngredients)
-            tas processPayment, returns boolean. if !successful -> revertIngredients.
-
-            Peter:
-            ung pagrestock -> settheinventories for each items.
-
-        note:
-        setitemprice -> greater than 0 but <= 1000
-
      */
 
 }

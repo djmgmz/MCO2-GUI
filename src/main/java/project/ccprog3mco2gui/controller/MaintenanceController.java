@@ -2,6 +2,8 @@ package project.ccprog3mco2gui.controller;
 
         import javafx.beans.value.ChangeListener;
         import javafx.beans.value.ObservableValue;
+        import javafx.collections.FXCollections;
+        import javafx.collections.ObservableList;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
@@ -9,10 +11,13 @@ package project.ccprog3mco2gui.controller;
         import javafx.scene.Node;
         import javafx.scene.Scene;
         import javafx.scene.control.Button;
+        import javafx.scene.control.ListView;
         import javafx.scene.control.TextField;
 
         import java.io.IOException;
         import java.net.URL;
+        import java.util.ArrayList;
+        import java.util.List;
         import java.util.ResourceBundle;
         import java.util.Scanner;
         import java.util.concurrent.atomic.AtomicInteger;
@@ -27,7 +32,6 @@ package project.ccprog3mco2gui.controller;
 public class MaintenanceController implements Initializable {
     @FXML
     private Button restockItemBtn, setItemPriceBtn, collectMoneyBtn, replenishMoneyBtn, printTransSummaryBtn, backBtn, backBtn2, addBtn;
-
     @FXML
     private Text num1,num2,num3,num4,num5,num6,num7,num8,num9;
     @FXML
@@ -52,16 +56,22 @@ public class MaintenanceController implements Initializable {
     @FXML
     private Button[] slotButtons = new Button[9];
 
-
+    @FXML
+    private Text inv1,inv2,inv3,inv4,inventoryname;
     @FXML
     private Button slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9;
     @FXML
     private Button stockBtn, enterBtn2;
-
+    @FXML
+    private Button startInvBtn, currInvBtn, transBtn;
     @FXML
     private Label  titleText;
     @FXML
-    private AnchorPane anchorPaneItems, newquantity, slotspane, stockItem, setPrice;
+    private AnchorPane anchorPaneItems, newquantity, slotspane, stockItem, setPrice, inventoryBtns, printScreen, moneyView,denomListBtns;
+    @FXML
+    private ListView transSummary, moneyListView;
+    @FXML
+    Button btn1, btn5, btn10, btn20, btn50, btn100, btn200, btn500, btn1000;
     private RegularVendingMachine vendingMachine;
     private SpecialVendingMachine specialVendingMachine;
     private int selectedItemIndex = -1;
@@ -80,7 +90,16 @@ public class MaintenanceController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        numLabels = new Text[]{num1,num2,num3,num4,num5,num6,num7,num8,num9};
+        nameLabels = new Text[]{name1,name2,name3,name4,name5,name6,name7,name8,name9};
+        priceLabels = new Text[]{price1, price2, price3, price4, price5, price6, price7, price8, price9};
+        quantityLabels = new Text[]{qty1, qty2, qty3, qty4, qty5, qty6, qty7, qty8, qty9};
+        slotButtons = new Button[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
+        moneyView.setVisible(false);
+        denomListBtns.setVisible(false);
         setPrice.setVisible(false);
+        printScreen.setVisible(false);
+        inventoryBtns.setVisible(false);
         anchorPaneItems.setVisible(false);
         newquantity.setVisible(false);
         backBtn2.setVisible(false);
@@ -88,19 +107,170 @@ public class MaintenanceController implements Initializable {
         stockItem.setVisible(false);
         backBtn2.setOnAction(e -> returnMaintenanceMenu());
 
-            numLabels = new Text[]{num1,num2,num3,num4,num5,num6,num7,num8,num9};
-            nameLabels = new Text[]{name1,name2,name3,name4,name5,name6,name7,name8,name9};
-            priceLabels = new Text[]{price1, price2, price3, price4, price5, price6, price7, price8, price9};
-            quantityLabels = new Text[]{qty1, qty2, qty3, qty4, qty5, qty6, qty7, qty8, qty9};
-            slotButtons = new Button[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
             restockItemBtn.setOnAction(e -> restockItems());
             setItemPriceBtn.setOnAction(e -> setItemPrice()); // replace 'setItemPrice' with the actual method name.
+            collectMoneyBtn.setOnAction(e -> collectMoney());
+            replenishMoneyBtn.setOnAction(e -> replenishMoney());
+            printTransSummaryBtn.setOnAction(e -> printTransSummary());
 
-            backBtn.setOnAction(this::goBackToMenu2);
+                backBtn.setOnAction(this::goBackToMenu2);
+    }
 
-//            restockItemBtn.setOnAction(e -> );
-//            setItemPriceBtn.setOnAction(e -> setItemPrice()); // replace 'setItemPrice' with the actual method name.
-            //... repeat for other buttons
+    private void replenishMoney() {
+        hideButtons();
+        showMoney();
+        moneyView.setVisible(true);
+        denomListBtns.setVisible(true);
+        titleText.setText("Replenish Money");
+        backBtn2.setVisible(true);
+
+        btn1.setOnAction(e -> addDenomination(1));
+        btn5.setOnAction(e -> addDenomination(5));
+        btn10.setOnAction(e -> addDenomination(10));
+        btn20.setOnAction(e -> addDenomination(20));
+        btn50.setOnAction(e -> addDenomination(50));
+        btn100.setOnAction(e -> addDenomination(100));
+        btn200.setOnAction(e -> addDenomination(200));
+        btn500.setOnAction(e -> addDenomination(500));
+        btn1000.setOnAction(e -> addDenomination(1000));
+
+        backBtn2.setOnAction(e -> returnMaintenanceMenu());
+    }
+
+
+    private void showMoney()
+    {
+        denomListBtns.setVisible(true);
+        moneyListView.setStyle("-fx-font-size: 15px;");
+        moneyView.setVisible(true);
+
+    }
+
+    private void addDenomination(int value) {
+        List<Denomination> denom = isSpecial ? specialVendingMachine.getDenominations() : vendingMachine.getDenominations();
+        (specialVendingMachine != null ? specialVendingMachine : vendingMachine).addPaymentDenominations(new Double[] {(double) value});
+
+
+        // Update the ListView
+        moneyListView.getItems().clear();
+        for (Denomination d : denom) {
+            moneyListView.getItems().add(d.getValue() + ": " + d.getCount());
+        }
+    }
+
+    private void collectMoney() {
+        hideButtons();
+        showMoney();
+        titleText.setText("Collect Money");
+        moneyView.setVisible(true);
+        denomListBtns.setVisible(false);
+        backBtn2.setVisible(true);
+        moneyListView.getItems().clear();
+        double totalCollected = 0.0;
+        List<Denomination> d = isSpecial ? specialVendingMachine.getDenominations() : vendingMachine.getDenominations();
+        for (Denomination denomination : d) {
+            double valueOfDenomination = denomination.getValue() * denomination.getCount();
+            totalCollected += valueOfDenomination; // Add the value of this denomination to the total
+            moneyListView.getItems().add(denomination.getValue() + ": " + denomination.getCount());
+            denomination.setCount(0);
+        }
+        moneyListView.getItems().add("Total Collected: " + totalCollected); // Add total collected to the ListView
+        backBtn2.setOnAction(e -> returnMaintenanceMenu());
+    }
+
+
+    private void printTransSummary() {
+        hideButtons();
+        titleText.setText("Transaction Summary");
+        backBtn2.setVisible(true);
+        inventoryBtns.setVisible(true);
+        transSummary.setVisible(true);
+        printScreen.setVisible(true);
+
+        // Create an ObservableList for the ListView
+        ObservableList<String> items = FXCollections.observableArrayList();
+
+        // Assuming transSummary is the ListView<String> you have in your GUI
+        transSummary.setItems(items);
+        transSummary.setStyle("-fx-font-size: 15px;");
+
+        // Event handlers for the buttons
+        startInvBtn.setOnAction(e ->{
+            hideNames();
+            items.clear();
+            List<ItemSlots> startInventory = new ArrayList<>();
+            if(vendingMachine != null)
+                startInventory.addAll(List.of(vendingMachine.getStartingInventory()));
+
+            if(isSpecial && specialVendingMachine != null)
+            {
+                startInventory.addAll(List.of(specialVendingMachine.getStartingInventory()));
+                startInventory.addAll(List.of(specialVendingMachine.getStartingMilkInventory()));
+                startInventory.addAll(List.of(specialVendingMachine.getStartingSweetenerInventory()));
+                startInventory.addAll(List.of(specialVendingMachine.getStartingAddOnsInventory()));
+            }
+            for (ItemSlots itemSlot : startInventory) {
+                items.add(itemSlot.getItem().getItemName() + "      " + itemSlot.getQuantity());
+            }
+        });
+
+        currInvBtn.setOnAction(e -> {
+            hideNames();
+            items.clear();
+            List<ItemSlots> currentInventory = new ArrayList<>();
+
+            if(vendingMachine != null)
+                currentInventory.addAll(List.of(vendingMachine.getSlots()));
+            if(isSpecial && specialVendingMachine != null)
+            {
+                currentInventory.addAll(List.of(specialVendingMachine.getSlots()));
+                currentInventory.addAll(List.of(specialVendingMachine.getMilk()));
+                currentInventory.addAll(List.of(specialVendingMachine.getSweetener()));
+                currentInventory.addAll(List.of(specialVendingMachine.getAddOns()));
+            }
+            for (ItemSlots itemSlot : currentInventory) {
+                items.add(itemSlot.getItem().getItemName() + "      " + itemSlot.getQuantity());
+            }
+        });
+
+        transBtn.setOnAction(e -> {
+            showNames();
+            items.clear();
+            // Assuming you have a list of Transaction objects
+            List<Transaction> transactions = isSpecial ? specialVendingMachine.getTransactions() : vendingMachine.getTransactions();
+
+            // Loop counter for transaction numbering
+            int count = 1;
+
+            for (Transaction transaction : transactions) {
+                String transString = " " + count + "           " +
+                        transaction.getItemName() + "            " +
+                        transaction.getQuantity() + "           " +
+                        transaction.getPayment();
+                items.add(transString);
+
+                // Increment the counter
+                count++;
+            }
+        });
+
+        backBtn2.setOnAction(e -> returnMaintenanceMenu());
+    }
+
+    private void showNames() {
+        inventoryname.setVisible(false);
+        inv1.setVisible(true);
+        inv2.setVisible(true);
+        inv3.setVisible(true);
+        inv4.setVisible(true);
+    }
+
+    private void hideNames() {
+        inventoryname.setVisible(true);
+        inv1.setVisible(false);
+        inv2.setVisible(false);
+        inv3.setVisible(false);
+        inv4.setVisible(false);
     }
 
     private void setItemPrice() {
@@ -169,13 +339,7 @@ public class MaintenanceController implements Initializable {
         });
 
         // Back button event handler
-        backbtn2.setOnAction(e -> {
-            // Reset to initial UI state
-            anchorPaneItems.setVisible(false);
-            restockItemBtn.setVisible(true);
-            setItemPriceBtn.setVisible(true);
-            setPrice.setVisible(false);
-        });
+        backbtn2.setOnAction(e -> {returnMaintenanceMenu();});
 
         restockItemBtn.setVisible(false);
         setItemPriceBtn.setVisible(false);
@@ -334,6 +498,9 @@ public class MaintenanceController implements Initializable {
 
                 if (selectedSlot != null && newQuantity > 0 && selectedSlot.getQuantity() + newQuantity <= 10) {
                     selectedSlot.increaseQuantity(newQuantity);
+                    specialVendingMachine.resetTransactions();
+                    specialVendingMachine.setStartingAddonsInv(specialVendingMachine.getSlots());
+                    specialVendingMachine.setStandAloneItemsInv(milkSlots, sweetenerSlots, addonslots);
                     populateItemsStandAlone();
                     resetMaintenance();
                 }
@@ -449,13 +616,15 @@ public class MaintenanceController implements Initializable {
             }
 
             Item newItem = new Item(newItemName, newItemPrice, newItemCalories);
+            int selectedSlotIndex = selectedSlot.get();
+            ItemSlots selectedSlot = null;
 
             if(isSpecial) {
                 ItemSlots[] slots = specialVendingMachine.getSlots();
-                slots[selectedItemIndex].restockItem(newItem, newItemQuantity);
+                slots[selectedSlotIndex].restockItem(newItem, newItemQuantity);
             } else {
                 ItemSlots[] slots = vendingMachine.getSlots();
-                slots[selectedItemIndex].restockItem(newItem, newItemQuantity);
+                slots[selectedSlotIndex].restockItem(newItem, newItemQuantity);
             }
 
             slotspane.setVisible(true);
@@ -603,7 +772,12 @@ public class MaintenanceController implements Initializable {
                         if(isSpecial)
                         {
                             specialVendingMachine.restockWithQuantity(selectedSlot.get(), newQuantity.get());
-
+                            specialVendingMachine.resetTransactions();
+                            specialVendingMachine.setStartingAddonsInv(specialVendingMachine.getSlots());
+                            ItemSlots[] milkSlots = specialVendingMachine.getMilk();
+                            ItemSlots[] sweetenerSlots = specialVendingMachine.getSweetener();
+                            ItemSlots[] addonslots = specialVendingMachine.getAddOns();
+                            specialVendingMachine.setStandAloneItemsInv(milkSlots, sweetenerSlots, addonslots);
                         }
                         else {
                             vendingMachine.restockWithQuantity(selectedSlot.get(), newQuantity.get());
@@ -692,11 +866,16 @@ public class MaintenanceController implements Initializable {
 
     public void returnMaintenanceMenu()
     {
-
+        denomListBtns.setVisible(false);
+        moneyView.setVisible(false);
+        transSummary.setVisible(false);
+        inventoryBtns.setVisible(false);
+        printScreen.setVisible(false);
         setPrice.setVisible(false);
         stockItem.setVisible(false);
         restockItemBtn.setText("Restock Items");
         setItemPriceBtn.setText("Set Item Price");
+        titleText.setText("Maintenance Features");
         setItemPriceBtn.setDisable(false);
         restockItemBtn.setDisable(false);
         restockItemBtn.setOnAction(e -> restockItems());
@@ -720,6 +899,16 @@ public class MaintenanceController implements Initializable {
         replenishMoneyBtn.setVisible(false);
         printTransSummaryBtn.setVisible(false);
         backBtn.setVisible(false);
+
+    }
+    public void showButtons()
+    {
+        restockItemBtn.setVisible(true);
+        setItemPriceBtn.setVisible(true);
+        collectMoneyBtn.setVisible(true);
+        replenishMoneyBtn.setVisible(true);
+        printTransSummaryBtn.setVisible(true);
+        backBtn.setVisible(true);
     }
     public void specialRestockItems() {
         Scanner scanner = new Scanner(System.in);

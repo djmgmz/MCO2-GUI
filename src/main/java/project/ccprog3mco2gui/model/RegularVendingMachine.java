@@ -29,8 +29,6 @@ public class RegularVendingMachine {
         this.transactions = new ArrayList<>();
         initializeDenominations();
         predefinedSlots();
-        slots[0].setQuantity(0);
-        slots[0].setAvailability(false);
     }
 
     // Initialization methods
@@ -120,7 +118,7 @@ public class RegularVendingMachine {
 
     // Getter methods
     public String getName() { return name; }
-    public ItemSlots[] getSlots() { return slots; }
+    public ItemSlots[] getSlots() { return this.slots; }
     public ItemSlots[] getStartingInventory() { return this.startingInventory; }
     public double getTotalSales() { return this.totalSales; }
     public List<Denomination> getDenominations() { return denominations; }
@@ -228,6 +226,7 @@ public class RegularVendingMachine {
         ItemSlots slot = slots[slotIndex];
 
         slot.restockItem(newItem, newQuantity);
+        setStartingInventory(slots);
     }
     /**
      * Restocks the specified slot with a new quantity.
@@ -242,14 +241,10 @@ public class RegularVendingMachine {
         {
             slot.setAvailability(true);
             slot.setQuantity(slot.getQuantity()+newQuantity);
-            updateStartingInventory();
+            setStartingInventory(slots);
             resetTransactions();
         }
     }
-public void updateStartingInventory()
-{
-    this.startingInventory = slots;
-}
     // Internal helper methods
     /**
      * Updates the count of denominations in the vending machine after a transaction.
@@ -360,7 +355,7 @@ public void updateStartingInventory()
         String result = "";
         double totalPayment = Arrays.stream(denominations).mapToDouble(Double::doubleValue).sum();
 
-        if (totalPayment >= slots[choice - 1].getItem().getItemPrice()) {
+        if (totalPayment >= this.slots[choice - 1].getItem().getItemPrice()) {
             addPaymentDenominations(denominations);
             result = dispenseItem(choice - 1, totalPayment, 1);
         }

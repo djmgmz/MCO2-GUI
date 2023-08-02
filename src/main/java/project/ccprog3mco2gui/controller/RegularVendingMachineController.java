@@ -41,14 +41,14 @@ public class RegularVendingMachineController implements Initializable {
     @FXML
     private Label[] quantityLabels = new Label[9];
     @FXML
-    private Text screenText;
+    private Text screenText, finalPrice;
 
     private RegularVendingMachine vendingMachine;
     @FXML
     private Label numberButtonText;
 
     @FXML
-    private Button denom1, denom5, denom10, denom15, denom20, denom50, denom100, denom200, denom300, denom500, denom1000;
+    private Button denom1, denom5, denom10, denom20, denom50, denom100, denom200, denom500, denom1000;
 
     private Button[] denomButtonsArray;
     @FXML
@@ -67,18 +67,16 @@ public class RegularVendingMachineController implements Initializable {
         priceLabels = new Label[]{price1, price2, price3, price4, price5, price6, price7, price8, price9};
         caloriesLabels = new Label[]{calories1, calories2, calories3, calories4, calories5, calories6, calories7, calories8, calories9};
         quantityLabels = new Label[]{quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8, quantity9};
-        denomButtonsArray = new Button[]{denom1, denom5, denom10, denom15, denom20, denom50, denom100, denom200, denom300, denom500,denom1000};
+        denomButtonsArray = new Button[]{denom1, denom5, denom10, denom20, denom50, denom100, denom200, denom500,denom1000};
 
         Map<Button, Integer> denominationsMap = new HashMap<>();
         denominationsMap.put(denom1, 1);
         denominationsMap.put(denom5, 5);
         denominationsMap.put(denom10, 10);
-        denominationsMap.put(denom15, 15);
         denominationsMap.put(denom20, 20);
         denominationsMap.put(denom50, 50);
         denominationsMap.put(denom100, 100);
         denominationsMap.put(denom200, 200);
-        denominationsMap.put(denom300, 300);
         denominationsMap.put(denom500, 500);
         denominationsMap.put(denom1000, 1000);
 
@@ -134,8 +132,14 @@ public class RegularVendingMachineController implements Initializable {
                     String[] numbersArray = text.split(" ");
                     Double[] denominations = new Double[numbersArray.length];
                     for (int i = 0; i < numbersArray.length; i++) {
-                        denominations[i] = Double.parseDouble(numbersArray[i]);
-                        totalPayment += Double.parseDouble(numbersArray[i]);
+                        if (numbersArray[i] != null && !numbersArray[i].isEmpty()) {
+                            try {
+                                denominations[i] = Double.parseDouble(numbersArray[i]);
+                                totalPayment += Double.parseDouble(numbersArray[i]);
+                            } catch (NumberFormatException e) {
+                                screenError.setVisible(true);
+                            }
+                        }
                     }
                     ItemSlots selectedSlot = vendingMachine.getSlots()[selectedItemIndex-1];
                     Item item = selectedSlot.getItem();
