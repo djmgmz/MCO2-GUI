@@ -64,6 +64,7 @@ public class SpecialVendingMachineController implements Initializable {
     @FXML Button backButton;
 
     private int selectedItemIndex = -1;
+    private boolean itemCheck;
 
     private String[] steps = {
             ""
@@ -139,8 +140,14 @@ public class SpecialVendingMachineController implements Initializable {
                             }
                         }
                         else {
-                            vendingMachine.selectIngredient(vendingMachine.getSlots(), selectedItemIndex, selectedIngredients);
-                            screenText.setText("Select your preferred milk on the right: ");
+                            itemCheck = vendingMachine.selectIngredient(vendingMachine.getSlots(), selectedItemIndex, selectedIngredients);
+                            if(itemCheck == true)
+                            {
+                                screenText.setText("Select your preferred milk on the right: ");
+                            }
+                            else {
+                                screenError.setVisible(true);
+                            }
                         }
                     }
                     else
@@ -159,8 +166,14 @@ public class SpecialVendingMachineController implements Initializable {
                 numberButtonText.setText("");
                 if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getMilk().length) {
                     screenError.setVisible(false);
-                    vendingMachine.selectIngredient(vendingMachine.getMilk(), selectedItemIndex, selectedIngredients);
-                    screenText.setText("Select your preferred sweetener on the right: ");
+                    itemCheck = vendingMachine.selectIngredient(vendingMachine.getMilk(), selectedItemIndex, selectedIngredients);
+                    if(itemCheck == true)
+                    {
+                        screenText.setText("Select your preferred sweetener on the right: ");
+                    }
+                    else {
+                        screenError.setVisible(true);
+                    }
                 }
                 else
                 {
@@ -187,13 +200,19 @@ public class SpecialVendingMachineController implements Initializable {
                 numberButtonText.setText("");
                 if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getAddOns().length) {
                     screenError.setVisible(false);
-                    vendingMachine.selectIngredient(vendingMachine.getAddOns(), selectedItemIndex, selectedIngredients);
-                    screenText.setText("Enter the denominations of your payment");
-                    for (int i = 0; i < 10; i++) {
-                        redButtons[i].setDisable(true);
+                    itemCheck = vendingMachine.selectIngredient(vendingMachine.getAddOns(), selectedItemIndex, selectedIngredients);
+                    if(itemCheck == true)
+                    {
+                        screenText.setText("Enter the denominations of your payment");
+                        for (int i = 0; i < 10; i++) {
+                            redButtons[i].setDisable(true);
+                        }
+                        for (Button denomButton : denomButtonsArray) {
+                            denomButton.setDisable(false);
+                        }
                     }
-                    for (Button denomButton : denomButtonsArray) {
-                        denomButton.setDisable(false);
+                    else {
+                        screenError.setVisible(true);
                     }
                 }
                 else
@@ -312,6 +331,10 @@ public class SpecialVendingMachineController implements Initializable {
         for (int i = 0; i < itemLabels.length; i++) {
             if (i < slots.length) {
                 ItemSlots slot = slots[i];
+                if (slot.getQuantity() == 0)
+                {
+                    slot.setAvailability(false);
+                }
                 if (slot != null && slot.isAvailable()) {
                     Item item = slot.getItem();
                     itemLabels[i].setText(item.getItemName());
@@ -440,6 +463,84 @@ public class SpecialVendingMachineController implements Initializable {
 
     public void setVendingMachine(SpecialVendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
+    }
+
+    public ArrayList<String> setAnimationWords(ArrayList<Item> selectedIngredients)
+    {
+        ArrayList<String> steps =new ArrayList<>();
+
+        for (int i = 0; i < selectedIngredients.size(); i++) {
+            Item ingredient = selectedIngredients.get(i);
+            String itemName = ingredient.getItemName();
+            switch(itemName)
+            {
+                case "Banana":
+                    steps.add("Blending Banana...");
+                    break;
+                case "Strawberry":
+                    steps.add("Cutting up strawberries...");
+                    break;
+                case "Blueberry":
+                    steps.add("Adding Blueberries...");
+                    break;
+                case "Mango":
+                    steps.add("Slicing Mango...");
+                    break;
+                case "Pineapple":
+                    steps.add("Dicing Pineapple...");
+                    break;
+                case "Kiwi":
+                    steps.add("Peeling and Slicing Kiwi...");
+                    break;
+                case "Raspberry":
+                    steps.add("Mashing Raspberries...");
+                    break;
+                case "Peach":
+                    steps.add("Slicing Peaches...");
+                    break;
+                case "Gomu-Gomu":
+                    steps.add("Stretching Gomu-Gomu...");
+                    break;
+                case "Almond Milk":
+                    steps.add("Pouring Almond Milk...");
+                    break;
+                case "Soy Milk":
+                    steps.add("Adding Soy Milk...");
+                    break;
+                case "Cow's Milk":
+                    steps.add("Milking Cow...");
+                    break;
+                case "Honey":
+                    steps.add("Drizzling Honey...");
+                    break;
+                case "Stevia":
+                    steps.add("Sprinkling Stevia");
+                    break;
+                case "Agave Syrup":
+                    steps.add("Mixing in Agave Syrup...");
+                    break;
+                case "Yogurt":
+                    steps.add("Scooping Yogurt...");
+                    break;
+                case "Chia Seeds":
+                    steps.add("Throwing in Chia Seeds");
+                    break;
+                case "Protein Powder":
+                    steps.add("Mixing in some Protein Powder");
+                    break;
+                default:
+                    steps.add("Adding unknown ingredient");
+                    break;
+            }
+        }
+        steps.add("Smoothie Done!");
+
+        return steps;
+    }
+
+    private void setupAnimation(ArrayList<Item> selectedIngredients)
+    {
+
     }
 
 }

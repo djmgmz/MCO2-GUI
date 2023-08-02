@@ -46,7 +46,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         startSweetenerItems = new ItemSlots[3];
         startAddOnsItems = new ItemSlots[3];
         for (int i = 0; i < 3; i++) {
-            milkItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
+            milkItems[i] = new ItemSlots(milk[i], 1); // Set quantity to 10 as an example, you can adjust as needed
             startMilkItems[i] = new ItemSlots(milk[i], 10); // Set quantity to 10 as an example, you can adjust as needed
 
         }
@@ -328,20 +328,21 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         return new Item("Fruit Smoothie", totalCost, totalCalories);
     }
 
-    public void selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
+    public boolean selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
         if(index < 1 || index > itemSlots.length) {
             System.out.println("Invalid option. Please try again.");
-            return;
+            return false;
         }
 
         ItemSlots slot = itemSlots[index-1];
-        if(!slot.isAvailable()) {
+        if(slot.getQuantity() <= 0) {
             System.out.println("Sorry, this item is currently unavailable.");
-            return;
+            return false;
         }
         Item chosenItem = slot.getItem();
         selectedIngredients.add(chosenItem);
         slot.decreaseQuantity(1);
+        return true;
     }
 
 
