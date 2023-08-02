@@ -54,56 +54,6 @@ public class RegularVendingMachine {
         denominations.add(new Denomination(1000, 10));
     }
     /**
-     * Creates slots in the vending machine based on user input.
-     */
-    public void createSlots() {
-        Scanner scanner = new Scanner(System.in);
-        ItemSlots[] slots = new ItemSlots[9];
-        for (int i = 0; i < slots.length; i++) {
-            int slotCount = getOccupiedSlotCount();
-            if (slotCount >= slots.length) {
-                System.out.println("Cannot create more slots. Maximum slot limit reached.");
-                return;
-            }
-
-            System.out.print("Enter Item [" + (i + 1) + "] Name: ");
-            String itemName = scanner.next();
-
-            double price = -1;
-            while (price < 0) {
-                System.out.print("Enter Item Price: ");
-                price = scanner.nextDouble();
-                if (price < 0) {
-                    System.out.println("The price you entered is invalid!");
-                }
-            }
-
-            double calories = -1;
-            while (calories < 0) {
-                System.out.print("Enter Item Calories: ");
-                calories = scanner.nextDouble();
-                if (calories < 0) {
-                    System.out.println("The calories you entered are invalid!");
-                }
-            }
-
-            int quantity = 100;
-            while (quantity > 10 || quantity < 0) {
-                System.out.print("Enter Item Quantity: ");
-                quantity = scanner.nextInt();
-                if (quantity > 10) {
-                    System.out.println("The capacity of the vending machine is only up to 10 items!");
-                } else if (quantity < 0) {
-                    System.out.println("You entered a negative amount of items!");
-                }
-            }
-
-            Item item = new Item(itemName, price, calories);
-            ItemSlots newSlot = new ItemSlots(item, quantity);
-            slots[slotCount] = newSlot;
-        }
-    }
-    /**
      * Sets up predefined slots with items.
      */
     public void predefinedSlots() {
@@ -188,23 +138,6 @@ public class RegularVendingMachine {
      */
     public void setStartingInventory(ItemSlots[] newInventory) { this.startingInventory = newInventory; }
 
-    // Business methods
-    /**
-     * Returns the count of occupied slots in the vending machine.
-     *
-     * @return the count of occupied slots
-     */
-    public int getOccupiedSlotCount() {
-        int count = 0;
-        for (int i = 0; i < slots.length; i++) {
-            ItemSlots slot = slots[i];
-            if (slot != null) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     /**
      * Checks if the vending machine has sufficient change for a given amount.
      *
@@ -250,42 +183,11 @@ public class RegularVendingMachine {
     }
 
     /**
-     * Collects all the money from the vending machine.
-     *
-     * @return the total money within the vending machine
-     */
-    public double collectMoney() {
-        double totalMoney = 0;
-        for(int i = 0; i < denominations.size(); i++)
-        {
-            totalMoney += denominations.get(i).getValue()* denominations.get(i).getCount();
-            this.denominations.get(i).setCount(0);
-        }
-        System.out.println("Collected: " + totalMoney);
-
-        return totalMoney;
-    }
-
-
-    /**
      * Resets the transactions and total sales of the vending machine.
      */
     public void resetTransactions() {
         this.getTransactions().clear();
         this.setTotalSales(0);
-    }
-
-    /**
-     * Restocks the specified slot with a new item and quantity, if the slot is not already stocked.
-     *
-     * @param slotIndex The index of the slot to be restocked.
-     */
-    public void restockWithNewItem(int slotIndex, Item newItem, int newQuantity) {
-        ItemSlots[] slots = getSlots();
-        ItemSlots slot = slots[slotIndex];
-
-        slot.restockItem(newItem, newQuantity);
-        setStartingInventory(slots);
     }
     /**
      * Restocks the specified slot with a new quantity.

@@ -312,23 +312,4 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
         return null;
     }
-
-    /**
-     * Validates the given denomination for use in vending machine payment.
-     *
-     * @param denomination The denomination to validate.
-     * @return True if the denomination is valid, false otherwise.
-     */
-    private boolean validateDenominations(int denomination) {
-        int[] validDenominations = {1, 5, 10, 15, 20, 50, 100, 200, 300, 500, 1000};
-
-        for (int i = 0; i < validDenominations.length; i++) {
-            if (denomination == validDenominations[i]) {
-                return true;
-            }
-        }
-
-        System.out.println("Error: Invalid denomination (" + denomination + "). We do not accept this type of denomination.");
-        return false;
-    }
 }
