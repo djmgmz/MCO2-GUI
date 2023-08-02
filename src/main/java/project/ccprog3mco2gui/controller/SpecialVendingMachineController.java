@@ -65,6 +65,7 @@ public class SpecialVendingMachineController implements Initializable {
 
     private int selectedItemIndex = -1;
     private boolean itemCheck;
+    private Timeline timeline;
 
     private String[] steps = {
             ""
@@ -244,12 +245,16 @@ public class SpecialVendingMachineController implements Initializable {
                         output = vendingMachine.processPayment(selectedIngredients, denominations, item);
                         numberButtonText.setText(output);
                         screenError.setVisible(false);
-                        for (Button denomButton : denomButtonsArray) {
-                            denomButton.setDisable(true);
-                        }
-                        screenText.setText("Please press Enter if you want to buy again");
-                        updateVendingMachine();
-                        selectedIngredients.clear();
+                        enterButton.setDisable(true);
+                        setupAnimation(selectedIngredients, numberButtonText, () -> {
+                                    enterButton.setDisable(false);
+                                    for (Button denomButton : denomButtonsArray) {
+                                        denomButton.setDisable(true);
+                                    }
+                                    screenText.setText("Please press Enter if you want to buy again");
+                                    updateVendingMachine();
+                                    selectedIngredients.clear();
+                                });
                     }
                 }
                 else
@@ -284,6 +289,7 @@ public class SpecialVendingMachineController implements Initializable {
             }
             else if(textFromScreen.equals("Please press Enter if you want to buy again"))
             {
+                System.out.println("this works");
                 resetVendingMachine();
             }
         });
@@ -514,7 +520,7 @@ public class SpecialVendingMachineController implements Initializable {
                     steps.add("Drizzling Honey...");
                     break;
                 case "Stevia":
-                    steps.add("Sprinkling Stevia");
+                    steps.add("Sprinkling Stevia...");
                     break;
                 case "Agave Syrup":
                     steps.add("Mixing in Agave Syrup...");
@@ -523,13 +529,13 @@ public class SpecialVendingMachineController implements Initializable {
                     steps.add("Scooping Yogurt...");
                     break;
                 case "Chia Seeds":
-                    steps.add("Throwing in Chia Seeds");
+                    steps.add("Throwing in Chia Seeds...");
                     break;
                 case "Protein Powder":
-                    steps.add("Mixing in some Protein Powder");
+                    steps.add("Mixing in some Protein Powder...");
                     break;
                 default:
-                    steps.add("Adding unknown ingredient");
+                    steps.add("Adding unknown ingredient...");
                     break;
             }
         }
@@ -538,9 +544,40 @@ public class SpecialVendingMachineController implements Initializable {
         return steps;
     }
 
-    private void setupAnimation(ArrayList<Item> selectedIngredients)
-    {
+    private void setupAnimation(ArrayList<Item> selectedIngredients, Label messageLabel, Runnable onFinishedCallback) {
+        // Get the list of steps for the animation
+        ArrayList<String> steps = setAnimationWords(selectedIngredients);
 
+        // Create a new Timeline
+        timeline = new Timeline();
+
+        // Set an initial delay of 3 seconds before the animation starts
+        KeyFrame initialDelayFrame = new KeyFrame(Duration.seconds(3), event -> {
+            // This code will execute after the initial delay
+            messageLabel.setText(steps.get(0)); // Set the first step message
+        });
+        timeline.getKeyFrames().add(initialDelayFrame);
+
+        // Add keyframes for each step
+        for (int i = 1; i < steps.size() - 1; i++) {
+            Duration delay = Duration.seconds(i + 3); // Add 3 seconds to each subsequent step
+            String stepMessage = steps.get(i);
+            KeyFrame keyFrame = new KeyFrame(delay, event -> {
+                // This code will execute after the specified delay
+                messageLabel.setText(stepMessage);
+            });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        KeyFrame finalStepFrame = new KeyFrame(Duration.seconds(steps.size() + 3), event -> {
+            // This code will execute after the last step
+            messageLabel.setText(steps.get(steps.size() - 1)); // Show the last step message
+            onFinishedCallback.run();
+        });
+        timeline.getKeyFrames().add(finalStepFrame);
+
+        // Start the Timeline
+        timeline.play();
     }
 
 }
