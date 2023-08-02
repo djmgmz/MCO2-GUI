@@ -22,7 +22,18 @@ import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-
+/**
+ * Controller for the SpecialVendingMachine application.
+ *
+ * This class is responsible for managing the user interface and business logic for a
+ * special type of vending machine. It implements JavaFX's Initializable interface to
+ * provide initialization logic for the GUI components.
+ *
+ * This controller interacts with the GUI components defined in an associated FXML file,
+ * handling user input and updating the display as needed.
+ * It also communicates with the model classes to carry out the core functionality of
+ * the application.
+ */
 public class SpecialVendingMachineController implements Initializable {
 
     @FXML
@@ -66,11 +77,19 @@ public class SpecialVendingMachineController implements Initializable {
     private int selectedItemIndex = -1;
     private boolean itemCheck;
     private Timeline timeline;
-
-    private String[] steps = {
-            ""
-    };
-
+    private boolean isFinished;
+    /**
+     * Initializes the GUI components for the Vending Machine and sets up the appropriate event listeners.
+     *
+     * It initializes all ImageView, Label, and Button elements used in the application, and sets up
+     * event listeners for the various user interactions like button clicks and text field changes.
+     * It also maps denomination buttons to their respective denomination values.
+     *
+     * This method is called automatically by JavaFX when the FXML file associated with this controller is loaded.
+     *
+     * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         redButtons = new ImageView[]{redButton0, redButton1, redButton2, redButton3, redButton4, redButton5, redButton6, redButton7, redButton8, redButton9};
@@ -94,9 +113,8 @@ public class SpecialVendingMachineController implements Initializable {
         denominationsMap.put(denom500, 500);
         denominationsMap.put(denom1000, 1000);
 
-
         resetVendingMachine();
-
+        isFinished = false;
         for (int i = 0; i <= 9; i++) {
             int buttonNumber = i; // Button numbers 1 to 9
 
@@ -263,6 +281,7 @@ public class SpecialVendingMachineController implements Initializable {
                                     screenText.setText("Please press Enter if you want to buy again");
                                     updateVendingMachine();
                                     selectedIngredients.clear();
+                                    isFinished = true;
                                 });
                     }
                 }
@@ -336,10 +355,33 @@ public class SpecialVendingMachineController implements Initializable {
                 redButtons[buttonNumber].setImage(redButtonImage);
             });
         }
+        if(!isFinished)
+        {
+            vendingMachine.revertIngredientQuantities(selectedIngredients);
 
-        backButton.setOnAction(this::goBackToMenu1);
+        }
+        backButton.setOnAction(event -> {
+            if (!isFinished) {
+                vendingMachine.revertIngredientQuantities(selectedIngredients);
+            }
+            goBackToMenu1(event);
+        });
+
     }
-
+    /**
+     * Updates the display of the vending machine.
+     *
+     * This method retrieves all the item slots from the vending machine, and updates the
+     * corresponding labels in the GUI to match the current state of the items in the machine.
+     *
+     * The information displayed for each slot includes the item name, price, calories and quantity.
+     * If a slot is unavailable or null, the labels for that slot are set to "N/A". If the vending machine
+     * has fewer slots than expected, the labels for the remaining slots are set to "MISSING".
+     *
+     * Besides the main item slots, the vending machine also includes slots for milk, sweetener, and
+     * extra add-ons. These are treated separately, and the display of these slots is updated in a similar
+     * manner to the main item slots.
+     */
     private void updateVendingMachine()
     {
         ItemSlots[] slots = vendingMachine.getSlots();
@@ -442,7 +484,13 @@ public class SpecialVendingMachineController implements Initializable {
             }
         }
     }
-
+    /**
+     * Resets the vending machine interface.
+     *
+     * This method sets the error screen to be invisible, clears the number button text,
+     * sets the screen text to a prompt for the user to select a fruit or enter 0 for change,
+     * and enables all red buttons.
+     */
     private void resetVendingMachine()
     {
         screenError.setVisible(false);
@@ -453,6 +501,14 @@ public class SpecialVendingMachineController implements Initializable {
         }
     }
 
+    /**
+     * Returns the user to the main menu.
+     *
+     * This method loads the main menu and sets the vending machine service to the singleton instance.
+     * It then retrieves the current stage from the event source and sets the scene to the main menu.
+     *
+     * @param event the event that triggers this method
+     */
     private void goBackToMenu1(ActionEvent event) {
         try {
             // Get the singleton instance of VendingMachineService
@@ -476,10 +532,25 @@ public class SpecialVendingMachineController implements Initializable {
         }
     }
 
+    /**
+     * Sets the vending machine to the specified instance.
+     *
+     * @param vendingMachine the vending machine instance to set
+     */
     public void setVendingMachine(SpecialVendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
     }
 
+    /**
+     * Creates a list of animation words for the selected ingredients.
+     *
+     * This method iterates through the list of selected ingredients, and for each ingredient,
+     * it adds a corresponding action (e.g., "Blending Banana..." for a banana) to a list of steps.
+     * After all the ingredients have been processed, it adds "Smoothie Done!" to the list of steps.
+     *
+     * @param selectedIngredients the list of selected ingredients
+     * @return the list of animation words
+     */
     public ArrayList<String> setAnimationWords(ArrayList<Item> selectedIngredients)
     {
         ArrayList<String> steps =new ArrayList<>();
@@ -552,7 +623,19 @@ public class SpecialVendingMachineController implements Initializable {
 
         return steps;
     }
-
+    /**
+     * Sets up an animation for displaying the process of creating a smoothie.
+     *
+     * This method creates a list of steps based on the selected ingredients,
+     * then sets up a Timeline animation in JavaFX where each step is displayed with a delay.
+     * It begins with an initial delay of 3 seconds, then each subsequent step is displayed
+     * after an additional delay of 3 seconds. After all the steps, the specified callback
+     * function is called.
+     *
+     * @param selectedIngredients the list of selected ingredients
+     * @param messageLabel the label in which the step messages are displayed
+     * @param onFinishedCallback the function to be called after the last step message is displayed
+     */
     private void setupAnimation(ArrayList<Item> selectedIngredients, Label messageLabel, Runnable onFinishedCallback) {
         // Get the list of steps for the animation
         ArrayList<String> steps = setAnimationWords(selectedIngredients);

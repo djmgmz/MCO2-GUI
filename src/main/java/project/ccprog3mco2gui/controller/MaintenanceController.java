@@ -28,7 +28,10 @@ package project.ccprog3mco2gui.controller;
         import javafx.scene.text.Text;
         import javafx.stage.Stage;
         import project.ccprog3mco2gui.model.*;
-
+/**
+ * Controller class for the Maintenance operations in a Vending Machine application.
+ * The class is responsible for updating the user interface and handling the user interactions.
+ */
 public class MaintenanceController implements Initializable {
     @FXML
     private Button restockItemBtn, setItemPriceBtn, collectMoneyBtn, replenishMoneyBtn, printTransSummaryBtn, backBtn, backBtn2, addBtn;
@@ -79,15 +82,32 @@ public class MaintenanceController implements Initializable {
     private Button backbtn2 = new Button();
     private AtomicInteger selectedSlot = new AtomicInteger();
     private AtomicReference<Integer> newQuantity = new AtomicReference<>(0);
-
+    /**
+     * Sets the RegularVendingMachine to be used by the controller for performing maintenance operations.
+     *
+     * @param vendingMachine the RegularVendingMachine to be set
+     */
     public void setVendingMachine(RegularVendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
     }
+
+    /**
+     * Sets the SpecialVendingMachine to be used by the controller for performing maintenance operations.
+     *
+     * @param vendingMachine the SpecialVendingMachine to be set
+     */
     public void setVendingMachineSpecial(SpecialVendingMachine vendingMachine) {
         this.specialVendingMachine = vendingMachine;
         this.isSpecial = true;
     }
-
+    /**
+     * The initialize method is called after all @FXML annotated members have been injected.
+     * It's used to set up any additional data that the controller needs,
+     * such as setting up event handlers, configuring properties, or populating controls.
+     *
+     * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numLabels = new Text[]{num1,num2,num3,num4,num5,num6,num7,num8,num9};
@@ -115,7 +135,10 @@ public class MaintenanceController implements Initializable {
 
                 backBtn.setOnAction(this::goBackToMenu2);
     }
-
+    /**
+     * Replenishes money for the vending machine.
+     * The method will update the GUI to show the options for replenishing money.
+     */
     private void replenishMoney() {
         hideButtons();
         showMoney();
@@ -138,6 +161,9 @@ public class MaintenanceController implements Initializable {
     }
 
 
+    /**
+     * Updates the GUI to show the money state of the vending machine.
+     */
     private void showMoney()
     {
         denomListBtns.setVisible(true);
@@ -146,6 +172,12 @@ public class MaintenanceController implements Initializable {
 
     }
 
+    /**
+     * Adds the specified denomination to the vending machine's available money.
+     * Updates the list view to reflect the new state.
+     *
+     * @param value the denomination value to be added.
+     */
     private void addDenomination(int value) {
         List<Denomination> denom = isSpecial ? specialVendingMachine.getDenominations() : vendingMachine.getDenominations();
         (specialVendingMachine != null ? specialVendingMachine : vendingMachine).addPaymentDenominations(new Double[] {(double) value});
@@ -157,7 +189,10 @@ public class MaintenanceController implements Initializable {
             moneyListView.getItems().add(d.getValue() + ": " + d.getCount());
         }
     }
-
+    /**
+     * Collects all money from the vending machine.
+     * The method will update the GUI to show the state of money collection.
+     */
     private void collectMoney() {
         hideButtons();
         showMoney();
@@ -178,7 +213,10 @@ public class MaintenanceController implements Initializable {
         backBtn2.setOnAction(e -> returnMaintenanceMenu());
     }
 
-
+    /**
+     * Updates the GUI to print a transaction summary.
+     * The summary includes starting inventory, current inventory, and transactions performed.
+     */
     private void printTransSummary() {
         hideButtons();
         titleText.setText("Transaction Summary");
@@ -257,6 +295,9 @@ public class MaintenanceController implements Initializable {
         backBtn2.setOnAction(e -> returnMaintenanceMenu());
     }
 
+    /**
+     * Updates the GUI to hide texts.
+     */
     private void showNames() {
         inventoryname.setVisible(false);
         inv1.setVisible(true);
@@ -265,6 +306,9 @@ public class MaintenanceController implements Initializable {
         inv4.setVisible(true);
     }
 
+    /**
+     * Updates the GUI to hide texts.
+     */
     private void hideNames() {
         inventoryname.setVisible(true);
         inv1.setVisible(false);
@@ -272,7 +316,10 @@ public class MaintenanceController implements Initializable {
         inv3.setVisible(false);
         inv4.setVisible(false);
     }
-
+    /**
+     * Handles setting the item price in the vending machine's GUI.
+     * It provides options for setting the price for both slots and extras.
+     */
     private void setItemPrice() {
         hideButtons();
         titleText.setText("Set Item Price");
@@ -285,6 +332,7 @@ public class MaintenanceController implements Initializable {
             setItemPriceBtn.setVisible(true);
         }
         else {
+            restockItemBtn.setText("Set Item Price for Slots");
             setItemPriceBtn.setVisible(false);
         }
 
@@ -294,6 +342,10 @@ public class MaintenanceController implements Initializable {
         backBtn2.setOnAction(e -> returnMaintenanceMenu());
     }
 
+    /**
+     * Handles setting the price for standalone items (extras) in the vending machine's GUI.
+     * Standalone items can be things like milk, sweeteners, etc.
+     */
     private void setItemPriceExtras() {
         // Show list of standalone items here
         populateItemsStandAlone();
@@ -345,6 +397,10 @@ public class MaintenanceController implements Initializable {
         setItemPriceBtn.setVisible(false);
     }
 
+    /**
+     * Handles the selection of slots for standalone items (extras) in the vending machine's GUI.
+     * This is used to select which slot's item price needs to be updated.
+     */
     private void chooseItemSlotExtra() {
         slotspane.setVisible(true);
         slotButtons = new Button[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
@@ -372,7 +428,11 @@ public class MaintenanceController implements Initializable {
         }
     }
 
-
+    /**
+     * Handles setting the price for items in slots in the vending machine's GUI.
+     * This method displays the slots, lets the user choose a slot,
+     * and then prompts them to enter the new price for the item in the selected slot.
+     */
     private void setItemPriceSlots() {
         populateItems();
         anchorPaneItems.setVisible(true);
@@ -415,6 +475,11 @@ public class MaintenanceController implements Initializable {
     }
 
 
+    /**
+     * Handles the restocking of items in the vending machine's GUI.
+     * It provides options for restocking with a new item or simply increasing the quantity of an existing item.
+     * Also, it gives the choice to restock regular slots or special ones, if available.
+     */
     public void restockItems() {
         hideButtons();
         titleText.setText("Restock Items");
@@ -456,6 +521,10 @@ public class MaintenanceController implements Initializable {
         setItemPriceBtn.setVisible(true);
     }
 
+    /**
+     * Handles the restocking of special items in the vending machine's GUI.
+     * It provides the user with the option to restock either slots or standalone items (extras).
+     */
     private void restockItemsNewQuantitySpecial() {
         restockItemBtn.setDisable(false);
         restockItemBtn.setText("Restock Slots");
@@ -466,6 +535,11 @@ public class MaintenanceController implements Initializable {
         setItemPriceBtn.setOnAction(e -> restockItemsNewQuantityStandAlone());
 
     }
+    /**
+     * Handles the restocking of standalone items in the vending machine's GUI.
+     * This method first displays the standalone items, then lets the user choose an item and input the quantity to be added.
+     * Note: An item can be restocked only if the total quantity after restocking does not exceed 10.
+     */
     private void restockItemsNewQuantityStandAlone() {
         // Show list of items here
         populateItemsStandAlone();
@@ -530,7 +604,12 @@ public class MaintenanceController implements Initializable {
     }
 
 
-
+    /**
+     * Handles the selection of standalone items in the vending machine's GUI.
+     * This method displays the slots, enables the buttons for slots with items, and disables the buttons for empty slots.
+     * When a slot button is clicked, it disables the slot pane and enables the quantity pane for the user to input the quantity to be added.
+     * @return A boolean indicating whether at least one button was clicked (i.e., there is at least one standalone item).
+     */
     public boolean chooseStandAloneItems() {
         slotspane.setVisible(true);
         Button[] slotButtons = {slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
@@ -562,7 +641,14 @@ public class MaintenanceController implements Initializable {
 
         return clicked;
     }
-
+    /**
+     * Handles the creation and stocking of a new item in the vending machine's GUI.
+     * This method displays the fields for entering the new item's details, which are:
+     * the item's name, price, calories, and quantity. It also checks whether the entered values are valid.
+     * If the values are valid, it creates the new item and restocks the chosen slot with the new item.
+     * It then resets the UI to the initial state and clears the text fields.
+     * If the values are not valid, it displays an error message without creating or stocking the new item.
+     */
     private void stockWithNewItem() {
         // Display fields for new item details
         restockItemBtn.setVisible(false);
@@ -649,7 +735,12 @@ public class MaintenanceController implements Initializable {
             newquantity.setVisible(false);
         });
     }
-
+    /**
+     * Checks whether the provided string can be parsed into a Double, essentially determining if it's numeric.
+     *
+     * @param str the string to check
+     * @return true if the string can be parsed into a Double, false otherwise
+     */
     private boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
@@ -659,7 +750,12 @@ public class MaintenanceController implements Initializable {
         }
     }
 
-
+    /**
+     * Enables the buttons corresponding to the empty slots in the vending machine's GUI and disables the others.
+     * When a button (slot) is clicked, it opens a section to stock a new item and disables the slot section.
+     *
+     * @return true if at least one slot is empty, false otherwise
+     */
     public boolean chooseEmptyItemSlot() {
         slotspane.setVisible(true);
         slotspane.setDisable(false);
@@ -698,7 +794,10 @@ public class MaintenanceController implements Initializable {
         return clicked;
     }
 
-
+    /**
+     * Enables all the buttons corresponding to the slots in the vending machine's GUI.
+     * When a button (slot) is clicked, it opens a section to set the price of the item in that slot and hides the slot section.
+     */
     public void chooseItemSlotPrice() {
         slotspane.setVisible(true);
         slotButtons = new Button[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
@@ -716,8 +815,14 @@ public class MaintenanceController implements Initializable {
                 selectedSlot.set(finalI);
             });
         }
-
     }
+
+    /**
+     * Enables all the buttons corresponding to the slots in the vending machine's GUI.
+     * When a button (slot) is clicked, it prepares for the user to enter a new quantity for the item in that slot.
+     *
+     * @return true if at least one slot is not empty, false otherwise
+     */
     public boolean chooseAnyItemSlot() {
         slotspane.setVisible(true);
         slotButtons = new Button[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
@@ -749,7 +854,17 @@ public class MaintenanceController implements Initializable {
     }
 
 
-
+    /**
+     * This method allows the user to restock existing items in the vending machine.
+     * Upon activation, this method displays the list of items and hides other UI elements
+     * like restock and set price buttons.
+     * It then allows the user to choose an item slot and specify a quantity for restock.
+     * The new quantity is only accepted if it is greater than zero and doesn't exceed the slot capacity (which is checked in the vending machine).
+     *
+     * The method also includes event handlers for an "Add" button and a "Back" button.
+     * The "Add" button triggers the restocking process for a selected item slot,
+     * while the "Back" button resets the UI to its initial state.
+     */
     public void restockItemsNewQuantity() {
         //visible pa ung list of items here
         //hide buttons
@@ -811,6 +926,12 @@ public class MaintenanceController implements Initializable {
         restockItemBtn.setVisible(false);
         setItemPriceBtn.setVisible(false);
     }
+    /**
+     * This method populates the vending machine UI with items currently in the machine.
+     * It checks the status of each slot in the machine and updates corresponding UI elements
+     * (number, name, price, and quantity labels) accordingly. If the slot is empty or unavailable,
+     * the labels are set to display "Empty" or "*".
+     */
     public void populateItems() {
         ItemSlots[] slots = isSpecial ? specialVendingMachine.getSlots() : vendingMachine.getSlots();
 
@@ -840,6 +961,13 @@ public class MaintenanceController implements Initializable {
             }
         }
     }
+    /**
+     * This method populates the vending machine UI with standalone items in the machine,
+     * specifically items in the categories: Milk, Sweetener, and Addons.
+     * It iterates over each category, checks the status of each slot,
+     * and updates corresponding UI elements (number, name, price, and quantity labels) accordingly.
+     * If a slot is empty, the labels will not be populated.
+     */
     public void populateItemsStandAlone() {
         ItemSlots[] milkSlots = specialVendingMachine.getMilk();
         ItemSlots[] sweetenerSlots = specialVendingMachine.getSweetener();
@@ -862,10 +990,15 @@ public class MaintenanceController implements Initializable {
             }
         }
     }
-
-
+    /**
+     * Resets the Maintenance Features screen to its default state.
+     * This includes setting visibility of various UI elements and resetting
+     * certain UI elements to their default text. The action handlers for
+     * 'Restock Items' and 'Set Item Price' buttons are also reset.
+     */
     public void returnMaintenanceMenu()
     {
+        printTransSummaryBtn.setVisible(true);
         denomListBtns.setVisible(false);
         moneyView.setVisible(false);
         transSummary.setVisible(false);
@@ -888,9 +1021,13 @@ public class MaintenanceController implements Initializable {
         setItemPriceBtn.setVisible(true);
         collectMoneyBtn.setVisible(true);
         replenishMoneyBtn.setVisible(true);
-        printTransSummaryBtn.setVisible(true);
         backBtn.setVisible(true);
     }
+    /**
+     * Hides all the action buttons in the vending machine UI.
+     * The buttons that are hidden include: restockItemBtn, setItemPriceBtn,
+     * collectMoneyBtn, replenishMoneyBtn, printTransSummaryBtn, and backBtn.
+     */
     public void hideButtons()
     {
         restockItemBtn.setVisible(false);
@@ -899,23 +1036,13 @@ public class MaintenanceController implements Initializable {
         replenishMoneyBtn.setVisible(false);
         printTransSummaryBtn.setVisible(false);
         backBtn.setVisible(false);
+    }
 
-    }
-    public void showButtons()
-    {
-        restockItemBtn.setVisible(true);
-        setItemPriceBtn.setVisible(true);
-        collectMoneyBtn.setVisible(true);
-        replenishMoneyBtn.setVisible(true);
-        printTransSummaryBtn.setVisible(true);
-        backBtn.setVisible(true);
-    }
-    public void specialRestockItems() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Do you want to restock Standalone items or Fruits? (1: Standalone, 2: Fruits): ");
-        int choice = scanner.nextInt();
-
-    }
+    /**
+     * Resets the state of all the item slots in the vending machine.
+     * Each slot button is first disabled and then re-enabled. This can be used to ensure
+     * the vending machine's user interface reflects the current state of the machine.
+     */
     private void resetMaintenance()
     {
         ItemSlots[] slots;
@@ -934,6 +1061,14 @@ public class MaintenanceController implements Initializable {
         }
     }
 
+    /**
+     * Switches the application scene to the main menu.
+     * It accomplishes this by creating a new FXMLLoader for the main menu fxml file,
+     * setting the vending machine service on the newly created menu controller,
+     * and finally setting the scene on the current stage.
+     *
+     * @param event An ActionEvent that triggers this method. Typically this is the user clicking a button.
+     */
     private void goBackToMenu2(ActionEvent event) {
         try {
             // Get the singleton instance of VendingMachineService

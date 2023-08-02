@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * SpecialVendingMachine is a specific type of vending machine, it extends from the RegularVendingMachine.
+ * This vending machine offers additional items such as milk, sweetener, and addons.
+ */
 public class SpecialVendingMachine extends RegularVendingMachine {
 
     //additional items
@@ -16,12 +19,22 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     private ItemSlots[] startSweetenerItems;
     private ItemSlots[] startAddOnsItems;
 
+    /**
+     * The constructor for the SpecialVendingMachine. Calls the superclass constructor and then initializes
+     * the additional items this machine offers.
+     *
+     * @param name The name of the vending machine.
+     */
     public SpecialVendingMachine(String name) {
         super(name);
         initializeStandaloneItems();
     }
 
-    // Initialization method to create standalone items
+
+    /**
+     * This method initializes the additional items offered by the vending machine, namely milk, sweetener, and addons.
+     * Each category of item is initialized with three options and a set quantity in each slot.
+     */
     private void initializeStandaloneItems() {
         Item[] milk = new Item[3];
         milk[0] = new Item("Almond Milk", 120, 86);
@@ -62,6 +75,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
 
     }
+    /**
+     * Sets the initial inventory for the standalone items in the vending machine.
+     * This includes milk, sweetener, and addons.
+     *
+     * @param milk The array of ItemSlots containing the milk items.
+     * @param sweetener The array of ItemSlots containing the sweetener items.
+     * @param addons The array of ItemSlots containing the addons items.
+     */
     public void setStandAloneItemsInv(ItemSlots[] milk, ItemSlots[] sweetener, ItemSlots[] addons)
     {
         milkItems = milk;
@@ -72,14 +93,29 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         startAddOnsItems = addons;
 
     }
+
+    /**
+     * Sets the starting inventory for the milk items in the vending machine.
+     *
+     * @param newInventory The array of ItemSlots containing the new inventory for milk items.
+     */
     public void setStartingMilkInv(ItemSlots[] newInventory){
         this.milkItems = newInventory;
     }
-
+    /**
+     * Sets the starting inventory for the sweetener items in the vending machine.
+     *
+     * @param newInventory The array of ItemSlots containing the new inventory for sweetener items.
+     */
     public void setStartingSweetenerInv(ItemSlots[] newInventory){
         this.sweetenerItems = newInventory;
     }
 
+    /**
+     * Sets the starting inventory for the addons items in the vending machine.
+     *
+     * @param newInventory The array of ItemSlots containing the new inventory for addons items.
+     */
     public void setStartingAddonsInv(ItemSlots[] newInventory){
         this.addOnsItems = newInventory;
 
@@ -149,183 +185,39 @@ public class SpecialVendingMachine extends RegularVendingMachine {
     public ItemSlots[] getAddOns() {
         return addOnsItems;
     }
-    public void prepareBasicFruitSmoothieWithProcess(List<Item> selectedIngredients) {
-        System.out.println("\nPreparing Basic Fruit Smoothie...");
-        for (Item ingredient : selectedIngredients) {
-            System.out.println("Adding " + ingredient.getItemName() + "...");
-            try {
-                Thread.sleep(1000); // Simulate the process of adding each ingredient
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("Smoothie Done!");
-        System.out.println("-------------------");
-    }
-
-    public void restockStandaloneItems() {
-        Scanner scanner = new Scanner(System.in);
-        int choice = -1;
-        System.out.println("Which standalone items do you want to restock?");
-
-        System.out.println("[1] Milk");
-        System.out.println("[2] Sweetener");
-        System.out.println("[3] Add-ons");
-
-        choice = scanner.nextInt();
-
-        ItemSlots[] milk = getMilk();
-        ItemSlots[] sweetener = getSweetener();
-        ItemSlots[] addons = getAddOns();
-
-        switch(choice) {
-            case 1 -> restockItems(scanner, milk);
-            case 2 -> restockItems(scanner, sweetener);
-            case 3 -> restockItems(scanner, addons);
-            default -> System.out.println("Incorrect input");
-        }
-
-        resetTransactions();
-        setStandAloneItemsInv(milk, sweetener, addons);
-    }
-
-    public void restockItems(Scanner scanner, ItemSlots[] items) {
-        for (int i = 0; i < 3; i++) {
-            System.out.println("[" + (i+1) + "] " + items[i].getItem().getItemName());
-        }
-        System.out.println("Select an item to restock: ");
-        int itemChoice = scanner.nextInt();
-        if(itemChoice >= 1 && itemChoice <= 3) {
-            System.out.println("Enter the restock quantity: ");
-            int quantity = scanner.nextInt();
-            int currentQuantity = items[itemChoice-1].getQuantity();
-            int maxCapacity = 10; // This could be a constant or a field in your class
-            if(currentQuantity + quantity > maxCapacity) {
-                System.out.println("Error: The restock quantity would exceed the slot's maximum capacity.");
-            } else {
-                items[itemChoice-1].increaseQuantity(quantity);
-            }
-        } else {
-            System.out.println("Invalid choice. Please try again.");
-        }
-    }
-
-//    /**
-//     * Prompts the user to select an item slot from an array.
-//     *
-//     * @param slots the array of item slots to choose from
-//     * @return the index of the selected item slot in the slots array
-//     */
-//    public int selectItemSlot(ItemSlots[] slots) {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Which item slot do you want to select?");
-//        for (int i = 0; i < slots.length; i++) {
-//            ItemSlots slot = slots[i];
-//            Item item = slot.getItem();
-//            String itemName = item != null ? item.getItemName() : "Empty";
-//            int quantity = slot.getQuantity();
-//            System.out.println("[" + (i + 1) + "] " + itemName + " (Quantity: " + quantity + ")");
-//        }
-//        System.out.print("Enter choice: ");
-//        int itemSlotNumber = scanner.nextInt();
-//        return itemSlotNumber - 1;
-//    }
-
-    public void restockFruits(int itemSlotIndex) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Restock item for " + getName());
-        int restockSuccess = -1;
-        ItemSlots[] slots = getSlots();
-
-        if (itemSlotIndex < 0 || itemSlotIndex >= slots.length) {
-            System.out.println("Invalid item slot number. Please enter a correct input.");
-            return;
-        }
-
-        ItemSlots selectedSlot = slots[itemSlotIndex];
-        System.out.println("Item Slot: " + selectedSlot.getItem().getItemName());
-
-        if (!selectedSlot.isAvailable()) {
-            System.out.println("There are no items left in the slot");
-            System.out.println("[1] Stock with another item");
-            System.out.println("[2] Restock Item");
-
-            System.out.print("Enter choice: ");
-            int n = scanner.nextInt();
-            ItemSlots[] newInventory = getStartingInventory();
-            switch (n) {
-                case 1 -> {
-                    System.out.print("Enter the name of the new item: ");
-                    String itemName = scanner.next();
-                    System.out.print("Enter the price of the new item: ");
-                    double itemPrice = scanner.nextDouble();
-                    System.out.print("Enter calories of the new item: ");
-                    double itemCalories = scanner.nextDouble();
-                    System.out.print("Enter quantity of the new item: ");
-                    int newQuantity = scanner.nextInt();
-                    if (newQuantity <= 10) {
-                        Item newItem = new Item(itemName, itemPrice, itemCalories);
-                        restockWithNewItem(itemSlotIndex, newItem, newQuantity);
-                        newInventory[itemSlotIndex].setQuantity(newQuantity);
-                        slots[itemSlotIndex] = newInventory[itemSlotIndex]; // Update slots array
-                        restockSuccess = 1;
-                    } else {
-                        System.out.println("Each slot only has a capacity of 10 items.");
-                    }
-                }
-                case 2 -> {
-                    System.out.print("Enter quantity to add: ");
-                    int newQuantity2 = scanner.nextInt() + selectedSlot.getQuantity();
-                    if (newQuantity2 <= 10) {
-                        newInventory[itemSlotIndex].setQuantity(newQuantity2);
-                        setStartingInventory(newInventory);
-                        restockWithQuantity(itemSlotIndex, newQuantity2);
-                        slots[itemSlotIndex] = newInventory[itemSlotIndex]; // Update slots array
-                        restockSuccess = 1;
-                    } else {
-                        System.out.println("Each slot only has a capacity of 10 items.");
-                    }
-                }
-                default -> System.out.println("Please enter a correct input");
-            }
-            if (restockSuccess == 1) {
-                setSlots(newInventory);
-                resetTransactions();
-                System.out.println("Quantity for the selected item slot and transactions have been reset.");
-            }
-        } else {
-            System.out.print("Enter quantity to add: ");
-            int newQuantity = scanner.nextInt();
-
-            if (newQuantity + selectedSlot.getQuantity() <= 10) {
-                restockWithQuantity(itemSlotIndex, newQuantity);
-                ItemSlots[] newInventory = getStartingInventory();
-                newInventory[itemSlotIndex].setQuantity(newQuantity + selectedSlot.getQuantity());
-                setStartingInventory(newInventory);
-                slots[itemSlotIndex] = newInventory[itemSlotIndex]; // Update slots array
-
-                resetTransactions();
-                System.out.println("Stocking successful. Quantity for the selected item slot and transactions have been reset.");
-                restockSuccess = 1;
-            } else {
-                System.out.println("Each slot only has a capacity of 10 items. Restocking not possible.");
-            }
-        }
-
-    }
-
+    /**
+     * Retrieves the initial inventory of milk items.
+     *
+     * @return An array of ItemSlots representing the starting milk inventory.
+     */
     public ItemSlots[] getStartingMilkInventory() {
         return this.startMilkItems;
     }
 
+    /**
+     * Retrieves the initial inventory of sweetener items.
+     *
+     * @return An array of ItemSlots representing the starting sweetener inventory.
+     */
     public ItemSlots[] getStartingSweetenerInventory() {
         return this.startSweetenerItems;
     }
 
+    /**
+     * Retrieves the initial inventory of addon items.
+     *
+     * @return An array of ItemSlots representing the starting addons inventory.
+     */
     public ItemSlots[] getStartingAddOnsInventory() {
         return this.startAddOnsItems;
     }
-
+    /**
+     * Creates a new Item based on a list of selected ingredients. The cost and calories of the new
+     * item are determined by the sum of the cost and calories of each ingredient.
+     *
+     * @param selectedIngredients A list of Items representing the selected ingredients.
+     * @return A new Item representing the final product.
+     */
     public Item createItem(ArrayList<Item> selectedIngredients) {
         double totalCost = 0;
         double totalCalories = 0;
@@ -336,7 +228,15 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
         return new Item("Fruit Smoothie", totalCost, totalCalories);
     }
-
+    /**
+     * Selects an ingredient from an array of item slots based on the provided index and adds it to the list of selected ingredients.
+     * If the selected ingredient is unavailable or the index is out of bounds, an appropriate message is printed and the method returns false.
+     *
+     * @param itemSlots An array of ItemSlots representing the available items.
+     * @param index The index of the desired item.
+     * @param selectedIngredients A list of Items representing the selected ingredients.
+     * @return true if the ingredient was successfully added, false otherwise.
+     */
     public boolean selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
         if(index < 1 || index > itemSlots.length) {
             System.out.println("Invalid option. Please try again.");
@@ -354,8 +254,14 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         return true;
     }
 
-
-    private void revertIngredientQuantities(ArrayList<Item> selectedIngredients) {
+    /**
+     * Reverts the quantity of each selected ingredient.
+     * It locates the corresponding slot of each ingredient in the vending machine and increments the quantity by 1.
+     * It iterates through the standard slots and the special slots for milk items, sweetener items, and addon items.
+     *
+     * @param selectedIngredients A list of Items representing the selected ingredients to be reverted.
+     */
+    public void revertIngredientQuantities(ArrayList<Item> selectedIngredients) {
         for (Item ingredient : selectedIngredients) {
             ItemSlots correspondingSlot = findCorrespondingSlot(ingredient, this.slots);
             if (correspondingSlot == null) {
@@ -372,7 +278,12 @@ public class SpecialVendingMachine extends RegularVendingMachine {
             }
         }
     }
-//for special only
+    /**
+     * Overrides the hasEmptySlot method from the superclass to include the additional item categories offered by the SpecialVendingMachine.
+     * Returns true if there is an empty or unavailable slot in any of the item categories.
+     *
+     * @return true if an empty or unavailable slot is found, false otherwise.
+     */
     @Override
     public boolean hasEmptySlot() {
         List<ItemSlots[]> allSlotArrays = Arrays.asList(getSlots(), milkItems, sweetenerItems, addOnsItems);
@@ -386,7 +297,13 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
         return false;
     }
-
+    /**
+     * Finds the ItemSlots object that corresponds to the provided Item in the given array of ItemSlots.
+     *
+     * @param item The Item to find.
+     * @param slots An array of ItemSlots in which to search for the item.
+     * @return The ItemSlots object containing the item, or null if no such object is found.
+     */
     private ItemSlots findCorrespondingSlot(Item item, ItemSlots[] slots) {
         for (ItemSlots slot : slots) {
             if (slot.getItem().equals(item)) {
@@ -395,19 +312,6 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         }
         return null;
     }
-
-
-    /**
-     * Sets the item price for a specific item in a vending machine.
-     */
-    public void setItemPrice(ItemSlots[] itemSlots, double price, int itemSlotIndex) {
-        ItemSlots selectedSlot = itemSlots[itemSlotIndex];
-//        System.out.print("Enter new price for the item: ");
-        if(price > 0 && price <= 1000)
-        selectedSlot.getItem().setPrice(price);
-//        System.out.println("Item price set successfully. The price for the selected item slot has been updated.");
-    }
-
 
     /**
      * Validates the given denomination for use in vending machine payment.
@@ -427,8 +331,4 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         System.out.println("Error: Invalid denomination (" + denomination + "). We do not accept this type of denomination.");
         return false;
     }
-
-    /* to do:
-     */
-
 }

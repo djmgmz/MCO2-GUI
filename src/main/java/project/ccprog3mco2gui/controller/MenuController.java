@@ -54,21 +54,44 @@ public class MenuController {
     private int selectedRegularVendingMachineIndex;
     private int selectedSpecialVendingMachineIndex;
     private boolean isInMaintenanceMode;
-
+    /**
+     * Sets the vending machine service to be used by this controller.
+     *
+     * @param vendingMachineService the vending machine service to be used
+     */
     public void setVendingMachineService(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
     }
+
+    /**
+     * Default constructor for the MenuController class.
+     */
     public MenuController() {
     }
-
+    /**
+     * Overloaded constructor for the MenuController class.
+     *
+     * @param vendingMachineService the vending machine service to be used
+     */
     public MenuController(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
     }
 
+    /**
+     * Sets the driver stage to be used by this controller.
+     *
+     * @param driverStage the driver stage to be used
+     */
     public void setDriverStage(Stage driverStage) {
         this.driverStage = driverStage;
     }
 
+    /**
+     * Initializes the controller.
+     *
+     * The initialization involves setting up listeners for the list views and
+     * setting the action for the buttons. It also initializes the vending machine service.
+     */
     @FXML
     public void initialize() {
         isInMaintenanceMode = false;
@@ -95,24 +118,41 @@ public class MenuController {
         btn2.setOnAction(e -> testVendingMachine());
     }
 
+
+    /**
+     * Makes the buttons visible.
+     */
     public void showButtons()
     {
         btn1.setVisible(true);
         btn2.setVisible(true);
         btn3.setVisible(true);
     }
+
+    /**
+     * Hides the buttons.
+     */
     public void hideButtons()
     {
         btn1.setVisible(false);
         btn2.setVisible(false);
         btn3.setVisible(false);
     }
+
+    /**
+     * Enables the buttons.
+     */
     public void enableButtons()
     {
         btn1.setDisable(false);
         btn2.setDisable(false);
         btn3.setDisable(false);
     }
+
+
+    /**
+     * Disables the buttons.
+     */
     public void disableButtons()
     {
         btn1.setDisable(true);
@@ -120,7 +160,9 @@ public class MenuController {
         btn3.setDisable(true);
     }
 
-
+    /**
+     * Resets the main menu UI to its default state and sets up the main menu button actions.
+     */
     @FXML
     public void goBackToMainMenu()
     {
@@ -137,6 +179,9 @@ public class MenuController {
         enableButtons();
     }
 
+    /**
+     * Sets up the UI and button actions for the vending machine creation screen.
+     */
     @FXML
     public void createVendingMachine() {
         titleText.setText("Create a Vending Machine");
@@ -147,6 +192,9 @@ public class MenuController {
         btn3.setOnAction(e -> goBackToMainMenu());
     }
 
+    /**
+     * Sets up the UI and button actions for the vending machine testing screen.
+     */
     @FXML
     public void testVendingMachine() {
         titleText.setText("Test a Vending Machine");
@@ -156,6 +204,9 @@ public class MenuController {
         btn2.setOnAction(e -> maintenanceFeatures());
     }
 
+    /**
+     * Sets up the UI and button actions for the vending features screen.
+     */
     @FXML
     public void vendingFeatures()
     {
@@ -169,6 +220,10 @@ public class MenuController {
         btn3.setOnAction(e -> goBackToMainMenu());
     }
 
+    /**
+     * Displays a list of regular vending machines that the user can select for testing.
+     * If no regular vending machines are available, an error message is displayed.
+     */
     public void chooseRegularVendingMachine()
     {
         if (vendingMachineService.getRegularVendingMachines().isEmpty()) {
@@ -188,7 +243,10 @@ public class MenuController {
             }
         }
     }
-
+    /**
+     * Displays a list of special vending machines that the user can select for testing.
+     * If no special vending machines are available, an error message is displayed.
+     */
     public void chooseSpecialVendingMachine()
     {
         if (vendingMachineService.getSpecialVendingMachines().isEmpty()) {
@@ -208,7 +266,12 @@ public class MenuController {
             }
         }
     }
-
+    /**
+     * Opens a new window with the UI for the selected regular vending machine.
+     * The UI will either be the vending machine interface or the maintenance interface,
+     * depending on the value of isInMaintenanceMode.
+     * @throws IllegalStateException if driverStage has not been initialized.
+     */
     public void openRegular()
     {
         if (this.driverStage == null) {
@@ -242,6 +305,13 @@ public class MenuController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Opens a new window with the UI for the selected special vending machine.
+     * The UI will either be the vending machine interface or the maintenance interface,
+     * depending on the value of isInMaintenanceMode.
+     * @throws IllegalStateException if driverStage has not been initialized.
+     */
     public void openSpecial()
     {
         if (this.driverStage == null) {
@@ -275,6 +345,9 @@ public class MenuController {
             e.printStackTrace();
         }
     }
+    /**
+     * Sets the UI to maintenance mode, where the user can select a vending machine type (regular or special) for maintenance.
+     */
     @FXML
     public void maintenanceFeatures()
     {
@@ -287,6 +360,9 @@ public class MenuController {
         btn3.setOnAction(e -> goBackToMainMenu());
     }
 
+    /**
+     * Prepares the UI for the creation of a new regular vending machine. The user is prompted to enter a name for the machine.
+     */
     @FXML
     public void regularVendingMachine()
     {
@@ -298,6 +374,11 @@ public class MenuController {
         nameText.setVisible(true);
     }
 
+    /**
+     * Handles the Enter key event for the text field where the vending machine name is entered.
+     * If the entered name is not empty, a new vending machine of the appropriate type is created based on the current titleText.
+     * @param event the KeyEvent to handle.
+     */
     @FXML
     public void onEnterKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -319,6 +400,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Prepares the UI for the creation of a new special vending machine. The user is prompted to enter a name for the machine.
+     */
     @FXML
     public void specialVendingMachine()
     {
@@ -330,6 +414,9 @@ public class MenuController {
         nameText.setVisible(true);
     }
 
+    /**
+     * Exits the program.
+     */
     @FXML
     public void exitProgram()
     {

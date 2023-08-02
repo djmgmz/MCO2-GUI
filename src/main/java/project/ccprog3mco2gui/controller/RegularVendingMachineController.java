@@ -59,7 +59,16 @@ public class RegularVendingMachineController implements Initializable {
     @FXML Button backButton;
 
     private int selectedItemIndex = -1;
-
+    /**
+     * Initializes the controller after its root element has been completely processed. This method is overridden from
+     * Initializable interface. It initializes various UI elements and sets up event handlers for button clicks and
+     * key events. The event handlers are responsible for managing the vending machine's operations such as item selection,
+     * payment processing, and change dispensing.
+     *
+     * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         redButtons = new ImageView[]{redButton0, redButton1, redButton2, redButton3, redButton4, redButton5, redButton6, redButton7, redButton8, redButton9};
@@ -236,7 +245,10 @@ public class RegularVendingMachineController implements Initializable {
 
         backButton.setOnAction(this::goBackToMenu1);
     }
-
+    /**
+     * Updates the vending machine display by setting the labels of each slot to match the current state of the vending
+     * machine's slots.
+     */
     private void updateVendingMachine()
     {
         ItemSlots[] slots = vendingMachine.getSlots();
@@ -269,6 +281,10 @@ public class RegularVendingMachineController implements Initializable {
         }
     }
 
+    /**
+     * Resets the vending machine UI to its initial state, clearing any error messages, clearing the numberButtonText field,
+     * re-enabling any disabled buttons, and setting the screenText field to its initial prompt.
+     */
     private void resetVendingMachine()
     {
         screenError.setVisible(false);
@@ -279,6 +295,12 @@ public class RegularVendingMachineController implements Initializable {
         }
     }
 
+    /**
+     * Navigates back to the main menu. This method handles an ActionEvent (typically a button press), and changes
+     * the current scene to the main menu scene.
+     *
+     * @param event The ActionEvent that triggered this method. Typically a button press.
+     */
     private void goBackToMenu1(ActionEvent event) {
         try {
             // Get the singleton instance of VendingMachineService
@@ -302,6 +324,11 @@ public class RegularVendingMachineController implements Initializable {
         }
     }
 
+    /**
+     * Sets the current vending machine in the UI to the provided RegularVendingMachine.
+     *
+     * @param vendingMachine The new RegularVendingMachine that the UI should use.
+     */
     public void setVendingMachine(RegularVendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
     }

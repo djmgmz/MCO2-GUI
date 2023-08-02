@@ -20,6 +20,13 @@ public class RegularVendingMachine {
     protected  List<Transaction> transactions;
 
     // Constructor
+    /**
+     * Creates a new RegularVendingMachine with the given name. The machine is initialized with a
+     * specific number of slots and denominations, and the total sales and transactions are initialized
+     * to zero.
+     *
+     * @param name the name of the RegularVendingMachine
+     */
     public RegularVendingMachine(String name) {
         this.name = name;
         this.slots = new ItemSlots[MAX_SLOTS];
@@ -117,16 +124,68 @@ public class RegularVendingMachine {
     }
 
     // Getter methods
+    /**
+     * Gets the name of the vending machine.
+     *
+     * @return the name of the vending machine
+     */
     public String getName() { return name; }
+    /**
+     * Gets the slots of the vending machine.
+     *
+     * @return the array of ItemSlots representing the slots in the vending machine
+     */
     public ItemSlots[] getSlots() { return this.slots; }
+
+    /**
+     * Gets the starting inventory of the vending machine.
+     *
+     * @return the array of ItemSlots representing the starting inventory of the vending machine
+     */
     public ItemSlots[] getStartingInventory() { return this.startingInventory; }
+
+    /**
+     * Gets the total sales of the vending machine.
+     *
+     * @return the total sales of the vending machine
+     */
     public double getTotalSales() { return this.totalSales; }
+
+    /**
+     * Gets the list of denominations accepted by the vending machine.
+     *
+     * @return the list of Denomination objects accepted by the vending machine
+     */
     public List<Denomination> getDenominations() { return denominations; }
+
+    /**
+     * Gets the list of transactions performed by the vending machine.
+     *
+     * @return the list of Transaction objects performed by the vending machine
+     */
     public List<Transaction> getTransactions() { return this.transactions; }
 
     // Setter methods
+
+    /**
+     * Sets the total sales of the vending machine.
+     *
+     * @param totalSales the new total sales value
+     */
     public void setTotalSales(double totalSales) { this.totalSales = totalSales; }
+
+    /**
+     * Sets the slots of the vending machine.
+     *
+     * @param slots the new array of ItemSlots for the vending machine
+     */
     public void setSlots(ItemSlots[] slots) { this.slots = slots; }
+
+    /**
+     * Sets the starting inventory of the vending machine.
+     *
+     * @param newInventory the new array of ItemSlots for the starting inventory of the vending machine
+     */
     public void setStartingInventory(ItemSlots[] newInventory) { this.startingInventory = newInventory; }
 
     // Business methods
@@ -319,7 +378,11 @@ public class RegularVendingMachine {
         getTransactions().add(transaction);
         return Output;
     }
-
+    /**
+     * Checks if there is any empty slot available in the vending machine.
+     *
+     * @return true if there is at least one empty slot, false otherwise.
+     */
     public boolean hasEmptySlot() {
         for (ItemSlots slot : getSlots()) {
             if (slot == null || !slot.isAvailable()) {
