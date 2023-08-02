@@ -26,20 +26,20 @@ public class SpecialVendingMachineController implements Initializable {
     @FXML
     private Label item1,item2,item3,item4,item5,item6,item7,item8,item9;
     @FXML
-    private Label price1,price2,price3,price4,price5,price6,price7,price8,price9;
+    private Label price1,price2,price3,price4,price5,price6,price7,price8,price9,price10,price11,price12,price13,price14,price15,price16,price17,price18;
     @FXML
-    private Label calories1,calories2,calories3,calories4,calories5,calories6,calories7,calories8,calories9;
+    private Label calories1,calories2,calories3,calories4,calories5,calories6,calories7,calories8,calories9,calories10,calories11,calories12,calories13,calories14,calories15,calories16,calories17,calories18;
     @FXML
-    private Label quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8,quantity9;
+    private Label quantity1,quantity2,quantity3,quantity4,quantity5,quantity6,quantity7,quantity8,quantity9, quantity10, quantity11, quantity12, quantity13, quantity14, quantity15, quantity16, quantity17, quantity18;
     private ImageView[] redButtons = new ImageView[10];
     @FXML
     private Label[] itemLabels = new Label[9];
     @FXML
-    private Label[] priceLabels = new Label[9];
+    private Label[] priceLabels = new Label[18];
     @FXML
-    private Label[] caloriesLabels = new Label[9];
+    private Label[] caloriesLabels = new Label[18];
     @FXML
-    private Label[] quantityLabels = new Label[9];
+    private Label[] quantityLabels = new Label[18];
     @FXML
     private Text screenText;
 
@@ -64,9 +64,9 @@ public class SpecialVendingMachineController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         redButtons = new ImageView[]{redButton0, redButton1, redButton2, redButton3, redButton4, redButton5, redButton6, redButton7, redButton8, redButton9};
         itemLabels = new Label[]{item1, item2, item3, item4, item5, item6, item7, item8, item9};
-        priceLabels = new Label[]{price1, price2, price3, price4, price5, price6, price7, price8, price9};
-        caloriesLabels = new Label[]{calories1, calories2, calories3, calories4, calories5, calories6, calories7, calories8, calories9};
-        quantityLabels = new Label[]{quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8, quantity9};
+        priceLabels = new Label[]{price1, price2, price3, price4, price5, price6, price7, price8, price9, price10, price11, price12, price13, price14, price15, price16, price17, price18};
+        caloriesLabels = new Label[]{calories1, calories2, calories3, calories4, calories5, calories6, calories7, calories8, calories9, calories10,calories11,calories12,calories13,calories14,calories15,calories16,calories17,calories18};
+        quantityLabels = new Label[]{quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8, quantity9, quantity10, quantity11, quantity12, quantity13, quantity14, quantity15, quantity16, quantity17, quantity18};
         denomButtonsArray = new Button[]{denom1, denom5, denom10, denom15, denom20, denom50, denom100, denom200, denom300, denom500,denom1000};
 
         Map<Button, Integer> denominationsMap = new HashMap<>();
@@ -98,13 +98,13 @@ public class SpecialVendingMachineController implements Initializable {
             numberButtonText.setVisible(!newValue.isEmpty());
         });
 
-        screenText.setText("Select a fruit: ");
+        screenText.setText("Select a fruit on the left: ");
 
         enterButton.setOnAction(event -> {
             String textFromScreen = screenText.getText();
             String inputText = numberButtonText.getText();
 
-            if (textFromScreen.equals("Select a fruit: ")) {
+            if (textFromScreen.equals("Select a fruit on the left: ")) {
                 numberButtonText.setText("");
                 try {
                     selectedItemIndex = Integer.parseInt(inputText);
@@ -259,6 +259,73 @@ public class SpecialVendingMachineController implements Initializable {
             } else {
                 // If the vending machine has fewer slots, set empty labels for the remaining slots
                 itemLabels[i].setText("MISSING");
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
+            }
+        }
+
+        ItemSlots milk[] = vendingMachine.getMilk();
+        ItemSlots sweetener[] = vendingMachine.getSweetener();
+        ItemSlots extras[] = vendingMachine.getAddOns();
+
+        for (int i = 9; i <= 11; i++) {
+            int index = i - 9;
+            if (index < milk.length) {
+                ItemSlots slot = milk[index];
+                if (slot != null && slot.isAvailable()) {
+                    Item item = slot.getItem();
+                    priceLabels[i].setText(Double.toString(item.getItemPrice()));
+                    caloriesLabels[i].setText(Double.toString(item.getItemCalories()));
+                    quantityLabels[i].setText(Integer.toString(slot.getQuantity()));
+                } else {
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
+                }
+            } else {
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
+            }
+        }
+
+        for (int i = 12; i <= 14; i++) {
+            int index = i - 12;
+            if (index < sweetener.length) {
+                ItemSlots slot = sweetener[index];
+                if (slot != null && slot.isAvailable()) {
+                    Item item = slot.getItem();
+                    priceLabels[i].setText(Double.toString(item.getItemPrice()));
+                    caloriesLabels[i].setText(Double.toString(item.getItemCalories()));
+                    quantityLabels[i].setText(Integer.toString(slot.getQuantity()));
+                } else {
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
+                }
+            } else {
+                priceLabels[i].setText("MISSING");
+                caloriesLabels[i].setText("MISSING");
+                quantityLabels[i].setText("MISSING");
+            }
+        }
+
+        for (int i = 15; i <= 17; i++) {
+            int index = i - 15;
+            if (index < extras.length) {
+                ItemSlots slot = extras[index];
+                if (slot != null && slot.isAvailable()) {
+                    Item item = slot.getItem();
+                    priceLabels[i].setText(Double.toString(item.getItemPrice()));
+                    caloriesLabels[i].setText(Double.toString(item.getItemCalories()));
+                    quantityLabels[i].setText(Integer.toString(slot.getQuantity()));
+                } else {
+                    priceLabels[i].setText("N/A");
+                    caloriesLabels[i].setText("N/A");
+                    quantityLabels[i].setText("N/A");
+                }
+            } else {
                 priceLabels[i].setText("MISSING");
                 caloriesLabels[i].setText("MISSING");
                 quantityLabels[i].setText("MISSING");
