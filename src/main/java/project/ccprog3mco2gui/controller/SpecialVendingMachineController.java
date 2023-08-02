@@ -19,6 +19,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class SpecialVendingMachineController implements Initializable {
 
@@ -62,6 +65,10 @@ public class SpecialVendingMachineController implements Initializable {
 
     private int selectedItemIndex = -1;
 
+    private String[] steps = {
+            ""
+    };
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         redButtons = new ImageView[]{redButton0, redButton1, redButton2, redButton3, redButton4, redButton5, redButton6, redButton7, redButton8, redButton9};
@@ -72,6 +79,7 @@ public class SpecialVendingMachineController implements Initializable {
         denomButtonsArray = new Button[]{denom1, denom5, denom10, denom15, denom20, denom50, denom100, denom200, denom300, denom500,denom1000};
 
         ArrayList<Item> selectedIngredients = new ArrayList<>();
+        selectedIngredients.clear();
 
         Map<Button, Integer> denominationsMap = new HashMap<>();
         denominationsMap.put(denom1, 1);
@@ -222,6 +230,7 @@ public class SpecialVendingMachineController implements Initializable {
                         }
                         screenText.setText("Please press Enter if you want to buy again");
                         updateVendingMachine();
+                        selectedIngredients.clear();
                     }
                 }
                 else
