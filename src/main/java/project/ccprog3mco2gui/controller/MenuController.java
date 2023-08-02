@@ -48,6 +48,7 @@ public class MenuController {
 
     private VendingMachineService vendingMachineService;
     private int selectedRegularVendingMachineIndex;
+    private boolean isInMaintenanceMode;
 
     public void setVendingMachineService(VendingMachineService vendingMachineService) {
         this.vendingMachineService = vendingMachineService;
@@ -65,6 +66,8 @@ public class MenuController {
 
     @FXML
     public void initialize() {
+        isInMaintenanceMode = false;
+
         vendingMachineService = VendingMachineService.getInstance();;
         regularVendingMachineListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
@@ -142,6 +145,8 @@ public class MenuController {
     @FXML
     public void vendingFeatures()
     {
+        isInMaintenanceMode = false;
+
         titleText.setText("Choose a vending machine type");
         btn1.setText("Regular Vending Machine");
         btn2.setText("Special Vending Machine");
@@ -185,13 +190,23 @@ public class MenuController {
 
         RegularVendingMachine vendingMachine = vendingMachineService.getRegularVendingMachines().get(selectedRegularVendingMachineIndex);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
-            RegularVendingMachineController controller = new RegularVendingMachineController();
-            controller.setVendingMachine(vendingMachine);
-            fxmlLoader.setController(controller);
+            FXMLLoader fxmlLoader;
+            if (isInMaintenanceMode) {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/maintenance.fxml"));
+                MaintenanceController controller = new MaintenanceController();
+                controller.setVendingMachine(vendingMachine);
+                fxmlLoader.setController(controller);
+
+            } else {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
+                RegularVendingMachineController controller = new RegularVendingMachineController();
+                controller.setVendingMachine(vendingMachine);
+                fxmlLoader.setController(controller);
+            }
+
             Parent root = fxmlLoader.load();
             Stage vendingMachineStage = new Stage();
-            vendingMachineStage.setTitle("Vending Machine");
+            vendingMachineStage.setTitle(isInMaintenanceMode ? "Maintenance" : "Vending Machine");
             vendingMachineStage.setScene(new Scene(root, 794, 728));
             vendingMachineStage.show();
 
@@ -203,12 +218,44 @@ public class MenuController {
 
     public void openSpecial()
     {
+        if (this.driverStage == null) {
+            throw new IllegalStateException("driverStage has not been initialized.");
+        }
+        //to change
+        SpecialVendingMachine vendingMachine = vendingMachineService.getSpecialVendingMachines().get(selectedRegularVendingMachineIndex);
+        try {
+            FXMLLoader fxmlLoader;
+            if (isInMaintenanceMode) {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/maintenance.fxml")); // update the path to the maintenance FXML
+//                fxmlLoader.setController(new MaintenanceController(vendingMachine));
+            } else {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/project/ccprog3mco2gui/regularvendingmachine.fxml"));
+//                SpecialVendingMachineController controller = new SpecialVendingMachineController();
+//                controller.setVendingMachine(vendingMachine);
+//                fxmlLoader.setController(controller);
+            }
 
+            Parent root = fxmlLoader.load();
+            Stage vendingMachineStage = new Stage();
+            vendingMachineStage.setTitle(isInMaintenanceMode ? "Maintenance" : "Vending Machine");
+            vendingMachineStage.setScene(new Scene(root, 794, 728));
+            vendingMachineStage.show();
+
+            driverStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     public void maintenanceFeatures()
     {
-
+        this.isInMaintenanceMode = true;
+        titleText.setText("Choose a vending machine type");
+        btn1.setText("Regular Vending Machine");
+        btn2.setText("Special Vending Machine");
+        btn1.setOnAction(e -> chooseRegularVendingMachine());
+        btn2.setOnAction(e -> chooseSpecialVendingMachine());
+        btn3.setOnAction(e -> goBackToMainMenu());
     }
 
     @FXML
