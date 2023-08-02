@@ -85,40 +85,38 @@ public class SpecialVendingMachine extends RegularVendingMachine {
 
     }
 
-    private boolean processPayment(ArrayList<Item> selectedIngredients, double totalCost, double totalPayment) {
-        Item item = createItem(selectedIngredients);
-        return dispenseFinalItem(totalPayment, item);
+    public String processPayment(ArrayList<Item> selectedIngredients, Double[] denominations, Item item) {
+        return dispenseFinalItem(item, denominations);
     }
-    public boolean dispenseFinalItem(double payment, Item item)
-    {
+    public String dispenseFinalItem(Item smoothie, Double[] denominations) {
+        String output = "";
+        double totalPayment = Arrays.stream(denominations).mapToDouble(Double::doubleValue).sum();
 
-        double itemPrice = item.getItemPrice();
-        String itemName = item.getItemName();
-        if (payment < itemPrice) {
-            System.out.println("Insufficient payment. Please insert the exact amount to purchase.");
-            return false;
+        double itemPrice = smoothie.getItemPrice();
+        String itemName = smoothie.getItemName();
+        if (totalPayment < itemPrice) {
+            return "Insufficient payment. Please insert the exact amount to purchase.";
         }
-        double change = payment - itemPrice;
+
+        double change = totalPayment - itemPrice;
         if (change < 0) {
-            System.out.println("Insufficient payment. Please insert the exact amount to purchase.");
-            return false;
+            return "Insufficient payment. Please insert the exact amount to purchase.";
         }
 
         if (!hasSufficientChange(change)) {
-            System.out.println("Not enough change in the vending machine. Transaction canceled.");
-            return false;
+            return "Not enough change in the vending machine. Transaction canceled.";
         }
 
-        // Perform the actual dispensing of the item and change
-        System.out.println("Dispensing Item: " + itemName + " (Quantity: " + 1 + ")");
-        System.out.println("Dispensing change with the following denominations:");
+        addPaymentDenominations(denominations);
 
-        // Calculate and dispense the change denominations
+        output += "Dispensing Item: " + itemName + " (Quantity: 1)\n";
+        output += "Dispensing change with the following denominations:\n";
+
         List<Denomination> dispensedChange = calculateChange(change);
         for (Denomination denomination : dispensedChange) {
             int count = denomination.getCount();
             int value = denomination.getValue();
-            System.out.println(value + " count: " + count);
+            output += value + " count: " + count + "\n";
         }
 
         updateDenominationsCount(dispensedChange);
@@ -128,7 +126,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         Transaction transaction = new Transaction(itemName, 1, itemPrice);
         getTransactions().add(transaction);
 
-        return true;
+        return output;
     }
 
     public ItemSlots[] getMilk() {
@@ -319,7 +317,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         return this.startAddOnsItems;
     }
 
-    private Item createItem(ArrayList<Item> selectedIngredients) {
+    public Item createItem(ArrayList<Item> selectedIngredients) {
         double totalCost = 0;
         double totalCalories = 0;
         for(int i = 0; i < selectedIngredients.toArray().length; i++)
@@ -330,7 +328,7 @@ public class SpecialVendingMachine extends RegularVendingMachine {
         return new Item("Fruit Smoothie", totalCost, totalCalories);
     }
 
-    private void selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
+    public void selectIngredient(ItemSlots[] itemSlots, int index, ArrayList<Item> selectedIngredients) {
         if(index < 1 || index > itemSlots.length) {
             System.out.println("Invalid option. Please try again.");
             return;

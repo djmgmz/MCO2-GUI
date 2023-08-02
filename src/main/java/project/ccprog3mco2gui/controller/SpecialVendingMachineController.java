@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SpecialVendingMachineController implements Initializable {
 
@@ -44,6 +45,7 @@ public class SpecialVendingMachineController implements Initializable {
     private Text screenText;
 
     private SpecialVendingMachine vendingMachine;
+    private ArrayList<Item> selectedIngredients;
     @FXML
     private Label numberButtonText;
 
@@ -68,6 +70,8 @@ public class SpecialVendingMachineController implements Initializable {
         caloriesLabels = new Label[]{calories1, calories2, calories3, calories4, calories5, calories6, calories7, calories8, calories9, calories10,calories11,calories12,calories13,calories14,calories15,calories16,calories17,calories18};
         quantityLabels = new Label[]{quantity1, quantity2, quantity3, quantity4, quantity5, quantity6, quantity7, quantity8, quantity9, quantity10, quantity11, quantity12, quantity13, quantity14, quantity15, quantity16, quantity17, quantity18};
         denomButtonsArray = new Button[]{denom1, denom5, denom10, denom15, denom20, denom50, denom100, denom200, denom300, denom500,denom1000};
+
+        ArrayList<Item> selectedIngredients = new ArrayList<>();
 
         Map<Button, Integer> denominationsMap = new HashMap<>();
         denominationsMap.put(denom1, 1);
@@ -98,32 +102,94 @@ public class SpecialVendingMachineController implements Initializable {
             numberButtonText.setVisible(!newValue.isEmpty());
         });
 
-        screenText.setText("Select a fruit on the left: ");
+        screenText.setText("Select a fruit on the left (or enter 0 for change): ");
 
         enterButton.setOnAction(event -> {
             String textFromScreen = screenText.getText();
-            String inputText = numberButtonText.getText();
+            String inputText = numberButtonText.getText().trim();
 
-            if (textFromScreen.equals("Select a fruit on the left: ")) {
+            if (inputText.isEmpty()) {
+                screenError.setVisible(true);
+                return;
+            }
+
+            if (textFromScreen.equals("Select a fruit on the left (or enter 0 for change): ")) {
                 numberButtonText.setText("");
                 try {
                     selectedItemIndex = Integer.parseInt(inputText);
 
                     if (selectedItemIndex >= 0 && selectedItemIndex <= vendingMachine.getSlots().length) {
                         screenError.setVisible(false);
-                        for (int i = 0; i < 10; i++) {
-                            redButtons[i].setDisable(true);
+                        if(selectedItemIndex == 0)
+                        {
+                            for (int i = 0; i < 10; i++) {
+                                redButtons[i].setDisable(true);
+                            }
+                            screenText.setText("Enter the denominations of your payment");
+                            for (Button denomButton : denomButtonsArray) {
+                                denomButton.setDisable(false);
+                            }
                         }
-                        screenText.setText("Enter the denominations of your payment");
-                        for (Button denomButton : denomButtonsArray) {
-                            denomButton.setDisable(false);
+                        else {
+                            vendingMachine.selectIngredient(vendingMachine.getSlots(), selectedItemIndex, selectedIngredients);
+                            screenText.setText("Select your preferred milk on the right: ");
                         }
                     }
                     else
                     {
                         screenError.setVisible(true);
                     }
-                } catch (NumberFormatException e) {
+                }
+                catch (NumberFormatException e)
+                {
+                    screenError.setVisible(true);
+                }
+            }
+            else if(textFromScreen.equals("Select your preferred milk on the right: "))
+            {
+                selectedItemIndex = Integer.parseInt(inputText);
+                numberButtonText.setText("");
+                if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getMilk().length) {
+                    screenError.setVisible(false);
+                    vendingMachine.selectIngredient(vendingMachine.getMilk(), selectedItemIndex, selectedIngredients);
+                    screenText.setText("Select your preferred sweetener on the right: ");
+                }
+                else
+                {
+                    screenError.setVisible(true);
+                }
+            }
+            else if(textFromScreen.equals("Select your preferred sweetener on the right: "))
+            {
+                selectedItemIndex = Integer.parseInt(inputText);
+                numberButtonText.setText("");
+                if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getSweetener().length) {
+                    screenError.setVisible(false);
+                    vendingMachine.selectIngredient(vendingMachine.getSweetener(), selectedItemIndex, selectedIngredients);
+                    screenText.setText("Select your preferred add-on on the right: ");
+                }
+                else
+                {
+                    screenError.setVisible(true);
+                }
+            }
+            else if(textFromScreen.equals("Select your preferred add-on on the right: "))
+            {
+                selectedItemIndex = Integer.parseInt(inputText);
+                numberButtonText.setText("");
+                if (selectedItemIndex >= 1 && selectedItemIndex <= vendingMachine.getAddOns().length) {
+                    screenError.setVisible(false);
+                    vendingMachine.selectIngredient(vendingMachine.getAddOns(), selectedItemIndex, selectedIngredients);
+                    screenText.setText("Enter the denominations of your payment");
+                    for (int i = 0; i < 10; i++) {
+                        redButtons[i].setDisable(true);
+                    }
+                    for (Button denomButton : denomButtonsArray) {
+                        denomButton.setDisable(false);
+                    }
+                }
+                else
+                {
                     screenError.setVisible(true);
                 }
             }
@@ -139,8 +205,7 @@ public class SpecialVendingMachineController implements Initializable {
                         denominations[i] = Double.parseDouble(numbersArray[i]);
                         totalPayment += Double.parseDouble(numbersArray[i]);
                     }
-                    ItemSlots selectedSlot = vendingMachine.getSlots()[selectedItemIndex-1];
-                    Item item = selectedSlot.getItem();
+                    Item item = vendingMachine.createItem(selectedIngredients);
                     double itemPrice = item.getItemPrice();
                     if (totalPayment < itemPrice)
                     {
@@ -149,7 +214,7 @@ public class SpecialVendingMachineController implements Initializable {
                     }
                     else {
                         String output = "";
-                        output = vendingMachine.payDenominations(denominations, selectedItemIndex);
+                        output = vendingMachine.processPayment(selectedIngredients, denominations, item);
                         numberButtonText.setText(output);
                         screenError.setVisible(false);
                         for (Button denomButton : denomButtonsArray) {
@@ -159,8 +224,9 @@ public class SpecialVendingMachineController implements Initializable {
                         updateVendingMachine();
                     }
                 }
-                else {
-                    // for 0
+                else
+                {
+                    // for 0 input
                     String text = numberButtonText.getText();
                     String[] numbersArray = text.split(" ");
                     Double[] denominations = new Double[numbersArray.length];
@@ -168,14 +234,12 @@ public class SpecialVendingMachineController implements Initializable {
                         denominations[i] = Double.parseDouble(numbersArray[i]);
                     }
 
-                    // Insert the code to count each unique denomination here
                     Map<Double, Integer> denominationCountMap = new HashMap<>();
                     for (double denomination : denominations) {
                         int count = denominationCountMap.getOrDefault(denomination, 0);
                         denominationCountMap.put(denomination, count + 1);
                     }
 
-                    // Construct the output string with no decimals
                     String changeOutput = "Dispensing change with the following denominations:\n";
                     for (Map.Entry<Double, Integer> entry : denominationCountMap.entrySet()) {
                         double denominationValue = entry.getKey();
@@ -183,7 +247,6 @@ public class SpecialVendingMachineController implements Initializable {
                         changeOutput += String.format("%.0f count: %d\n", denominationValue, count);
                     }
 
-                    // Set the text of the numberButtonText label to display the result
                     numberButtonText.setText(changeOutput);
                     screenText.setText("Please press Enter if you want to buy again");
                     for (Button denomButton : denomButtonsArray) {
@@ -337,7 +400,7 @@ public class SpecialVendingMachineController implements Initializable {
     {
         screenError.setVisible(false);
         numberButtonText.setText("");
-        screenText.setText("Choose an item (or enter 0 for change): ");
+        screenText.setText("Select a fruit on the left (or enter 0 for change): ");
         for (int i = 0; i < 10; i++) {
             redButtons[i].setDisable(false);
         }
